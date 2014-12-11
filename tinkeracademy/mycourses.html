@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+	<body>
+		{% include 'header.html' %}
+		<h1>Courses</h1>
+		<table>
+			{% for course in courses %}
+			<tr>
+				<td>
+					<div>
+						<a href="{{courseurl|safe}}">{{courseurllinktext}}</a>
+					</div>
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</body>
+</html>
+{% endautoescape %}

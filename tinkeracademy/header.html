@@ -1,0 +1,19 @@
+<h1>Tinker Academy</h1>
+{% if abouturl %}
+<a href="{{abouturl|safe}}">{{abouturllinktext}}</a>
+{% endif %}
+{% if allcoursesurl %}
+<a href="{{allcoursesurl|safe}}">{{allcoursesurllinktext}}</a>
+{% endif %}
+{% if mycoursesurl %}
+<a href="{{mycoursesurl|safe}}">{{mycoursesurllinktext}}</a>
+{% endif %}
+{% if signinurl %}
+<a href="{{signinurl|safe}}">{{signinurllinktext}}</a>
+{% endif %}
+{% if signouturl %}
+<a href="{{signouturl|safe}}">{{signouturllinktext}}</a>
+{% endif %}
+{% if signupurl %}
+<a href="{{signupurl|safe}}">{{signupurllinktext}}</a>
+{% endif %}

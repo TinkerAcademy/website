@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+	<body>
+		{% include 'header.html' %}
+		<h1>Sign Up</h1>
+		<form action="/signup" method="post">
+			<div><span>
+			<div><span>Email:</span><input id="emailid" name="emailid" type="text"></div>
+			<div><input type="submit"></div>
+		</form>
+	</body>
+</html>
+{% endautoescape %}
