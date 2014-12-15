@@ -2,10 +2,12 @@
 {% autoescape true %}
 <html>
 	<body>
+		{% include 'header.html' %}
 		<h1>Sign In</h1>
 		<form action="/signin" method="post">
 			<div><span>Email:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
 			<div><span>Student ID:</span><input id="studentid" name="studentid" type="password"></div>
+			<div><span><a href="{{forgoturl|safe}}">{{forgoturllinktext}}</a></span></div>
 			<div><input type="submit"></div>
 		</form>
 	</body>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+	<body>
+		<h1>Forgot Student ID</h1>
+		<form action="/forgot" method="post">
+			<div><span>Email:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
+			<div><input type="submit"></div>
+		</form>
+	</body>
+</html>
+{% endautoescape %}

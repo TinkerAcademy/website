@@ -64,7 +64,8 @@ def buildmycoursestemplatevalues(insession, uid, mycourses):
 def extractkeyfromrequest(request, key):
 	uid = None
 	if request.params and len(request.params) > 0:
-		uid = request.params[key]
+		if key in request.params:
+			uid = request.params[key]
 	return uid
 
 def isinsession(uid):

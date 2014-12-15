@@ -17,6 +17,16 @@ from services import UserService
 from services import CoursesService
 from services import SignUpService
 
+class AboutPage(webapp2.RequestHandler):
+	def get(self):
+		uid = extractkeyfromrequest(self.request, 'u')
+		insession = isinsession(uid)
+		template_values = {}
+		header_template_values = buildheadertemplatevalues(insession, uid)
+		template_values.update(header_template_values)
+		template = JINJA_ENVIRONMENT.get_template('about.html')
+		self.response.write(template.render(template_values))
+
 class AdminPage(webapp2.RequestHandler):
 	def get(self):
 		template_values = {}
@@ -37,6 +47,22 @@ class AllCoursesPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('allcourses.html')
 		self.response.write(template.render(template_values))
 
+class ForgotPage(webapp2.RequestHandler):
+	def get(self):
+		uid = extractkeyfromrequest(self.request, 'u')
+		insession = isinsession(uid)
+		emailid = extractkeyfromrequest(self.request, 'e')
+		if emailid is None:
+			emailid = ''
+		template_values = {	
+			'emailid' : emailid,
+		}
+		header_template_values = buildheadertemplatevalues(insession, uid)
+		template_values.update(header_template_values)
+		template = JINJA_ENVIRONMENT.get_template('forgot.html')
+		self.response.write(template.render(template_values))
+
+
 class MyCoursesPage(webapp2.RequestHandler):
 	def get(self):
 		uid = extractkeyfromrequest(self.request, 'u')
@@ -53,16 +79,6 @@ class MyCoursesPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('mycourses.html')
 		self.response.write(template.render(template_values))
 
-class AboutPage(webapp2.RequestHandler):
-	def get(self):
-		uid = extractkeyfromrequest(self.request, 'u')
-		insession = isinsession(uid)
-		template_values = {}
-		header_template_values = buildheadertemplatevalues(insession, uid)
-		template_values.update(header_template_values)
-		template = JINJA_ENVIRONMENT.get_template('about.html')
-		self.response.write(template.render(template_values))
-
 class MainPage(webapp2.RequestHandler):
 	def get(self):
 		uid = extractkeyfromrequest(self.request, 'u')
@@ -75,12 +91,18 @@ class MainPage(webapp2.RequestHandler):
 
 class SignInPage(webapp2.RequestHandler):
 	def get(self):
+		uid = extractkeyfromrequest(self.request, 'u')
+		insession = isinsession(uid)
 		emailid = extractkeyfromrequest(self.request, 'e')
 		if emailid is None:
 			emailid = ''
 		template_values = {	
 			'emailid' : emailid,
+			'forgoturl' : '/forgot?e='+str(emailid),
+			'forgoturllinktext' : 'Forgot Student ID' 
 		}
+		header_template_values = buildheadertemplatevalues(insession, uid)
+		template_values.update(header_template_values)
 		template = JINJA_ENVIRONMENT.get_template('signin.html')
 		self.response.write(template.render(template_values))
 	def post(self):
