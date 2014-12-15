@@ -135,6 +135,7 @@ class SignOutPage(webapp2.RequestHandler):
 
 class SignUpPage(webapp2.RequestHandler):
 	def get(self):
+		uid =extractkeyfromrequest(self.request, 'u')
 		insession = issessionrequest(self.request)
 		template_values = {}
 		header_template_values = buildheadertemplatevalues(insession, uid)
@@ -144,29 +145,24 @@ class SignUpPage(webapp2.RequestHandler):
 	def post(self):
 		emailid = self.request.get('emailid')
 		signupservice = SignUpService()
-		storedsignup = signupservice.signup(emailid)
-		template_values = {				
-			'emailid' : emailid
+		returnvalue = signupservice.signup(emailid)
+		self.redirect('/signupstatus?r='+str(returnvalue)+'&e='+str(emailid))
+
+class SignUpStatusPage(webapp2.RequestHandler):
+	def get(self):
+		uid =extractkeyfromrequest(self.request, 'u')
+		insession = issessionrequest(self.request)
+		returnvalue = extractkeyfromrequest(self.request, 'r')
+		hasreturnvalue = True
+		if returnvalue is None:
+			hasreturnvalue = False		
+		emailid = extractkeyfromrequest(self.request, 'e')	
+		template_values = {	
+			'emailid' : emailid,
+			'hasreturnvalue': hasreturnvalue,
 		}
-		if storedsignup:
-			self.redirect('/signupsuccess')
-		else:
-			self.redirect('/signupfailure')
-
-class SignUpSuccessPage(webapp2.RequestHandler):
-	def get(self):
-		insession = issessionrequest(self.request)
-		template_values = {}
 		header_template_values = buildheadertemplatevalues(insession, uid)
 		template_values.update(header_template_values)		
-		template = JINJA_ENVIRONMENT.get_template('signupsuccess.html')
+		template = JINJA_ENVIRONMENT.get_template('signupstatus.html')
 		self.response.write(template.render(template_values))
 
-class SignUpFailurePage(webapp2.RequestHandler):
-	def get(self):
-		insession = issessionrequest(self.request)
-		template_values = {}
-		header_template_values = buildheadertemplatevalues(insession, uid)
-		template_values.update(header_template_values)		
-		template_values = JINJA_ENVIRONMENT.get_template('signupfailure.html')
-		self.response.write(template.render(template_values))

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+	<body>
+		{% include 'header.html' %}
+		{% if hasreturnvalue %}
+		<h1>Sign Up Successful</h1>
+		<div><span>An email will be sent to {{emailid}} in the next 24 hours.</span></div>
+		{% endif %}
+		{% if not hasreturnvalue %}
+		<h1>Sign Up Failed</h1>
+		<div><span>The email {{emailid}} could not be registered. That's all we know.</span></div>
+		{% endif %}		
+	</body>
+</html>
+{% endautoescape %}

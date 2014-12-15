@@ -119,12 +119,12 @@ class SignUpService(object):
 			p.put()
 			schedulerservice = SchedulerService()
 			schedulerservice.schedulesignup(p)
-			return p
+			return 1
 		except Exception as e:
 			logging.error("error signing up " + str(emailid))
 			sys_err = sys.exc_info()
 			logging.error(sys_err[1])
-		return None
+		return 0
 
 class SchedulerService(object):
 	def schedulesignup(self, p):

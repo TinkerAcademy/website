@@ -14,8 +14,7 @@ from pages import 	MainPage, \
 					SignOutPage, \
 					AboutPage, \
 					SignUpPage, \
-					SignUpSuccessPage, \
-					SignUpFailurePage, \
+					SignUpStatusPage, \
 					AdminPage
 
 application = webapp2.WSGIApplication([
@@ -28,8 +27,7 @@ application = webapp2.WSGIApplication([
 										('/signin', SignInPage),
 										('/signout', SignOutPage),
 										('/signup', SignUpPage),
-										('/signupsuccess', SignUpSuccessPage),
-										('/signupfailure', SignUpFailurePage),
+										('/signupstatus', SignUpStatusPage),
 										('/admin', AdminPage),
 									], debug=True)
 
