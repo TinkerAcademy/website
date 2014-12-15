@@ -16,6 +16,7 @@ from environment import JINJA_ENVIRONMENT
 from services import UserService
 from services import CoursesService
 from services import SignUpService
+from services import ForgotStudentIDService
 
 class AboutPage(webapp2.RequestHandler):
 	def get(self):
@@ -54,14 +55,23 @@ class ForgotPage(webapp2.RequestHandler):
 		emailid = extractkeyfromrequest(self.request, 'e')
 		if emailid is None:
 			emailid = ''
+		returnvalue = extractkeyfromrequest(self.request, 'r')
+		hasreturnvalue = True
+		if returnvalue is None:
+			hasreturnvalue = False	
 		template_values = {	
 			'emailid' : emailid,
+			'hasreturnvalue': hasreturnvalue,
 		}
 		header_template_values = buildheadertemplatevalues(insession, uid)
 		template_values.update(header_template_values)
 		template = JINJA_ENVIRONMENT.get_template('forgot.html')
 		self.response.write(template.render(template_values))
-
+	def post(self):
+		emailid = self.request.get('emailid')
+		forgotservice = ForgotStudentIDService()
+		returnvalue = forgotservice.sendemail(emailid)
+		self.redirect('/forgot?e='+str(emailid)+'&r='+str(returnvalue))
 
 class MyCoursesPage(webapp2.RequestHandler):
 	def get(self):

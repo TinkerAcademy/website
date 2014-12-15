@@ -10,6 +10,11 @@ from models import User, \
 				   SignUp, \
 				   Course
 
+class ForgotStudentIDService(object):
+	def sendemail(self, emailid):
+		#TODO: schedule email
+		return 1
+
 class MemcacheService(object):
 	def hassession(self, uid):
 		studentid = memcache.get(uid, namespace = 'Session')
