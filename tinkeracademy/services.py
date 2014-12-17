@@ -11,9 +11,8 @@ from google.appengine.api import mail
 from validate_email import validate_email
 from validate_zipcode import validate_zipcode
 
-from environment import GOOGLE_DRIVE_SERVICE \
-						, googlehttp
-						# , GOOGLE_SPREADSHEETS_SERVICE
+from googleservices import GoogleDriveService \
+							, GoogleSpreadsheetService
 
 from models import User, \
 				   UserCourse, \
@@ -23,28 +22,12 @@ from models import User, \
 
 class DatabaseService(object):
 	def updatecourses(self):
-		googleservice = GoogleService()
-		dbfile = googleservice.getfile(constants.GOOGLE_DRIVE_DATABASE_FILE_TITLE)		
-		# spreadsheetsfeed = GOOGLE_SPREADSHEETS_SERVICE.GetSpreadsheetsFeed()
-		# logging.info('DatabaseService.updatecourses spreadsheetsfeed ' + str(spreadsheetsfeed))
-
-class GoogleService(object):
-	def getfile(self, title):
-		try:
-			param = {}
-			files = GOOGLE_DRIVE_SERVICE.files().list(**param).execute(http=googlehttp)
-			logging.info('GoogleService.getfile files=' + str(files))
-			items = files['items']
-			item = None
-			for item in items:
-				if item['title'] == title:
-					break
-			return item
-		except:
-			logging.error('GoogleDriveService.list_files error')
-			sys_err = sys.exc_info()
-			logging.error(sys_err[1])
-		return None
+		# googledriveservice = GoogleDriveService()
+		# dbfile = googledriveservice.getfile(constants.GOOGLE_DRIVE_SPREADSHEET_TITLE)		
+		# logging.info('dbfile='+str(dbfile))
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		worksheets = googlespreadsheetservice.getworksheets(constants.GOOGLE_DRIVE_SPREADSHEET_KEY)
+		logging.info('DatabaseService.updatecourses worksheets='+str(worksheets))
 
 class EmailService(object):
 	def register(self, emailtype, senderid, receiveremailid, subject, body, attachment=None):

@@ -55,7 +55,7 @@ pemfile.close()
 credentials=SignedJwtAssertionCredentials(
 	SERVICE_ACCOUNT_EMAIL,
 	key,
-	scope=constants.GOOGLE_DRIVE_SCOPE,
+	scope=[constants.GOOGLE_DRIVE_SCOPE,constants.GOOGLE_SPREADSHEETS_SCOPE],
 	sub='admin@tinkeracademy.com'
 	)
 
@@ -64,4 +64,6 @@ googlehttp=credentials.authorize(googlehttp)
 
 GOOGLE_DRIVE_SERVICE = build('drive', 'v2', http=googlehttp)
 
+GOOGLE_SPREADSHEETS_SERVICE = SpreadsheetsService()
+GOOGLE_SPREADSHEETS_SERVICE.additional_headers = {'Authorization': 'Bearer %s' % googlehttp.request.credentials.access_token}
 
