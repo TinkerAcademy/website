@@ -7,6 +7,7 @@ import webapp2
 from environment import JINJA_ENVIRONMENT
 
 from pages import 	MainPage, \
+					CoursePage, \
 					ForgotPage, \
 					AllCoursesPage, \
 					MyCoursesPage, \
@@ -21,6 +22,7 @@ from tasks import 	EmailTask, \
 
 application = webapp2.WSGIApplication([
 										('/', MainPage),
+										('/course', CoursePage),
 										('/forgot', ForgotPage),
 										('/index.html', MainPage),
 										('/about', AboutPage),

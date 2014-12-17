@@ -65,19 +65,23 @@ class Course(db.Model):
 	courseclassdurationmins = db.IntegerProperty()
 	courseisonline = db.BooleanProperty()
 
-class Homework(db.Model):
+class CourseHomework(db.Model):
+	courseid = db.StringProperty()
 	homeworkid = db.StringProperty()
 	homeworkblob = db.BlobProperty()
 
-class StarterPack(db.Model):
+class CourseStarterPack(db.Model):
+	courseid = db.StringProperty()
 	starterpackid = db.StringProperty()	
 	starterpackblob = db.BlobProperty()
 
-class Video(db.Model):
+class CourseVideo(db.Model):
+	courseid = db.StringProperty()
 	videoid = db.StringProperty()
 	youtubeurl = db.StringProperty()
 
-class Quiz(db.Model):
+class CourseQuiz(db.Model):
+	courseid = db.StringProperty()
 	quizid = db.StringProperty()
 	quizblob = db.BlobProperty()
 

@@ -57,6 +57,10 @@ def buildmycoursestemplatevalues(insession, uid, mycourses):
 	template_values.update(courses_values)
 	return template_values
 
+def buildcoursetemplatevalues(insession, course, coursehomeworks, coursevideos, coursestarterpacks):
+	template_values = {}
+	return template_values	
+
 def extractkeyfromrequest(request, key):
 	uid = None
 	if request.params and len(request.params) > 0:

@@ -18,6 +18,10 @@ from models import User, \
 				   UserCourse, \
 				   SignUp, \
 				   Course, \
+				   CourseHomework, \
+				   CourseStarterPack, \
+				   CourseVideo, \
+				   CourseQuiz, \
 				   Email
 
 class DatabaseService(object):
@@ -105,6 +109,17 @@ class MemcacheService(object):
 			memcache.set(studentid, courses, namespace = 'UserCourses')
 
 class CoursesService(object):
+	def getcourse(self, courseid):
+		return None
+	def getcoursehomeworks(self, courseid):
+		coursehomeworks = []
+		return coursehomeworks
+	def getcoursevideos(self, courseid):
+		coursevideos = []
+		return coursevideos
+	def getcoursestarterpacks(self, courseid):
+		coursestarterpacks = []
+		return coursestarterpacks
 	def listcourses(self):
 		googlespreadsheetservice = GoogleSpreadsheetService()
 		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
