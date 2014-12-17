@@ -8,9 +8,12 @@ from environment import GOOGLE_DRIVE_SERVICE \
 						, GOOGLE_SPREADSHEETS_SERVICE
 
 class GoogleSpreadsheetService(object):
-	def getworksheets(self, spreadsheetid):
-		worksheets = GOOGLE_SPREADSHEETS_SERVICE.GetWorksheetsFeed(spreadsheetid)
-		return worksheets
+	def getrows(self, spreadsheetid, worksheetid):
+		rows = GOOGLE_SPREADSHEETS_SERVICE.GetListFeed(spreadsheetid, worksheetid)
+		return rows
+	# def getworksheets(self, spreadsheetid, worksheetid=None):
+	# 	worksheets = GOOGLE_SPREADSHEETS_SERVICE.GetWorksheetsFeed(spreadsheetid, worksheetid)
+	# 	return worksheets
 
 class GoogleDriveService(object):
 	def getfile(self, title):

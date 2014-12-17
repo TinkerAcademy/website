@@ -21,13 +21,15 @@ from models import User, \
 				   Email
 
 class DatabaseService(object):
-	def updatecourses(self):
+	def getcourses(self):
 		# googledriveservice = GoogleDriveService()
 		# dbfile = googledriveservice.getfile(constants.GOOGLE_DRIVE_SPREADSHEET_TITLE)		
 		# logging.info('dbfile='+str(dbfile))
 		googlespreadsheetservice = GoogleSpreadsheetService()
-		worksheets = googlespreadsheetservice.getworksheets(constants.GOOGLE_DRIVE_SPREADSHEET_KEY)
-		logging.info('DatabaseService.updatecourses worksheets='+str(worksheets))
+		# coursesworksheet = googlespreadsheetservice.getworksheets(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
+		# logging.info('DatabaseService.updatecourses coursesworksheet='+str(coursesworksheet))
+		coursesrows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
+		logging.info('DatabaseService.updatecourses courses rows='+str(coursesrows))
 
 class EmailService(object):
 	def register(self, emailtype, senderid, receiveremailid, subject, body, attachment=None):
