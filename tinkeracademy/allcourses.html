@@ -7,7 +7,7 @@
 		{% for course in courses %}
 		<table>
 			<tr>				
-				<td><span><a href="{{course.courseid|safe}}">{{course.coursename}}</a></span></td>
+				<td><span><a href="{{'/course?c='+course.courseid|safe}}">{{course.coursename}}</a></span></td>
 			</tr>
 			<tr>
 				<td><span>Ages {{course.courseminage}}Y - {{course.coursemaxage}}Y</span></td>
