@@ -5,8 +5,17 @@
 		{% include 'header.html' %}
 		<h1>Sign Up</h1>
 		<form action="/signup" method="post">
-			<div><span>
-			<div><span>Email:</span><input id="emailid" name="emailid" type="text"></div>
+			<div><span>Email:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
+			<div><span>Zip Code (US):</span><input id="zipcodeid" name="zipcodeid" type="text" value="{{zipcode}}"></div>
+			{% if returnvalue == 1 %}
+			<div><span>Invalid email. Darn It! :)</span></div>
+			{% endif %}
+			{% if returnvalue == 2 %}
+			<div><span>Invalid zipcode. Darn It! :)</span></div>
+			{% endif %}
+			{% if returnvalue == 3 %}
+			<div><span>Invalid email and zipcode. Darn It! :)</span></div>
+			{% endif %}
 			<div><input type="submit"></div>
 		</form>
 	</body>

@@ -1,0 +1,7 @@
+cron:
+- description: email job
+  url: /task/email
+  schedule: every 5 minutes
+- description: update database from spreadsheet
+  url: /task/databaseupdate
+  schedule: every 1 hours

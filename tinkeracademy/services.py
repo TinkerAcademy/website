@@ -2,18 +2,90 @@ import logging
 import os
 import sys
 import uuid
+import constants
+import json
 
 from google.appengine.api import memcache
+from google.appengine.api import mail
+
+from validate_email import validate_email
+from validate_zipcode import validate_zipcode
+
+from environment import GOOGLE_DRIVE_SERVICE \
+						, googlehttp
+						# , GOOGLE_SPREADSHEETS_SERVICE
 
 from models import User, \
 				   UserCourse, \
 				   SignUp, \
-				   Course
+				   Course, \
+				   Email
+
+class DatabaseService(object):
+	def updatecourses(self):
+		googleservice = GoogleService()
+		dbfile = googleservice.getfile(constants.GOOGLE_DRIVE_DATABASE_FILE_TITLE)		
+		# spreadsheetsfeed = GOOGLE_SPREADSHEETS_SERVICE.GetSpreadsheetsFeed()
+		# logging.info('DatabaseService.updatecourses spreadsheetsfeed ' + str(spreadsheetsfeed))
+
+class GoogleService(object):
+	def getfile(self, title):
+		try:
+			param = {}
+			files = GOOGLE_DRIVE_SERVICE.files().list(**param).execute(http=googlehttp)
+			logging.info('GoogleService.getfile files=' + str(files))
+			items = files['items']
+			item = None
+			for item in items:
+				if item['title'] == title:
+					break
+			return item
+		except:
+			logging.error('GoogleDriveService.list_files error')
+			sys_err = sys.exc_info()
+			logging.error(sys_err[1])
+		return None
+
+class EmailService(object):
+	def register(self, emailtype, senderid, receiveremailid, subject, body, attachment=None):
+		senderemailid = str(fromid) + '@' + constants.EMAIL_DOMAIN_APPSPOT
+		email = Email()
+		email.senderemailid = senderemailid
+		email.receiveremailid = receiveremailid
+		email.typeid = emailtype
+		email.counter = 0
+		email.subject = Text(subject)
+		email.body = Text(body)
+		if attachment:
+			email.filename = attachment.filename
+		email.put()
+		return 1
+	def sendnext(self):
+		query = Email.all()
+		query.filter("counter = ", 0)
+		p = None
+		for p in query.run(limit=1):
+			senderemailid = str(p.senderemailid)
+			receiveremailid = str(p.receiveremailid)
+			subject = str(p.subject)
+			body = str(p.body)
+			filename = str(p.filename)
+			if filename:
+				pass
+			try:
+				mail.send_mail(fromaddress, toaddress, subject, body)
+				return 1
+			except:
+				logging.error("error sending email to " + str(toaddress))
+				sys_err = sys.exc_info()
+				logging.error(sys_err[1])
+		return 0
 
 class ForgotStudentIDService(object):
 	def sendemail(self, emailid):
-		#TODO: schedule email
-		return 1
+		fromid = constants.EMAIL_ID_PASSWORD_RECOVERY
+		emailservice = EmailService()
+		return emailservice.send(fromid, emailid, 'Password Recovery', 'Your Student ID is ######')
 
 class MemcacheService(object):
 	def hassession(self, uid):
@@ -104,7 +176,7 @@ class UserService(object):
 			return cacheservice.getstudentidforsession(uid)
 
 class SignUpService(object):
-	def signup(self, emailid):
+	def signup(self, emailid, zipcode):
 		query = SignUp.all()
 		query.filter("emailid = ", emailid)
 		p = None
@@ -115,10 +187,11 @@ class SignUpService(object):
 				p = SignUp()
 				p.counter = 0
 				p.emailid = emailid
+				p.zipcode = zipcode
 			p.counter += 1
 			p.put()
-			schedulerservice = SchedulerService()
-			schedulerservice.schedulesignup(p)
+			emailservice = EmailService()	
+			emailservice.register(constants.EMAIL_ID_SIGNUP, emailid, 'You have been signed up', 'You have been signed up')
 			return 1
 		except Exception as e:
 			logging.error("error signing up " + str(emailid))
@@ -126,6 +199,15 @@ class SignUpService(object):
 			logging.error(sys_err[1])
 		return 0
 
-class SchedulerService(object):
-	def schedulesignup(self, p):
-		pass
+class ValidationService(object):
+	def isvalidemail(self, emailid):
+		isvalid = False
+		if emailid:
+			isvalid = validate_email(emailid)
+		return isvalid
+	def isvalidzipcode(self, zipcode):
+		isvalid = False
+		if zipcode:
+			isvalid = validate_zipcode(zipcode)
+		return isvalid
+

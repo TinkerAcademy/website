@@ -75,4 +75,14 @@ class Quiz(db.Model):
 
 class SignUp(db.Model):
 	emailid = db.StringProperty()
+	zipcode = db.StringProperty()
 	counter = db.IntegerProperty()
+
+class Email(db.Model):
+	senderemailid = db.StringProperty()
+	receiveremailid = db.StringProperty()
+	typeid = db.StringProperty()
+	counter = db.IntegerProperty()
+	subject = db.TextProperty()
+	body = db.TextProperty()
+	filename = db.StringProperty()

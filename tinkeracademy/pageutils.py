@@ -4,8 +4,10 @@ import jinja2
 import logging
 import webapp2
 import pageutils
+import logging
 
 from environment import JINJA_ENVIRONMENT
+from google.appengine.api import users
 
 from services import UserService
 from services import CoursesService
@@ -67,6 +69,16 @@ def extractkeyfromrequest(request, key):
 		if key in request.params:
 			uid = request.params[key]
 	return uid
+
+def createloginurl():
+	return users.create_login_url('/')
+
+def isadminuser():
+	user = users.get_current_user()
+	logging.info('admin user is ' + str(user))
+	if user:
+		return users.is_current_user_admin()
+	return False
 
 def isinsession(uid):
 	insession = False
