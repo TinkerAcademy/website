@@ -4,6 +4,26 @@
 	<body>
 		{% include 'header.html' %}
 		<h1>Course</h1>
+		<div><span>{{course.coursename}}</span></div>
+		<div><span>{{course.coursedescription}}</span></div>		
+		<div><span>Ages {{course.courseminage}}Y-{{course.coursemaxage}}Y</span></div>
+		{% for coursecontent in coursecontents %}
+		<table>
+			<tr>
+				<td><span>{{coursecontent.coursecontentname}}</span></td>
+			</tr>
+			<tr>
+				<td><span>{{coursecontent.coursecontentdescription}}</span></td>
+			</tr>
+		</table>
+		{% for coursehandout in coursehandouts %}		
+		<table>
+			<tr>
+				<td><span>{{coursehandout.coursehandoutname}}</span></td>
+			</tr>
+		</table>
+		{% endfor %}
+		{% endfor %}
 	</body>
 </html>
 {% endautoescape %}

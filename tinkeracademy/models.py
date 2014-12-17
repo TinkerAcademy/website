@@ -65,25 +65,42 @@ class Course(db.Model):
 	courseclassdurationmins = db.IntegerProperty()
 	courseisonline = db.BooleanProperty()
 
+class CourseContent(db.Model):
+	courseid = db.StringProperty()
+	coursecontentid = db.StringProperty()
+	coursecontentname = db.StringProperty()
+	coursecontentdescription = db.TextProperty()
+
+class CourseHandout(db.Model):
+	courseid = db.StringProperty()
+	coursecontentid = db.StringProperty()
+	coursehandoutid = db.StringProperty()
+	coursehandoutname = db.StringProperty()	
+
 class CourseHomework(db.Model):
 	courseid = db.StringProperty()
-	homeworkid = db.StringProperty()
-	homeworkblob = db.BlobProperty()
+	coursecontentid = db.StringProperty()
+	coursehomeworkid = db.StringProperty()
+	coursehomeworkname = db.StringProperty()
 
 class CourseStarterPack(db.Model):
 	courseid = db.StringProperty()
-	starterpackid = db.StringProperty()	
-	starterpackblob = db.BlobProperty()
+	coursecontentid = db.StringProperty()
+	coursestarterpackid = db.StringProperty()
+	coursestarterpackname = db.StringProperty()	
 
 class CourseVideo(db.Model):
 	courseid = db.StringProperty()
-	videoid = db.StringProperty()
-	youtubeurl = db.StringProperty()
+	coursecontentid = db.StringProperty()
+	coursevideoid = db.StringProperty()
+	coursevideoname = db.StringProperty()
 
 class CourseQuiz(db.Model):
 	courseid = db.StringProperty()
+	coursecontentid = db.StringProperty()
 	quizid = db.StringProperty()
-	quizblob = db.BlobProperty()
+	videoid = db.StringProperty()
+	videomin = db.IntegerProperty()
 
 class SignUp(db.Model):
 	emailid = db.StringProperty()

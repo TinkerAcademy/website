@@ -18,6 +18,8 @@ from models import User, \
 				   UserCourse, \
 				   SignUp, \
 				   Course, \
+				   CourseContent, \
+				   CourseHandout, \
 				   CourseHomework, \
 				   CourseStarterPack, \
 				   CourseVideo, \
@@ -110,20 +112,60 @@ class MemcacheService(object):
 
 class CoursesService(object):
 	def getcourse(self, courseid):
+		courses = self.listcourses()
+		for course in courses:
+			if course.courseid == courseid:
+				return course
 		return None
+	def getcoursecontents(self, courseid):
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSECONTENTS_WORKSHEET_KEY)
+		coursecontents = self._processcoursecontentrows(rows)
+		results = []
+		for coursecontent in coursecontents:
+			if coursecontent.courseid == courseid:
+				results.append(coursecontent)
+		return results
+	def getcoursehandouts(self, courseid):
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSEHANDOUTS_WORKSHEET_KEY)
+		coursehandouts = self._processcoursehandoutrows(rows)
+		results = []
+		for coursehandout in coursehandouts:
+			if coursehandout.courseid == courseid:
+				results.append(coursehandout)
+		return coursehandouts
 	def getcoursehomeworks(self, courseid):
-		coursehomeworks = []
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSEHOMEWORKS_WORKSHEET_KEY)
+		coursehomeworks = self._processcoursehomeworkrows(rows)
+		results = []
+		for coursehomework in coursehomeworks:
+			if coursehomework.courseid == courseid:
+				results.append(coursehomework)
 		return coursehomeworks
 	def getcoursevideos(self, courseid):
-		coursevideos = []
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSEVIDEOS_WORKSHEET_KEY)
+		coursevideos = self._processcoursevideorows(rows)
+		results = []
+		for coursevideo in coursevideos:
+			if coursevideo.courseid == courseid:
+				results.append(coursevideo)
 		return coursevideos
 	def getcoursestarterpacks(self, courseid):
-		coursestarterpacks = []
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSESTARTERPACKS_WORKSHEET_KEY)
+		coursestarterpacks = self._processcoursestarterpackrows(rows)
+		results = []
+		for coursestarterpack in coursestarterpacks:
+			if coursestarterpack.courseid == courseid:
+				results.append(coursestarterpack)
 		return coursestarterpacks
 	def listcourses(self):
 		googlespreadsheetservice = GoogleSpreadsheetService()
 		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
-		courses = self._processrows(rows)
+		courses = self._processcourserows(rows)
 		return courses
 	def listusercourses(self, studentid):
 		cacheservice = MemcacheService()
@@ -137,13 +179,68 @@ class CoursesService(object):
 				usercourses.append(p)
 			cacheservice.setusercourses(studentid, usercourses)
 		return usercourses
-	def _processrows(self, rows):
+	def _processcoursestarterpackrows(self, rows):
+		coursestarterpacks = []
+		entries = rows.entry
+		for entry in entries:
+			coursestarterpack = CourseStarterPack()
+			coursestarterpack.courseid = self._processstr(entry, 'courseid')
+			coursestarterpack.coursecontentid = self._processstr(entry, 'coursecontentid')
+			coursestarterpack.coursestarterpackid = self._processstr(entry, 'coursestarterpackid')
+			coursestarterpack.coursestarterpackname = self._processstr(entry, 'coursestarterpackname')
+			coursestarterpacks.append(coursestarterpack)
+		return coursestarterpacks
+	def _processcoursevideorows(self, rows):
+		coursevideos = []
+		entries = rows.entry
+		for entry in entries:
+			coursevideo = CourseVideo()
+			coursevideo.courseid = self._processstr(entry, 'courseid')
+			coursevideo.coursecontentid = self._processstr(entry, 'coursecontentid')
+			coursevideo.coursevideoid = self._processstr(entry, 'coursevideoid')
+			coursevideo.coursevideoname = self._processstr(entry, 'coursevideoname')
+			coursevideos.append(coursevideo)
+		return coursevideos
+	def _processcoursehomeworkrows(self, rows):
+		coursehomeworks = []
+		entries = rows.entry
+		for entry in entries:
+			coursehomework = CourseHomework()
+			coursehomework.courseid = self._processstr(entry, 'courseid')
+			coursehomework.coursecontentid = self._processstr(entry, 'coursecontentid')
+			coursehomework.coursehomeworkid = self._processstr(entry, 'coursehomeworkid')
+			coursehomework.coursehomeworkname = self._processstr(entry, 'coursehomeworkname')
+			coursehomeworks.append(coursehomework)
+		return coursehomeworks
+	def _processcoursehandoutrows(self, rows):
+		coursehandouts = []
+		entries = rows.entry
+		for entry in entries:
+			coursehandout = CourseHandout()
+			coursehandout.courseid = self._processstr(entry, 'courseid')
+			coursehandout.coursecontentid = self._processstr(entry, 'coursecontentid')
+			coursehandout.coursehandoutid = self._processstr(entry, 'coursehandoutid')
+			coursehandout.coursehandoutname = self._processstr(entry, 'coursehandoutname')
+			coursehandouts.append(coursehandout)
+		return coursehandouts
+	def _processcoursecontentrows(self, rows):
+		coursecontents = []
+		entries = rows.entry
+		for entry in entries:
+			coursecontent = CourseContent()
+			coursecontent.courseid = self._processstr(entry, 'courseid')
+			coursecontent.coursecontentid = self._processstr(entry, 'coursecontentid')
+			coursecontent.coursecontentname = self._processstr(entry, 'coursecontentname')
+			coursecontent.coursecontentdescription = self._processstr(entry, 'coursecontentdescription')
+			coursecontents.append(coursecontent)
+		return coursecontents
+	def _processcourserows(self, rows):
 		courses = []
 		entries = rows.entry
 		for entry in entries:
 			course = Course()
 			course.courseid = self._processstr(entry, 'courseid')
-			course.coursetag = self._processstr(entry, 'courseid')
+			course.coursetag = self._processstr(entry, 'coursetag')
 			course.coursename = self._processstr(entry, 'coursename')
 			course.coursedescription = self._processstr(entry, 'coursedescription')
 			course.courseyear = self._processint(entry, 'courseyear')

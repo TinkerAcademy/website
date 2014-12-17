@@ -48,17 +48,17 @@ def buildallcoursestemplatevalues(insession, allcourses):
 
 def buildmycoursestemplatevalues(insession, uid, mycourses):
 	template_values = {}
-	courses_values = template_values['mycourses'] = []
-	for course in mycourses:
-		course_value = {}
-		course_value['courseurl'] = '/course?c=' + str(course.id) + "&u=" + str(uid)
-		course_value['courseurllinktext'] = course.name
-		course_values.append(course_value)
-	template_values.update(courses_values)
+	template_values['courses'] = mycourses
 	return template_values
 
-def buildcoursetemplatevalues(insession, course, coursehomeworks, coursevideos, coursestarterpacks):
+def buildcoursetemplatevalues(insession, course, coursecontents, coursehandouts, coursehomeworks, coursevideos, coursestarterpacks):
 	template_values = {}
+	template_values['course'] = course
+	template_values['coursecontents'] = coursecontents
+	template_values['coursehandouts'] = coursehandouts
+	template_values['coursehomeworks'] = coursehomeworks
+	template_values['coursevideos'] = coursevideos
+	template_values['coursestarterpacks'] = coursestarterpacks
 	return template_values	
 
 def extractkeyfromrequest(request, key):
