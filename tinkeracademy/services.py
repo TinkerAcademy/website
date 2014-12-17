@@ -106,14 +106,9 @@ class MemcacheService(object):
 
 class CoursesService(object):
 	def listcourses(self):
-		cacheservice = MemcacheService()
-		courses = cacheservice.getcourses()
-		if (not courses) or len(courses) == 0:
-			courses = []
-			query = Course.all()
-			for q in query.run(limit=100):
-				courses.append(query)
-			cacheservice.setcourses(courses)
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
+		courses = self._processrows(rows)
 		return courses
 	def listusercourses(self, studentid):
 		cacheservice = MemcacheService()
@@ -127,6 +122,39 @@ class CoursesService(object):
 				usercourses.append(p)
 			cacheservice.setusercourses(studentid, usercourses)
 		return usercourses
+	def _processrows(self, rows):
+		courses = []
+		entries = rows.entry
+		for entry in entries:
+			course = Course()
+			course.courseid = self._processstr(entry, 'courseid')
+			course.coursetag = self._processstr(entry, 'courseid')
+			course.coursename = self._processstr(entry, 'coursename')
+			course.coursedescription = self._processstr(entry, 'coursedescription')
+			course.courseyear = self._processint(entry, 'courseyear')
+			course.coursestartdate = self._processstr(entry, 'coursestartdate')
+			course.courseenddate = self._processstr(entry, 'courseenddate')
+			course.coursesession = self._processstr(entry, 'coursesession')
+			course.coursepartner = self._processstr(entry, 'coursepartner')
+			course.courseminage = self._processint(entry, 'courseminage')
+			course.coursemaxage = self._processint(entry, 'coursemaxage')
+			course.coursenumclasses = self._processint(entry, 'coursenumclasses')
+			course.courseclassdurationmins = self._processint(entry, 'courseclassdurationmins')
+			course.courseisonline = self._processboolean(entry, 'courseisonline')
+			courses.append(course)
+		return courses
+	def _processstr(self, entry, field):
+		text = entry.custom[field].text
+		return text
+	def _processint(self, entry, field):
+		text = self._processstr(entry, field)
+		if text:
+			return int(text)
+		return 0
+	def _processboolean(self, entry, field):
+		int_ = self._processint(entry, field)
+		return int_ != 0
+
 
 class UserService(object):
 	def isuserindb(self, emailid, studentid):

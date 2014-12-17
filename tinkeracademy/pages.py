@@ -44,6 +44,7 @@ class AllCoursesPage(webapp2.RequestHandler):
 		template_values.update(header_template_values)
 		course_template_values = buildallcoursestemplatevalues(insession, courses)
 		template_values.update(course_template_values)
+		logging.info('template_values='+str(template_values))
 		template = JINJA_ENVIRONMENT.get_template('allcourses.html')
 		self.response.write(template.render(template_values))
 

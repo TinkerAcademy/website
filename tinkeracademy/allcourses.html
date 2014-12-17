@@ -4,17 +4,19 @@
 	<body>
 		{% include 'header.html' %}
 		<h1>Courses</h1>
+		{% for course in courses %}
 		<table>
-			{% for course in courses %}
-			<tr>
-				<td>
-					<div>
-						<a href="{{courseurl|safe}}">{{courseurllinktext}}</a>
-					</div>
-				</td>
+			<tr>				
+				<td><span><a href="{{course.courseid|safe}}">{{course.coursename}}</a></span></td>
 			</tr>
-			{% endfor %}
+			<tr>
+				<td><span>Ages {{course.courseminage}}Y - {{course.coursemaxage}}Y</span></td>
+			</tr>
+			<tr>
+				<td><span>{{course.coursedescription}}</span></td>
+			</tr>
 		</table>
+		{% endfor %}
 	</body>
 </html>
 {% endautoescape %}

@@ -43,13 +43,7 @@ def buildheadertemplatevalues(insession, uid):
 
 def buildallcoursestemplatevalues(insession, allcourses):
 	template_values = {}
-	courses_values = template_values['allcourses'] = []
-	for course in allcourses:
-		course_value = {}
-		course_value['courseurl'] = '/course?c=' + str(course.id)
-		course_value['courseurllinktext'] = course.name
-		courses_values.append(course_value)
-	template_values.update(courses_values)
+	template_values['courses'] = allcourses
 	return template_values
 
 def buildmycoursestemplatevalues(insession, uid, mycourses):
