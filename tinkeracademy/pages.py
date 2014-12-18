@@ -116,9 +116,13 @@ class MainPage(webapp2.RequestHandler):
 	def get(self):
 		uid = extractkeyfromrequest(self.request, 'u')
 		insession = isinsession(uid)
+		coursesservice = CoursesService()
+		courses = coursesservice.listupcomingcourses()
 		template_values = {}
 		header_template_values = buildheadertemplatevalues(insession, uid)
 		template_values.update(header_template_values)
+		course_template_values = buildallcoursestemplatevalues(insession, courses)
+		template_values.update(course_template_values)
 		template = JINJA_ENVIRONMENT.get_template('index.html')
 		self.response.write(template.render(template_values))
 

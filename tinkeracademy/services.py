@@ -5,6 +5,9 @@ import uuid
 import constants
 import json
 
+from datetime import datetime
+from dateutil import parser
+
 from google.appengine.api import memcache
 from google.appengine.api import mail
 
@@ -176,6 +179,19 @@ class CoursesService(object):
 		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
 		courses = self._processcourserows(rows)
 		return courses
+	def listupcomingcourses(self):
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
+		courses = self._processcourserows(rows)
+		results = []
+		present = datetime.now()
+		for course in courses:
+			coursestartdate = parser.parse(course.coursestartdate)
+			delta = coursestartdate - present
+			deltadays = delta.days
+			if deltadays <= 28 and deltadays >= -7:
+				results.append(course)
+		return results
 	def listusercourses(self, studentid):
 		cacheservice = MemcacheService()
 		courses = self.listcourses()
