@@ -162,6 +162,15 @@ class CoursesService(object):
 			if coursestarterpack.courseid == courseid:
 				results.append(coursestarterpack)
 		return coursestarterpacks
+	def getcoursequizzes(self, courseid):
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSEQUIZS_WORKSHEET_KEY)
+		coursequizs = self._processcoursequizrows(rows)
+		results = []
+		for coursequiz in coursequizs:
+			if coursequiz.courseid == courseid:
+				results.append(coursequiz)
+		return coursequizs
 	def listcourses(self):
 		googlespreadsheetservice = GoogleSpreadsheetService()
 		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
@@ -223,6 +232,17 @@ class CoursesService(object):
 			coursehandout.coursehandoutname = self._processstr(entry, 'coursehandoutname')
 			coursehandouts.append(coursehandout)
 		return coursehandouts
+	def _processcoursequizrows(self, rows):
+		coursequizs = []
+		entries = rows.entry
+		for entry in entries:
+			coursequiz = CourseQuiz()
+			coursequiz.courseid = self._processstr(entry, 'courseid')
+			coursequiz.coursecontentid = self._processstr(entry, 'coursecontentid')
+			coursequiz.coursequizid = self._processstr(entry, 'coursequizid')
+			coursequiz.coursequizname = self._processstr(entry, 'coursequizname')
+			coursequizs.append(coursequiz)
+		return coursequizs
 	def _processcoursecontentrows(self, rows):
 		coursecontents = []
 		entries = rows.entry

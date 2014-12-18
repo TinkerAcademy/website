@@ -61,12 +61,13 @@ class CoursePage(webapp2.RequestHandler):
 		coursehomeworks = coursesservice.getcoursehomeworks(courseid)
 		coursevideos = coursesservice.getcoursevideos(courseid)
 		coursestarterpacks = coursesservice.getcoursestarterpacks(courseid)		
+		coursequizzes = coursesservice.getcoursequizzes(courseid)
 		template_values = {}
 		header_template_values = buildheadertemplatevalues(insession, uid)
 		template_values.update(header_template_values)
-		course_template_values = buildcoursetemplatevalues(insession, course, coursecontents, coursehandouts, coursehomeworks, coursevideos, coursestarterpacks)
-		template_values.update(course_template_values)
-		# logging.info('template_values='+str(template_values))
+		course_template_values = buildcoursetemplatevalues(insession, course, coursecontents, coursehandouts, coursehomeworks, coursevideos, coursestarterpacks, coursequizzes)
+		template_values.update(course_template_values)		
+		logging.info('template_values='+str(template_values))
 		template = JINJA_ENVIRONMENT.get_template('course.html')
 		self.response.write(template.render(template_values))			
 

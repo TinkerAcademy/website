@@ -16,19 +16,19 @@
 				<td><span>{{coursecontent.coursecontentdescription}}</span></td>
 			</tr>
 		</table>
-		{% for coursehandout in coursehandouts %}		
-		{% if coursehandout.coursecontentid == coursecontent.coursecontentid %}		
+		{% for coursestarterpack in coursestarterpacks %}		
+		{% if coursestarterpack.coursecontentid == coursecontent.coursecontentid %}		
 		<table>
 			<tr>
-				<td><span>Handout</span></td>
+				<td><span>Starter Pack</span></td>
 				<td><span>Download</span></td>
 			</tr>
 			<tr>
-				<td><span>{{coursehandout.coursehandoutname}}</span></td>
-				<td><span>{{coursehandout.coursehandoutname}}</span></td>
+				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
+				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
 			</tr>
-		</table>
 		{% endif %}
+		</table>
 		{% endfor %}
 		{% for coursevideo in coursevideos %}		
 		{% if coursevideo.coursecontentid == coursecontent.coursecontentid %}		
@@ -46,19 +46,33 @@
 		{% endif %}
 		</table>
 		{% endfor %}
-		{% for coursestarterpack in coursestarterpacks %}		
-		{% if coursestarterpack.coursecontentid == coursecontent.coursecontentid %}		
+		{% for coursequiz in coursequizs %}		
+		{% if coursequiz.coursecontentid == coursecontent.coursecontentid %}		
 		<table>
 			<tr>
-				<td><span>Starter Pack</span></td>
-				<td><span>Download</span></td>
+				<td><span>Quiz</span></td>
+				<td><span>Attempt Quiz</span></td>
 			</tr>
 			<tr>
-				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
-				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
+				<td><span>{{coursequiz.coursequizname}}</span></td>
+				<td><span>{{coursequiz.coursequizname}}</span></td>
 			</tr>
 		{% endif %}
 		</table>
+		{% endfor %}
+		{% for coursehandout in coursehandouts %}		
+		{% if coursehandout.coursecontentid == coursecontent.coursecontentid %}		
+		<table>
+			<tr>
+				<td><span>Handout</span></td>
+				<td><span>Download</span></td>
+			</tr>
+			<tr>
+				<td><span>{{coursehandout.coursehandoutname}}</span></td>
+				<td><span>{{coursehandout.coursehandoutname}}</span></td>
+			</tr>
+		</table>
+		{% endif %}
 		{% endfor %}
 		{% for coursehomework in coursehomeworks %}		
 		{% if coursehomework.coursecontentid == coursecontent.coursecontentid %}		

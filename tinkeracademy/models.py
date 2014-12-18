@@ -98,9 +98,8 @@ class CourseVideo(db.Model):
 class CourseQuiz(db.Model):
 	courseid = db.StringProperty()
 	coursecontentid = db.StringProperty()
-	quizid = db.StringProperty()
-	videoid = db.StringProperty()
-	videomin = db.IntegerProperty()
+	coursequizid = db.StringProperty()
+	coursequizname = db.StringProperty()
 
 class SignUp(db.Model):
 	emailid = db.StringProperty()
