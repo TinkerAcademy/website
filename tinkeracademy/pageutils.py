@@ -35,7 +35,7 @@ def buildheadertemplatevalues(insession, uid):
 		template_values['signinurllinktext'] = 'Sign In'
 	if not insession:
 		template_values['signupurl'] = '/signup'
-		template_values['signupurllinktext'] = 'Sign Up'
+		template_values['signupurllinktext'] = 'Register'
 	if insession:
 		template_values['signouturl'] = '/signout?u=' + str(uid)
 		template_values['signouturllinktext'] = 'Sign Out'

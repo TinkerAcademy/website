@@ -3,21 +3,22 @@
 <html>
 	<body>
 		{% include 'header.html' %}
-		<h1>Sign Up</h1>
+		<h1>Get Email Updates</h1>
 		<form action="/signup" method="post">
 			<div><span>Email:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
 			<div><span>Zip Code (US):</span><input id="zipcodeid" name="zipcodeid" type="text" value="{{zipcode}}"></div>
 			{% if returnvalue == 1 %}
-			<div><span>Invalid email. Darn It! :)</span></div>
+			<div><span>Invalid email. Sorry :(</span></div>
 			{% endif %}
 			{% if returnvalue == 2 %}
-			<div><span>Invalid zipcode. Darn It! :)</span></div>
+			<div><span>Invalid zipcode. Sorry :(</span></div>
 			{% endif %}
 			{% if returnvalue == 3 %}
 			<div><span>Invalid email and zipcode. Darn It! :)</span></div>
 			{% endif %}
 			<div><input type="submit"></div>
 		</form>
+		<h1>Register</h1>
 	</body>
 </html>
 {% endautoescape %}
