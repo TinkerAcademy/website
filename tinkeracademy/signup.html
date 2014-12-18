@@ -3,9 +3,17 @@
 <html>
 	<body>
 		{% include 'header.html' %}
-		<h1>Get Email Updates</h1>
+		<h1>Register</h1>
+		{% for channelpartner in channelpartners %}
+		<table>
+			<tr>
+				<td><a href="{{channelpartner.channelpartnerregsite|safe}}">Register with the {{channelpartner.channelpartnername}}</a></td>		
+			</tr>
+		</table>	
+		{% endfor %}	
+		<h1>Other Cities</h1>
 		<form action="/signup" method="post">
-			<div><span>Email:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
+<!-- 			<div><span>Email:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
 			<div><span>Zip Code (US):</span><input id="zipcodeid" name="zipcodeid" type="text" value="{{zipcode}}"></div>
 			{% if returnvalue == 1 %}
 			<div><span>Invalid email. Sorry :(</span></div>
@@ -16,9 +24,13 @@
 			{% if returnvalue == 3 %}
 			<div><span>Invalid email and zipcode. Darn It! :)</span></div>
 			{% endif %}
+ -->			
+<!--  			<div><span>City:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
+ --> 			
+ 			<div><span>I would like Tinker Academy in my city</span></div>
 			<div><input type="submit"></div>
+ 			<div><span>City data provided by <a href="www.geonames.org">GeoNames</a></span></div>
 		</form>
-		<h1>Register</h1>
 	</body>
 </html>
 {% endautoescape %}

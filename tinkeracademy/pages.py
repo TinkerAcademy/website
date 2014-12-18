@@ -194,6 +194,10 @@ class SignUpPage(webapp2.RequestHandler):
 		}
 		header_template_values = buildheadertemplatevalues(insession, uid)
 		template_values.update(header_template_values)		
+		channelpartnersservice = ChannelPartnersService()
+		channelpartners = channelpartnersservice.getchannelpartners()
+		channelpartner_template_values = buildchannelpartnertemplatevalues(insession, channelpartners)
+		template_values.update(channelpartner_template_values)
 		template = JINJA_ENVIRONMENT.get_template('signup.html')
 		self.response.write(template.render(template_values))
 	def post(self):
@@ -205,24 +209,18 @@ class SignUpPage(webapp2.RequestHandler):
 			zipcode = zipcode.strip()
 		validationservice = ValidationService()
 		isvalidemail = validationservice.isvalidemail(emailid)
-		isvalidzipcode = validationservice.isvalidzipcode(zipcode)
-		if not isvalidemail or not isvalidzipcode:
+		if not isvalidemail:
 			returnvalue = 0			
 			if not isvalidemail:
-				returnvalue |= constants.INPUT_INVALID_ZIPCODE
-			if not isvalidzipcode:
 				returnvalue |= constants.INPUT_INVALID_EMAILID
 			q = 'r='+str(returnvalue)
 			if emailid:
 				q += '&'
 				q += 'e='+str(emailid)
-			if zipcode:
-				q += '&'
-				q += 'z='+str(zipcode)
 			self.redirect('/signup?'+q)
 		else:
 			signupservice = SignUpService()
-			returnvalue = signupservice.signup(emailid, zipcode)		
+			returnvalue = signupservice.signup(emailid)		
 			self.redirect('/signupstatus?r='+str(returnvalue)+'&e='+str(emailid))
 
 class SignUpStatusPage(webapp2.RequestHandler):

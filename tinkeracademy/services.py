@@ -14,7 +14,6 @@ from google.appengine.api import memcache
 from google.appengine.api import mail
 
 from validate_email import validate_email
-from validate_zipcode import validate_zipcode
 
 from googleservices import GoogleDriveService \
 							, GoogleSpreadsheetService
@@ -380,7 +379,7 @@ class UserService(object):
 			return cacheservice.getstudentidforsession(uid)
 
 class SignUpService(object):
-	def signup(self, emailid, zipcode):
+	def signup(self, emailid):
 		query = SignUp.all()
 		query.filter("emailid = ", emailid)
 		p = None
@@ -391,7 +390,6 @@ class SignUpService(object):
 				p = SignUp()
 				p.counter = 0
 				p.emailid = emailid
-				p.zipcode = zipcode
 			p.counter += 1
 			p.put()
 			emailservice = EmailService()	
@@ -408,10 +406,5 @@ class ValidationService(object):
 		isvalid = False
 		if emailid:
 			isvalid = validate_email(emailid)
-		return isvalid
-	def isvalidzipcode(self, zipcode):
-		isvalid = False
-		if zipcode:
-			isvalid = validate_zipcode(zipcode)
 		return isvalid
 
