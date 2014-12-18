@@ -17,10 +17,61 @@
 			</tr>
 		</table>
 		{% for coursehandout in coursehandouts %}		
+		{% if coursehandout.coursecontentid == coursecontent.coursecontentid %}		
 		<table>
 			<tr>
+				<td><span>Handout</span></td>
+				<td><span>Download</span></td>
+			</tr>
+			<tr>
+				<td><span>{{coursehandout.coursehandoutname}}</span></td>
 				<td><span>{{coursehandout.coursehandoutname}}</span></td>
 			</tr>
+		</table>
+		{% endif %}
+		{% endfor %}
+		{% for coursevideo in coursevideos %}		
+		{% if coursevideo.coursecontentid == coursecontent.coursecontentid %}		
+		<table>
+			<tr>
+				<td><span>Lectures</span></td>
+				<td><span>Video</span></td>
+				<td><span>Slides</span></td>
+			</tr>
+			<tr>
+				<td><span>{{coursevideo.coursevideoname}}</span></td>
+				<td><span>{{coursevideo.coursevideoname}}</span></td>
+				<td><span>{{coursevideo.coursevideoname}}</span></td>
+			</tr>
+		{% endif %}
+		</table>
+		{% endfor %}
+		{% for coursestarterpack in coursestarterpacks %}		
+		{% if coursestarterpack.coursecontentid == coursecontent.coursecontentid %}		
+		<table>
+			<tr>
+				<td><span>Starter Pack</span></td>
+				<td><span>Download</span></td>
+			</tr>
+			<tr>
+				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
+				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
+			</tr>
+		{% endif %}
+		</table>
+		{% endfor %}
+		{% for coursehomework in coursehomeworks %}		
+		{% if coursehomework.coursecontentid == coursecontent.coursecontentid %}		
+		<table>
+			<tr>
+				<td><span>Homework</span></td>
+				<td><span>Download</span></td>
+			</tr>
+			<tr>
+				<td><span>{{coursehomework.coursehomeworkname}}</span></td>
+				<td><span>{{coursehomework.coursehomeworkname}}</span></td>
+			</tr>
+		{% endif %}
 		</table>
 		{% endfor %}
 		{% endfor %}
