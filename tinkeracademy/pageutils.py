@@ -41,6 +41,16 @@ def buildheadertemplatevalues(insession, uid):
 		template_values['signouturllinktext'] = 'Sign Out'
 	return template_values
 
+def buildstafftemplatevalues(insession, staff):
+	template_values = {}
+	template_values['staff'] = staff
+	return template_values
+
+def buildchannelpartnertemplatevalues(insession, channelpartners):
+	template_values = {}
+	template_values['channelpartners'] = channelpartners
+	return template_values	
+
 def buildallcoursestemplatevalues(insession, allcourses):
 	template_values = {}
 	template_values['courses'] = allcourses

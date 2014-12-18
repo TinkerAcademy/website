@@ -6,28 +6,33 @@
 		<h1>About Tinker Academy</h1>
 		<div><span>Tinker Academy offers online courses in software programming to elementary, middle and high school students in and around Cupertino, California. Students complete 9 weeks of an academically rigourous curriculum with weekly quizzes, hands on lectures, homework assignments and homework reviews. Students meet online every week to review course material and homework with our lead instructors.</span></div>
 		<h1>Our Team</h1>
+		{% for staffmember in staff %}
 		<table>
 			<tr>
-				<td>Ron</td>									
+				<td>{{staffmember.staffname}}</td>									
 			</tr>
 			<tr>
-				<td>Founder</td>									
+				<td>{{staffmember.staffrole}}</td>									
 			</tr>
 			<tr>
-				<td>Ron founded Tinker Academy in 2013 with a misson to make Americam students computer programming literate. Ron is always inspired by the creativity and innovation potential among American students, and wants to make sure that lack of computer programming skills doesn't stand in the way of American creativity in the 21st century. Ron focusses on setting the vision for Tinker Academy and in curriculum development. Ron can be reached at ron@tinkeracademy.com.</td>
+				<td>{{staffmember.staffdescription}} {{staffmember.staffname}} can be reached at {{staffmember.staffemail}}.</td>
 			</tr>
 		</table>
+		{% endfor %}
+		<h1>Our Partners</h1>
+		{% for channelpartner in channelpartners %}
 		<table>
-			<tr>
-				<td>Anindita</td>									
+			<tr>				
+				<td>{{channelpartner.channelpartnername}}</td>		
+			</tr>
+			<tr>				
+				<td><a href="{{channelpartner.channelpartnerwebsite|safe}}">Web Site</a></td>		
 			</tr>
 			<tr>
-				<td>Operations</td>									
+				<td><a href="{{channelpartner.channelpartnerregsite|safe}}">Online Registration</a></td>		
 			</tr>
-			<tr>
-				<td>Anindita manages operations at Tinker Academy. Anindita makes sure that Tinker Academy is operationally efficient and works with channel partners in bringing Tinker Academy to local communities. Anindita can be reached at anindita@tinkeracademy.com.</td>									
-			</tr>
-		</table>
+		</table>	
+		{% endfor %}	
 	</body>
 </html>
 {% endautoescape %}

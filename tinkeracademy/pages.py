@@ -10,6 +10,8 @@ from pageutils import buildheadertemplatevalues
 from pageutils import buildallcoursestemplatevalues
 from pageutils import buildmycoursestemplatevalues
 from pageutils import buildcoursetemplatevalues
+from pageutils import buildchannelpartnertemplatevalues
+from pageutils import buildstafftemplatevalues
 from pageutils import extractkeyfromrequest
 from pageutils import isinsession
 from pageutils import issessionrequest
@@ -23,14 +25,25 @@ from services import CoursesService
 from services import SignUpService
 from services import ForgotStudentIDService
 from services import ValidationService
+from services import ChannelPartnersService
+from services import StaffService
 
 class AboutPage(webapp2.RequestHandler):
 	def get(self):
 		uid = extractkeyfromrequest(self.request, 'u')
 		insession = isinsession(uid)
+		staffservice = StaffService()
+		staff = staffservice.getstaff()
+		channelpartnersservice = ChannelPartnersService()
+		channelpartners = channelpartnersservice.getchannelpartners()
 		template_values = {}
 		header_template_values = buildheadertemplatevalues(insession, uid)
 		template_values.update(header_template_values)
+		staff_template_values = buildstafftemplatevalues(insession, staff)
+		template_values.update(staff_template_values)
+		channelpartner_template_values = buildchannelpartnertemplatevalues(insession, channelpartners)
+		template_values.update(channelpartner_template_values)
+		logging.info('template_values='+str(template_values))
 		template = JINJA_ENVIRONMENT.get_template('about.html')
 		self.response.write(template.render(template_values))
 

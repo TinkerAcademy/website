@@ -5,6 +5,8 @@ import uuid
 import constants
 import json
 
+from servicesutils import processstr, processint, processboolean
+
 from datetime import datetime
 from dateutil import parser
 
@@ -27,7 +29,9 @@ from models import User, \
 				   CourseStarterPack, \
 				   CourseVideo, \
 				   CourseQuiz, \
-				   Email
+				   Email, \
+				   ChannelPartner, \
+				   Staff
 
 class DatabaseService(object):
 	def getcourses(self):
@@ -112,6 +116,45 @@ class MemcacheService(object):
 	def setusercourses(self, studentid, courses):
 		if studentid:
 			memcache.set(studentid, courses, namespace = 'UserCourses')
+
+class StaffService(object):
+	def getstaff(self):
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_STAFF_WORKSHEET_KEY)
+		staff = self._processstaffrows(rows)
+		return staff
+	def _processstaffrows(self, rows):
+		staffs = []
+		entries = rows.entry
+		for entry in entries:
+			staff = Staff()
+			staff.staffid = processstr(entry, 'staffid')
+			staff.staffname = processstr(entry, 'staffname')
+			staff.staffrole = processstr(entry, 'staffrole')
+			staff.staffdescription = processstr(entry, 'staffdescription')
+			staff.staffemail = processstr(entry, 'staffemail')
+			staffs.append(staff)
+		return staffs	
+
+class ChannelPartnersService(object):
+	def getchannelpartners(self):
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_CHANNELPARTNERS_WORKSHEET_KEY)
+		channelpartners = self._processchannelpartnerrows(rows)
+		return channelpartners
+	def _processchannelpartnerrows(self, rows):
+		channelpartners = []
+		entries = rows.entry
+		for entry in entries:
+			channelpartner = ChannelPartner()
+			channelpartner.channelpartnerid = processstr(entry, 'channelpartnerid')
+			channelpartner.channelpartnercity = processstr(entry, 'channelpartnercity')
+			channelpartner.channelpartnerstate = processstr(entry, 'channelpartnerstate')
+			channelpartner.channelpartnername = processstr(entry, 'channelpartnername')
+			channelpartner.channelpartnerwebsite = processstr(entry, 'channelpartnerwebsite')
+			channelpartner.channelpartnerregsite = processstr(entry, 'channelpartnerregsite')
+			channelpartners.append(channelpartner)
+		return channelpartners	
 
 class CoursesService(object):
 	def getcourse(self, courseid):
@@ -209,10 +252,10 @@ class CoursesService(object):
 		entries = rows.entry
 		for entry in entries:
 			coursestarterpack = CourseStarterPack()
-			coursestarterpack.courseid = self._processstr(entry, 'courseid')
-			coursestarterpack.coursecontentid = self._processstr(entry, 'coursecontentid')
-			coursestarterpack.coursestarterpackid = self._processstr(entry, 'coursestarterpackid')
-			coursestarterpack.coursestarterpackname = self._processstr(entry, 'coursestarterpackname')
+			coursestarterpack.courseid = processstr(entry, 'courseid')
+			coursestarterpack.coursecontentid = processstr(entry, 'coursecontentid')
+			coursestarterpack.coursestarterpackid = processstr(entry, 'coursestarterpackid')
+			coursestarterpack.coursestarterpackname = processstr(entry, 'coursestarterpackname')
 			coursestarterpacks.append(coursestarterpack)
 		return coursestarterpacks
 	def _processcoursevideorows(self, rows):
@@ -220,10 +263,10 @@ class CoursesService(object):
 		entries = rows.entry
 		for entry in entries:
 			coursevideo = CourseVideo()
-			coursevideo.courseid = self._processstr(entry, 'courseid')
-			coursevideo.coursecontentid = self._processstr(entry, 'coursecontentid')
-			coursevideo.coursevideoid = self._processstr(entry, 'coursevideoid')
-			coursevideo.coursevideoname = self._processstr(entry, 'coursevideoname')
+			coursevideo.courseid = processstr(entry, 'courseid')
+			coursevideo.coursecontentid = processstr(entry, 'coursecontentid')
+			coursevideo.coursevideoid = processstr(entry, 'coursevideoid')
+			coursevideo.coursevideoname = processstr(entry, 'coursevideoname')
 			coursevideos.append(coursevideo)
 		return coursevideos
 	def _processcoursehomeworkrows(self, rows):
@@ -231,10 +274,10 @@ class CoursesService(object):
 		entries = rows.entry
 		for entry in entries:
 			coursehomework = CourseHomework()
-			coursehomework.courseid = self._processstr(entry, 'courseid')
-			coursehomework.coursecontentid = self._processstr(entry, 'coursecontentid')
-			coursehomework.coursehomeworkid = self._processstr(entry, 'coursehomeworkid')
-			coursehomework.coursehomeworkname = self._processstr(entry, 'coursehomeworkname')
+			coursehomework.courseid = processstr(entry, 'courseid')
+			coursehomework.coursecontentid = processstr(entry, 'coursecontentid')
+			coursehomework.coursehomeworkid = processstr(entry, 'coursehomeworkid')
+			coursehomework.coursehomeworkname = processstr(entry, 'coursehomeworkname')
 			coursehomeworks.append(coursehomework)
 		return coursehomeworks
 	def _processcoursehandoutrows(self, rows):
@@ -242,10 +285,10 @@ class CoursesService(object):
 		entries = rows.entry
 		for entry in entries:
 			coursehandout = CourseHandout()
-			coursehandout.courseid = self._processstr(entry, 'courseid')
-			coursehandout.coursecontentid = self._processstr(entry, 'coursecontentid')
-			coursehandout.coursehandoutid = self._processstr(entry, 'coursehandoutid')
-			coursehandout.coursehandoutname = self._processstr(entry, 'coursehandoutname')
+			coursehandout.courseid = processstr(entry, 'courseid')
+			coursehandout.coursecontentid = processstr(entry, 'coursecontentid')
+			coursehandout.coursehandoutid = processstr(entry, 'coursehandoutid')
+			coursehandout.coursehandoutname = processstr(entry, 'coursehandoutname')
 			coursehandouts.append(coursehandout)
 		return coursehandouts
 	def _processcoursequizrows(self, rows):
@@ -253,10 +296,10 @@ class CoursesService(object):
 		entries = rows.entry
 		for entry in entries:
 			coursequiz = CourseQuiz()
-			coursequiz.courseid = self._processstr(entry, 'courseid')
-			coursequiz.coursecontentid = self._processstr(entry, 'coursecontentid')
-			coursequiz.coursequizid = self._processstr(entry, 'coursequizid')
-			coursequiz.coursequizname = self._processstr(entry, 'coursequizname')
+			coursequiz.courseid = processstr(entry, 'courseid')
+			coursequiz.coursecontentid = processstr(entry, 'coursecontentid')
+			coursequiz.coursequizid = processstr(entry, 'coursequizid')
+			coursequiz.coursequizname = processstr(entry, 'coursequizname')
 			coursequizs.append(coursequiz)
 		return coursequizs
 	def _processcoursecontentrows(self, rows):
@@ -264,10 +307,10 @@ class CoursesService(object):
 		entries = rows.entry
 		for entry in entries:
 			coursecontent = CourseContent()
-			coursecontent.courseid = self._processstr(entry, 'courseid')
-			coursecontent.coursecontentid = self._processstr(entry, 'coursecontentid')
-			coursecontent.coursecontentname = self._processstr(entry, 'coursecontentname')
-			coursecontent.coursecontentdescription = self._processstr(entry, 'coursecontentdescription')
+			coursecontent.courseid = processstr(entry, 'courseid')
+			coursecontent.coursecontentid = processstr(entry, 'coursecontentid')
+			coursecontent.coursecontentname = processstr(entry, 'coursecontentname')
+			coursecontent.coursecontentdescription = processstr(entry, 'coursecontentdescription')
 			coursecontents.append(coursecontent)
 		return coursecontents
 	def _processcourserows(self, rows):
@@ -275,32 +318,32 @@ class CoursesService(object):
 		entries = rows.entry
 		for entry in entries:
 			course = Course()
-			course.courseid = self._processstr(entry, 'courseid')
-			course.coursetag = self._processstr(entry, 'coursetag')
-			course.coursename = self._processstr(entry, 'coursename')
-			course.coursedescription = self._processstr(entry, 'coursedescription')
-			course.courseyear = self._processint(entry, 'courseyear')
-			course.coursestartdate = self._processstr(entry, 'coursestartdate')
-			course.courseenddate = self._processstr(entry, 'courseenddate')
-			course.coursesession = self._processstr(entry, 'coursesession')
-			course.coursepartner = self._processstr(entry, 'coursepartner')
-			course.courseminage = self._processint(entry, 'courseminage')
-			course.coursemaxage = self._processint(entry, 'coursemaxage')
-			course.coursenumclasses = self._processint(entry, 'coursenumclasses')
-			course.courseclassdurationmins = self._processint(entry, 'courseclassdurationmins')
-			course.courseisonline = self._processboolean(entry, 'courseisonline')
+			course.courseid = processstr(entry, 'courseid')
+			course.coursetag = processstr(entry, 'coursetag')
+			course.coursename = processstr(entry, 'coursename')
+			course.coursedescription = processstr(entry, 'coursedescription')
+			course.courseyear = processint(entry, 'courseyear')
+			course.coursestartdate = processstr(entry, 'coursestartdate')
+			course.courseenddate = processstr(entry, 'courseenddate')
+			course.coursesession = processstr(entry, 'coursesession')
+			course.coursepartner = processstr(entry, 'coursepartner')
+			course.courseminage = processint(entry, 'courseminage')
+			course.coursemaxage = processint(entry, 'coursemaxage')
+			course.coursenumclasses = processint(entry, 'coursenumclasses')
+			course.courseclassdurationmins = processint(entry, 'courseclassdurationmins')
+			course.courseisonline = processboolean(entry, 'courseisonline')
 			courses.append(course)
 		return courses
 	def _processstr(self, entry, field):
 		text = entry.custom[field].text
 		return text
 	def _processint(self, entry, field):
-		text = self._processstr(entry, field)
+		text = processstr(entry, field)
 		if text:
 			return int(text)
 		return 0
 	def _processboolean(self, entry, field):
-		int_ = self._processint(entry, field)
+		int_ = processint(entry, field)
 		return int_ != 0
 
 

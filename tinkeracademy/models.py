@@ -3,6 +3,14 @@ import os
 
 from google.appengine.ext import db
 
+class ChannelPartner(db.Model):
+	channelpartnerid = db.StringProperty()
+	channelpartnercity = db.StringProperty()
+	channelpartnerstate = db.StringProperty()
+	channelpartnername = db.StringProperty()
+	channelpartnerwebsite = db.StringProperty()
+	channelpartnerregsite = db.StringProperty()
+
 class User(db.Model):
 	emailid = db.StringProperty()
 	studentid = db.StringProperty()
@@ -114,3 +122,12 @@ class Email(db.Model):
 	subject = db.TextProperty()
 	body = db.TextProperty()
 	filename = db.StringProperty()
+
+class Staff(db.Model):
+	staffid = db.StringProperty()
+	staffname = db.StringProperty()
+	staffrole = db.StringProperty()
+	staffdescription = db.StringProperty()
+	staffemail = db.StringProperty()
+
+
