@@ -14,6 +14,7 @@ from google.appengine.api import memcache
 from google.appengine.api import mail
 
 from validate_email import validate_email
+from geoip import loadgeoip
 
 from googleservices import GoogleDriveService \
 							, GoogleSpreadsheetService
@@ -33,15 +34,21 @@ from models import User, \
 				   Staff
 
 class DatabaseService(object):
-	def getcourses(self):
-		# googledriveservice = GoogleDriveService()
-		# dbfile = googledriveservice.getfile(constants.GOOGLE_DRIVE_SPREADSHEET_TITLE)		
-		# logging.info('dbfile='+str(dbfile))
-		googlespreadsheetservice = GoogleSpreadsheetService()
-		# coursesworksheet = googlespreadsheetservice.getworksheets(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
-		# logging.info('DatabaseService.updatecourses coursesworksheet='+str(coursesworksheet))
-		coursesrows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
-		logging.info('DatabaseService.updatecourses courses rows='+str(coursesrows))
+	def updategeoip(self, ipaddress):
+		ipdatabase = loadgeoip()
+		countryname = ipdatabase.country_name_by_addr(ipaddress)
+		logging.info('databaseupdate requested from ' + countryname)
+		citylookup = ipdatabase.record_by_addr(ipaddress)
+		logging.info('databaseupdate requested from ' + str(citylookup))
+	# def getcourses(self):
+	# 	# googledriveservice = GoogleDriveService()
+	# 	# dbfile = googledriveservice.getfile(constants.GOOGLE_DRIVE_SPREADSHEET_TITLE)		
+	# 	# logging.info('dbfile='+str(dbfile))
+	# 	googlespreadsheetservice = GoogleSpreadsheetService()
+	# 	# coursesworksheet = googlespreadsheetservice.getworksheets(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
+	# 	# logging.info('DatabaseService.updatecourses coursesworksheet='+str(coursesworksheet))
+	# 	coursesrows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
+	# 	logging.info('DatabaseService.updatecourses courses rows='+str(coursesrows))
 
 class EmailService(object):
 	def register(self, emailtype, senderid, receiveremailid, subject, body, attachment=None):
@@ -379,7 +386,7 @@ class UserService(object):
 			return cacheservice.getstudentidforsession(uid)
 
 class SignUpService(object):
-	def signup(self, emailid):
+	def signup(self, emailid, ipaddress):
 		query = SignUp.all()
 		query.filter("emailid = ", emailid)
 		p = None
@@ -391,6 +398,7 @@ class SignUpService(object):
 				p.counter = 0
 				p.emailid = emailid
 			p.counter += 1
+			p.ipaddress = ipaddress
 			p.put()
 			emailservice = EmailService()	
 			emailservice.register(constants.EMAIL_ID_SIGNUP, emailid, 'You have been signed up', 'You have been signed up')

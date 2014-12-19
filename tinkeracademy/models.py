@@ -111,6 +111,7 @@ class CourseQuiz(db.Model):
 
 class SignUp(db.Model):
 	emailid = db.StringProperty()
+	ipaddress = db.StringProperty()
 	counter = db.IntegerProperty()
 
 class Email(db.Model):

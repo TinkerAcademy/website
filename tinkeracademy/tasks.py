@@ -1,4 +1,5 @@
 import os
+import sys
 import urllib
 import jinja2
 import logging
@@ -13,7 +14,18 @@ class EmailTask(webapp2.RequestHandler):
 	def get(self):
 		pass
 
-class UpdateCoursesDatabaseTask(webapp2.RequestHandler):
+class DatabaseUpdateTask(webapp2.RequestHandler):
 	def get(self):
-		databaseservice = DatabaseService()
-		databaseservice.updatecourses()
+		ipaddress = self.request.remote_addr
+		if isadminuser:
+			try:
+				databaseservice = DatabaseService()
+				databaseservice.updategeoip(ipaddress)
+			except:
+				logging.error("database update from " + str(ipaddress))
+				sys_err = sys.exc_info()
+				logging.error(sys_err[1])
+		else:
+			logging.error("database update from non-admin user from " + str(ipaddress))
+
+

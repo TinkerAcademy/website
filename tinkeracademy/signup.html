@@ -13,23 +13,23 @@
 		{% endfor %}	
 		<h1>Other Cities</h1>
 		<form action="/signup" method="post">
-<!-- 			<div><span>Email:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
-			<div><span>Zip Code (US):</span><input id="zipcodeid" name="zipcodeid" type="text" value="{{zipcode}}"></div>
-			{% if returnvalue == 1 %}
+ 			<div><span>I would like Tinker Academy in my city</span></div>
+			<div><span>Email:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
+<!-- 			<div><span>Zip Code (US):</span><input id="zipcodeid" name="zipcodeid" type="text" value="{{zipcode}}"></div>
+ -->			{% if returnvalue == 1 %}
 			<div><span>Invalid email. Sorry :(</span></div>
 			{% endif %}
-			{% if returnvalue == 2 %}
+<!-- 			{% if returnvalue == 2 %}
 			<div><span>Invalid zipcode. Sorry :(</span></div>
 			{% endif %}
-			{% if returnvalue == 3 %}
+ -->			<!-- {% if returnvalue == 3 %}
 			<div><span>Invalid email and zipcode. Darn It! :)</span></div>
-			{% endif %}
- -->			
+			{% endif %} -->
+			
 <!--  			<div><span>City:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
  --> 			
- 			<div><span>I would like Tinker Academy in my city</span></div>
 			<div><input type="submit"></div>
- 			<div><span>City data provided by <a href="www.geonames.org">GeoNames</a></span></div>
+ 			<div><span>Geo IP data provided by <a href="https://www.maxmind.com/en/home">MaxMind</a></span></div>
 		</form>
 	</body>
 </html>
