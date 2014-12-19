@@ -5,13 +5,15 @@ import uuid
 import constants
 import json
 
-from servicesutils import processstr, processint, processboolean
+from servicesutils import processstr, processint, processboolean, readtextfilecontents
 
 from datetime import datetime
 from dateutil import parser
 
 from google.appengine.api import memcache
 from google.appengine.api import mail
+
+from google.appengine.ext import db
 
 from validate_email import validate_email
 from geoip import loadgeoip
@@ -97,28 +99,22 @@ class DatabaseService(object):
 				logging.error('error updating SignUp ipaddress=' + str(ipaddress))
 				sys_err = sys.exc_info()
 				logging.error(sys_err[1])
-	# def getcourses(self):
-	# 	# googledriveservice = GoogleDriveService()
-	# 	# dbfile = googledriveservice.getfile(constants.GOOGLE_DRIVE_SPREADSHEET_TITLE)		
-	# 	# logging.info('dbfile='+str(dbfile))
-	# 	googlespreadsheetservice = GoogleSpreadsheetService()
-	# 	# coursesworksheet = googlespreadsheetservice.getworksheets(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
-	# 	# logging.info('DatabaseService.updatecourses coursesworksheet='+str(coursesworksheet))
-	# 	coursesrows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_COURSES_WORKSHEET_KEY)
-	# 	logging.info('DatabaseService.updatecourses courses rows='+str(coursesrows))
 
 class EmailService(object):
 	def register(self, emailtype, senderid, receiveremailid, subject, body, attachment=None):
-		senderemailid = str(fromid) + '@' + constants.EMAIL_DOMAIN_APPSPOT
+		senderemailid = str(senderid) + '@' + constants.EMAIL_DOMAIN_APPSPOT
 		email = Email()
 		email.senderemailid = senderemailid
 		email.receiveremailid = receiveremailid
 		email.typeid = emailtype
 		email.counter = 0
-		email.subject = Text(subject)
-		email.body = Text(body)
+		email.subject = db.Text(subject)
+		email.body = db.Text(body)
 		if attachment:
 			email.filename = attachment.filename
+		logging.info('adding emailtype=' + str(emailtype) \
+			+ ', receiveremailid=' + str(receiveremailid) \
+			+ ', subject=' + str(subject))
 		email.put()
 		return 1
 	def sendnext(self):
@@ -134,10 +130,16 @@ class EmailService(object):
 			if filename:
 				pass
 			try:
-				mail.send_mail(fromaddress, toaddress, subject, body)
+				message = mail.EmailMessage(sender=senderemailid, subject=subject)
+				message.to = receiveremailid
+				message.html = body
+				message.send()
+				logging.info('sent email senderemailid=' + str(senderemailid) \
+					+ ', toaddress=' + str(receiveremailid) \
+					+ ', with subject=' + str(subject))
 				return 1
 			except:
-				logging.error("error sending email to " + str(toaddress))
+				logging.error('error sending email to ' + str(receiveremailid))
 				sys_err = sys.exc_info()
 				logging.error(sys_err[1])
 		return 0
@@ -460,7 +462,7 @@ class SignUpService(object):
 			p.emailupdated = False
 			p.put()
 			emailservice = EmailService()	
-			emailservice.register(constants.EMAIL_TYPE_SIGNUP, constants.EMAIL_ID_SIGNUP, emailid, 'You have been signed up', 'You have been signed up')
+			emailservice.register(constants.EMAIL_TYPE_SIGNUP, constants.EMAIL_ID_SIGNUP, emailid, constants.EMAIL_SIGNUP_SUBJECT, readtextfilecontents(constants.EMAIL_SIGNUP_BODY_FILENAME))
 			return 1
 		except Exception as e:
 			logging.error("error signing up " + str(emailid))

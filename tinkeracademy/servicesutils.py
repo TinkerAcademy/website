@@ -19,6 +19,15 @@ def processint(entry, field):
 def processboolean(entry, field):
 	int_ = processint(entry, field)
 	return int_ != 0
+def readtextfilecontents(filename):
+	contents = None
+	file_ = open(filename, 'r')
+	try:
+		contents = file_.read()
+	finally:
+		if file_:
+			file_.close()
+	return contents
 
 
 

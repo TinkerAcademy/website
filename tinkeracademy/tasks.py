@@ -7,12 +7,14 @@ import time
 import webapp2
 import httplib2
 
+from services import EmailService
 from services import DatabaseService
 from pageutils import isadminuser
 
 class EmailTask(webapp2.RequestHandler):
 	def get(self):
-		pass
+		emailservice = EmailService()
+		emailservice.sendnext()
 
 class DatabaseUpdateTask(webapp2.RequestHandler):
 	def get(self):
