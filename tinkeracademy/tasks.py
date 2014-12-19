@@ -22,10 +22,10 @@ class DatabaseUpdateTask(webapp2.RequestHandler):
 				databaseservice = DatabaseService()
 				databaseservice.updategeoip(ipaddress)
 			except:
-				logging.error("database update from " + str(ipaddress))
+				logging.error("database update from admin user from ipaddress=" + str(ipaddress))
 				sys_err = sys.exc_info()
 				logging.error(sys_err[1])
 		else:
-			logging.error("database update from non-admin user from " + str(ipaddress))
+			logging.error("database update from non-admin user from ipaddress=" + str(ipaddress))
 
 

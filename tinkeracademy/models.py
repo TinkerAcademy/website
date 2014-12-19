@@ -113,6 +113,14 @@ class SignUp(db.Model):
 	emailid = db.StringProperty()
 	ipaddress = db.StringProperty()
 	counter = db.IntegerProperty()
+	ipupdated = db.BooleanProperty()
+	emailupdated = db.BooleanProperty()
+
+class OtherCities(db.Model):
+	cityname = db.StringProperty()
+	countryname = db.StringProperty()
+	latitude = db.FloatProperty()
+	longitude = db.FloatProperty()
 
 class Email(db.Model):
 	senderemailid = db.StringProperty()

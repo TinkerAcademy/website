@@ -204,9 +204,6 @@ class SignUpPage(webapp2.RequestHandler):
 		emailid = self.request.get('emailid')
 		if emailid:
 			emailid = emailid.strip()
-		zipcode = self.request.get('zipcodeid')
-		if zipcode:
-			zipcode = zipcode.strip()
 		validationservice = ValidationService()
 		isvalidemail = validationservice.isvalidemail(emailid)
 		if not isvalidemail:

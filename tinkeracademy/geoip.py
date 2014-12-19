@@ -2,13 +2,8 @@ import sys
 import logging
 import pygeoip
 
-geoip = None
-
 def loadgeoip():
-	global geoip	
-	if geoip is None:
-		geoip = pygeoip.GeoIP('GeoLiteCity.dat', flags=pygeoip.const.MEMORY_CACHE)
-	logging.info('geoip ' + str(geoip))
+	geoip = pygeoip.GeoIP('GeoLiteCity.dat', flags=pygeoip.const.MEMORY_CACHE)
 	return geoip
 
 # ZIPCODE_FILE = 'free-zipcode-database-Primary.csv'

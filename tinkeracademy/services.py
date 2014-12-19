@@ -31,15 +31,72 @@ from models import User, \
 				   CourseQuiz, \
 				   Email, \
 				   ChannelPartner, \
-				   Staff
+				   Staff, \
+				   OtherCities
+
+class GeoService(object):
+	ipdatabase = loadgeoip()
+	def getcountryname(self, ipaddress):
+		countrname = None
+		try:
+			countryname = GeoService.ipdatabase.country_name_by_addr(ipaddress)
+		except:
+			countryname = None
+		return countryname
+	def getcitydetails(self, ipaddress):
+		cityname = None
+		latitude = None
+		longitude = None
+		try:
+			citylookup = GeoService.ipdatabase.record_by_addr(ipaddress)
+			cityname = citylookup['city']		
+			latitude = citylookup['latitude']
+			longitude = citylookup['longitude']
+		except:
+			cityname = None
+			latitude = None
+			longitude = None
+		return (cityname, latitude, longitude)
 
 class DatabaseService(object):
 	def updategeoip(self, ipaddress):
-		ipdatabase = loadgeoip()
-		countryname = ipdatabase.country_name_by_addr(ipaddress)
-		logging.info('databaseupdate requested from ' + countryname)
-		citylookup = ipdatabase.record_by_addr(ipaddress)
-		logging.info('databaseupdate requested from ' + str(citylookup))
+		geoservice = GeoService()		
+		countryname = geoservice.getcountryname(ipaddress)
+		cityname, latitude, longitude = geoservice.getcitydetails(ipaddress)
+		logging.info('databaseupdate requested from ipaddress=' + str(ipaddress) \
+						+ ', countryname=' + str(countryname) \
+						+ ', cityname=' + str(cityname) \
+						+ ', latitude=' + str(latitude) \
+						+ ', longitude=' + str(longitude))
+		query = SignUp.all()
+		query.filter("ipupdated = ", False)
+		p = None
+		for p in query.run(limit=100):
+			ipaddress = str(p.ipaddress)
+			countryname = geoservice.getcountryname(ipaddress)
+			cityname, latitude, longitude = geoservice.getcitydetails(ipaddress)
+			othercities = OtherCities()
+			othercities.countryname = countryname
+			othercities.cityname = cityname
+			othercities.latitude = latitude
+			othercities.longitude = longitude
+			try:
+				othercities.put()
+			except:
+				logging.info('error putting OtherCities ipaddress=' + str(ipaddress) \
+						+ ', countryname=' + str(countryname) \
+						+ ', cityname=' + str(cityname) \
+						+ ', latitude=' + str(latitude) \
+						+ ', longitude=' + str(longitude))
+				sys_err = sys.exc_info()
+				logging.error(sys_err[1])
+			try:
+				p.ipupdated = True			
+				p.put()
+			except:
+				logging.info('error updating SignUp ipaddress=' + str(ipaddress))
+				sys_err = sys.exc_info()
+				logging.error(sys_err[1])
 	# def getcourses(self):
 	# 	# googledriveservice = GoogleDriveService()
 	# 	# dbfile = googledriveservice.getfile(constants.GOOGLE_DRIVE_SPREADSHEET_TITLE)		
@@ -399,9 +456,10 @@ class SignUpService(object):
 				p.emailid = emailid
 			p.counter += 1
 			p.ipaddress = ipaddress
+			p.updated = False
 			p.put()
 			emailservice = EmailService()	
-			emailservice.register(constants.EMAIL_ID_SIGNUP, emailid, 'You have been signed up', 'You have been signed up')
+			emailservice.register(constants.EMAIL_TYPE_SIGNUP, constants.EMAIL_ID_SIGNUP, emailid, 'You have been signed up', 'You have been signed up')
 			return 1
 		except Exception as e:
 			logging.error("error signing up " + str(emailid))
