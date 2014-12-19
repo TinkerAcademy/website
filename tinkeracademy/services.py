@@ -83,7 +83,7 @@ class DatabaseService(object):
 			try:
 				othercities.put()
 			except:
-				logging.info('error putting OtherCities ipaddress=' + str(ipaddress) \
+				logging.error('error putting OtherCities ipaddress=' + str(ipaddress) \
 						+ ', countryname=' + str(countryname) \
 						+ ', cityname=' + str(cityname) \
 						+ ', latitude=' + str(latitude) \
@@ -94,7 +94,7 @@ class DatabaseService(object):
 				p.ipupdated = True			
 				p.put()
 			except:
-				logging.info('error updating SignUp ipaddress=' + str(ipaddress))
+				logging.error('error updating SignUp ipaddress=' + str(ipaddress))
 				sys_err = sys.exc_info()
 				logging.error(sys_err[1])
 	# def getcourses(self):
@@ -456,7 +456,8 @@ class SignUpService(object):
 				p.emailid = emailid
 			p.counter += 1
 			p.ipaddress = ipaddress
-			p.updated = False
+			p.ipupdated = False
+			p.emailupdated = False
 			p.put()
 			emailservice = EmailService()	
 			emailservice.register(constants.EMAIL_TYPE_SIGNUP, constants.EMAIL_ID_SIGNUP, emailid, 'You have been signed up', 'You have been signed up')
