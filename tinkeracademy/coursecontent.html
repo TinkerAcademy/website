@@ -8,13 +8,33 @@
 		{% include 'header.html' %}
 		<h1>{{course.coursename}}</h1>
 		<h2>Course Contents - {{coursecontent.coursecontentname}}</h2>
+		{% for coursestarterpack in coursestarterpacks %}		
+		<table>
+			<tr>
+				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
+			</tr>
+			<tr>
+				<td><span><a href="{{coursestarterpack.coursestarterpackdownloadurl|safe}}" target="_blank">{{coursestarterpack.coursestarterpackdescription}}</a></span></td>
+			</tr>
+		</table>
+		{% endfor %}
 		{% for coursevideo in coursevideos %}		
 		<table>
 			<tr>
 				<td><span>{{coursevideo.coursevideoname}}</span></td>
 			</tr>
 			<tr>
-				<td><span>{{coursevideo.coursevideodescription}}</span></td>
+				<td><span><a href="{{coursevideo.coursevideodownloadurl|safe}}" target="_blank">{{coursevideo.coursevideodescription}}</a></span></td>
+			</tr>
+		</table>
+		{% endfor %}
+		{% for coursequiz in coursequizs %}		
+		<table>
+			<tr>
+				<td><span>{{coursequiz.coursequizname}}</span></td>
+			</tr>
+			<tr>
+				<td><span><a href="{{coursequiz.coursequizdownloadurl|safe}}" target="_blank">{{coursequiz.coursequizdescription}}</a></span></td>
 			</tr>
 		</table>
 		{% endfor %}
