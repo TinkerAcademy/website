@@ -5,7 +5,7 @@ import uuid
 import constants
 import json
 
-from servicesutils import processstr, processint, processboolean, readtextfilecontents
+from servicesutils import processstr, processtext, processint, processboolean, readtextfilecontents
 
 from datetime import datetime
 from dateutil import parser
@@ -338,6 +338,8 @@ class CoursesService(object):
 			coursestarterpack.coursecontentid = processstr(entry, 'coursecontentid')
 			coursestarterpack.coursestarterpackid = processstr(entry, 'coursestarterpackid')
 			coursestarterpack.coursestarterpackname = processstr(entry, 'coursestarterpackname')
+			coursestarterpack.coursestarterpackdescription = processtext(entry, 'coursestarterpackdescription')
+			coursestarterpack.coursestarterpackdownloadurl = processstr(entry, 'coursestarterpackdownloadurl')
 			coursestarterpacks.append(coursestarterpack)
 		return coursestarterpacks
 	def _processcoursevideorows(self, rows):
@@ -349,6 +351,8 @@ class CoursesService(object):
 			coursevideo.coursecontentid = processstr(entry, 'coursecontentid')
 			coursevideo.coursevideoid = processstr(entry, 'coursevideoid')
 			coursevideo.coursevideoname = processstr(entry, 'coursevideoname')
+			coursevideo.coursevideodescription = processtext(entry, 'coursevideodescription')
+			coursevideo.coursevideodownloadurl = processstr(entry, 'coursevideodownloadurl')
 			coursevideos.append(coursevideo)
 		return coursevideos
 	def _processcoursehomeworkrows(self, rows):
@@ -360,6 +364,8 @@ class CoursesService(object):
 			coursehomework.coursecontentid = processstr(entry, 'coursecontentid')
 			coursehomework.coursehomeworkid = processstr(entry, 'coursehomeworkid')
 			coursehomework.coursehomeworkname = processstr(entry, 'coursehomeworkname')
+			coursehomework.coursehomeworkdescription = processtext(entry, 'coursehomeworkdescription')
+			coursehomework.coursehomeworkdownloadurl = processstr(entry, 'coursehomeworkdownloadurl')
 			coursehomeworks.append(coursehomework)
 		return coursehomeworks
 	def _processcoursehandoutrows(self, rows):
@@ -371,6 +377,8 @@ class CoursesService(object):
 			coursehandout.coursecontentid = processstr(entry, 'coursecontentid')
 			coursehandout.coursehandoutid = processstr(entry, 'coursehandoutid')
 			coursehandout.coursehandoutname = processstr(entry, 'coursehandoutname')
+			coursehandout.coursehandoutdescription = processtext(entry, 'coursehandoutdescription')
+			coursehandout.coursehandoutdownloadurl = processstr(entry, 'coursehandoutdownloadurl')
 			coursehandouts.append(coursehandout)
 		return coursehandouts
 	def _processcoursequizrows(self, rows):
@@ -382,6 +390,8 @@ class CoursesService(object):
 			coursequiz.coursecontentid = processstr(entry, 'coursecontentid')
 			coursequiz.coursequizid = processstr(entry, 'coursequizid')
 			coursequiz.coursequizname = processstr(entry, 'coursequizname')
+			coursequiz.coursequizdescription = processtext(entry, 'coursequizdescription')
+			coursequiz.coursequizdownloadurl = processstr(entry, 'coursequizdownloadurl')
 			coursequizs.append(coursequiz)
 		return coursequizs
 	def _processcoursecontentrows(self, rows):
@@ -393,6 +403,7 @@ class CoursesService(object):
 			coursecontent.coursecontentid = processstr(entry, 'coursecontentid')
 			coursecontent.coursecontentname = processstr(entry, 'coursecontentname')
 			coursecontent.coursecontentdescription = processstr(entry, 'coursecontentdescription')
+			coursecontent.coursecontenturl = '/coursecontent?c='+str(coursecontent.courseid)+'&cc='+str(coursecontent.coursecontentid)
 			coursecontents.append(coursecontent)
 		return coursecontents
 	def _processcourserows(self, rows):

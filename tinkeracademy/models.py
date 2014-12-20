@@ -77,6 +77,7 @@ class CourseContent(db.Model):
 	courseid = db.StringProperty()
 	coursecontentid = db.StringProperty()
 	coursecontentname = db.StringProperty()
+	coursecontenturl = db.StringProperty()
 	coursecontentdescription = db.TextProperty()
 
 class CourseHandout(db.Model):
@@ -84,30 +85,40 @@ class CourseHandout(db.Model):
 	coursecontentid = db.StringProperty()
 	coursehandoutid = db.StringProperty()
 	coursehandoutname = db.StringProperty()	
+	coursehandoutdescription = db.TextProperty()
+	coursehandoutdownloadurl = db.StringProperty()
 
 class CourseHomework(db.Model):
 	courseid = db.StringProperty()
 	coursecontentid = db.StringProperty()
 	coursehomeworkid = db.StringProperty()
 	coursehomeworkname = db.StringProperty()
+	coursehomeworkdescription = db.TextProperty()
+	coursehomeworkdownloadurl = db.StringProperty()
 
 class CourseStarterPack(db.Model):
 	courseid = db.StringProperty()
 	coursecontentid = db.StringProperty()
 	coursestarterpackid = db.StringProperty()
 	coursestarterpackname = db.StringProperty()	
+	coursestarterpackdescription = db.TextProperty()
+	coursestarterpackdownloadurl = db.StringProperty()
 
 class CourseVideo(db.Model):
 	courseid = db.StringProperty()
 	coursecontentid = db.StringProperty()
 	coursevideoid = db.StringProperty()
 	coursevideoname = db.StringProperty()
+	coursevideodescription = db.TextProperty()
+	coursevideodownloadurl = db.StringProperty()
 
 class CourseQuiz(db.Model):
 	courseid = db.StringProperty()
 	coursecontentid = db.StringProperty()
 	coursequizid = db.StringProperty()
 	coursequizname = db.StringProperty()
+	coursequizdescription = db.TextProperty()
+	coursequizdownloadurl = db.StringProperty()
 
 class SignUp(db.Model):
 	emailid = db.StringProperty()

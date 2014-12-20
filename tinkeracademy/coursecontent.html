@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+	<head>
+		<title>Course Contents  - {{coursecontent.coursecontentname}}</title>
+	</head>
+	<body>
+		{% include 'header.html' %}
+		<h1>{{course.coursename}}</h1>
+		<h2>Course Contents - {{coursecontent.coursecontentname}}</h2>
+		{% for coursevideo in coursevideos %}		
+		<table>
+			<tr>
+				<td><span>{{coursevideo.coursevideoname}}</span></td>
+			</tr>
+			<tr>
+				<td><span>{{coursevideo.coursevideodescription}}</span></td>
+			</tr>
+		</table>
+		{% endfor %}
+	</body>
+</html>
+{% endautoescape %}

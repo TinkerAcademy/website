@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 {% autoescape true %}
 <html>
+	<head>
+		<title>Course Contents  - {{course.coursename}}</title>
+	</head>
 	<body>
 		{% include 'header.html' %}
 		<h1>Course</h1>
@@ -13,10 +16,10 @@
 				<td><span>{{coursecontent.coursecontentname}}</span></td>
 			</tr>
 			<tr>
-				<td><span>{{coursecontent.coursecontentdescription}}</span></td>
+				<td><a href="{{coursecontent.coursecontenturl|safe}}" target="_blank">{{coursecontent.coursecontentdescription}}</a></td>
 			</tr>
 		</table>
-		{% for coursestarterpack in coursestarterpacks %}		
+<!-- 		{% for coursestarterpack in coursestarterpacks %}		
 		{% if coursestarterpack.coursecontentid == coursecontent.coursecontentid %}		
 		<table>
 			<tr>
@@ -25,7 +28,7 @@
 			</tr>
 			<tr>
 				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
-				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
+				<td><span><a href="{{coursestarterpack.coursestarterpackdownloadurl|safe}}" target="_blank">Download</a></span></td>
 			</tr>
 		{% endif %}
 		</table>
@@ -40,7 +43,7 @@
 			</tr>
 			<tr>
 				<td><span>{{coursevideo.coursevideoname}}</span></td>
-				<td><span>{{coursevideo.coursevideoname}}</span></td>
+				<td><span><a href="{{coursevideo.coursevideodownloadurl|safe}}" target="_blank">Download</a></span></td>
 				<td><span>{{coursevideo.coursevideoname}}</span></td>
 			</tr>
 		{% endif %}
@@ -55,7 +58,7 @@
 			</tr>
 			<tr>
 				<td><span>{{coursequiz.coursequizname}}</span></td>
-				<td><span>{{coursequiz.coursequizname}}</span></td>
+				<td><span><a href="{{coursequiz.coursequizdownloadurl|safe}}" target="_blank">Download</a></span></td>
 			</tr>
 		{% endif %}
 		</table>
@@ -69,7 +72,7 @@
 			</tr>
 			<tr>
 				<td><span>{{coursehandout.coursehandoutname}}</span></td>
-				<td><span>{{coursehandout.coursehandoutname}}</span></td>
+				<td><span><a href="{{coursehandout.coursehandoutdownloadurl|safe}}" target="_blank">Download</a></span></td>
 			</tr>
 		</table>
 		{% endif %}
@@ -83,11 +86,11 @@
 			</tr>
 			<tr>
 				<td><span>{{coursehomework.coursehomeworkname}}</span></td>
-				<td><span>{{coursehomework.coursehomeworkname}}</span></td>
+				<td><span><a href="{{coursehomework.coursehomeworkdownloadurl|safe}}" target="_blank">Download</a></span></td>
 			</tr>
 		{% endif %}
 		</table>
-		{% endfor %}
+		{% endfor %} -->
 		{% endfor %}
 	</body>
 </html>

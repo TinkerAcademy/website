@@ -61,16 +61,45 @@ def buildmycoursestemplatevalues(insession, uid, mycourses):
 	template_values['courses'] = mycourses
 	return template_values
 
-def buildcoursetemplatevalues(insession, course, coursecontents, coursehandouts, coursehomeworks, coursevideos, coursestarterpacks, coursequizzes):
+def buildcoursetemplatevalues(insession, course, coursecontents):
 	template_values = {}
 	template_values['course'] = course
 	template_values['coursecontents'] = coursecontents
-	template_values['coursehandouts'] = coursehandouts
-	template_values['coursehomeworks'] = coursehomeworks
-	template_values['coursevideos'] = coursevideos
-	template_values['coursestarterpacks'] = coursestarterpacks
-	template_values['coursequizs'] = coursequizzes
+	# template_values['coursehandouts'] = coursehandouts
+	# template_values['coursehomeworks'] = coursehomeworks
+	# template_values['coursevideos'] = coursevideos
+	# template_values['coursestarterpacks'] = coursestarterpacks
+	# template_values['coursequizs'] = coursequizzes
 	return template_values	
+
+def buildcoursecontenttemplatevalues(insession, courseid, coursecontentid, course, coursecontents, coursehandouts, coursehomeworks, coursevideos, coursestarterpacks, coursequizs):
+	template_values = {}
+	template_values['course'] = course
+	template_values['coursecontents'] = coursecontents
+	for coursecontent in coursecontents:
+		if coursecontent.coursecontentid == coursecontentid:
+			template_values['coursecontent'] = coursecontent
+	template_values['coursehandouts'] = []
+	for coursehandout in coursehandouts:
+		if coursehandout.coursecontentid == coursecontentid:
+			template_values['coursehandouts'].append(coursehandout)
+	template_values['coursehomeworks'] = []
+	for coursehomework in coursehomeworks:
+		if coursehomework.coursecontentid == coursecontentid:
+			template_values['coursehomeworks'].append(coursehomework)
+	template_values['coursestarterpacks'] = []
+	for coursestarterpack in coursestarterpacks:
+		if coursestarterpack.coursecontentid == coursecontentid:
+			template_values['coursestarterpacks'].append(coursestarterpack)
+	template_values['coursequizs'] = []
+	for coursequiz in coursequizs:
+		if coursequiz.coursecontentid == coursecontentid:
+			template_values['coursequizs'].append(coursequiz)
+	template_values['coursevideos'] = []
+	for coursevideo in coursevideos:
+		if coursevideo.coursecontentid == coursecontentid:
+			template_values['coursevideos'].append(coursevideo)
+	return template_values
 
 def extractkeyfromrequest(request, key):
 	uid = None

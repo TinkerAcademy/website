@@ -8,9 +8,14 @@ import json
 from datetime import datetime
 from dateutil import parser
 
+from google.appengine.ext import db
+
 def processstr(entry, field):
 	text = entry.custom[field].text
 	return text
+def processtext(entry, field):
+	text = entry.custom[field].text
+	return db.Text(text)	
 def processint(entry, field):
 	text = processstr(entry, field)
 	if text:

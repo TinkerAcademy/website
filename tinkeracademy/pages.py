@@ -10,6 +10,7 @@ from pageutils import buildheadertemplatevalues
 from pageutils import buildallcoursestemplatevalues
 from pageutils import buildmycoursestemplatevalues
 from pageutils import buildcoursetemplatevalues
+from pageutils import buildcoursecontenttemplatevalues
 from pageutils import buildchannelpartnertemplatevalues
 from pageutils import buildstafftemplatevalues
 from pageutils import extractkeyfromrequest
@@ -70,6 +71,29 @@ class CoursePage(webapp2.RequestHandler):
 		coursesservice = CoursesService()
 		course = coursesservice.getcourse(courseid)	
 		coursecontents = coursesservice.getcoursecontents(courseid)
+		# coursehandouts = coursesservice.getcoursehandouts(courseid)
+		# coursehomeworks = coursesservice.getcoursehomeworks(courseid)
+		# coursevideos = coursesservice.getcoursevideos(courseid)
+		# coursestarterpacks = coursesservice.getcoursestarterpacks(courseid)		
+		# coursequizzes = coursesservice.getcoursequizzes(courseid)
+		template_values = {}
+		header_template_values = buildheadertemplatevalues(insession, uid)
+		template_values.update(header_template_values)
+		course_template_values = buildcoursetemplatevalues(insession, course, coursecontents)
+		template_values.update(course_template_values)		
+		logging.info('template_values='+str(template_values))
+		template = JINJA_ENVIRONMENT.get_template('course.html')
+		self.response.write(template.render(template_values))			
+
+class CourseContentsPage(webapp2.RequestHandler):
+	def get(self):
+		uid = extractkeyfromrequest(self.request, 'u')
+		insession = isinsession(uid)
+		courseid = extractkeyfromrequest(self.request, 'c')
+		coursecontentid = extractkeyfromrequest(self.request, 'cc')
+		coursesservice = CoursesService()
+		course = coursesservice.getcourse(courseid)	
+		coursecontents = coursesservice.getcoursecontents(courseid)
 		coursehandouts = coursesservice.getcoursehandouts(courseid)
 		coursehomeworks = coursesservice.getcoursehomeworks(courseid)
 		coursevideos = coursesservice.getcoursevideos(courseid)
@@ -78,10 +102,10 @@ class CoursePage(webapp2.RequestHandler):
 		template_values = {}
 		header_template_values = buildheadertemplatevalues(insession, uid)
 		template_values.update(header_template_values)
-		course_template_values = buildcoursetemplatevalues(insession, course, coursecontents, coursehandouts, coursehomeworks, coursevideos, coursestarterpacks, coursequizzes)
-		template_values.update(course_template_values)		
+		coursecontent_template_values = buildcoursecontenttemplatevalues(insession, courseid, coursecontentid, course, coursecontents, coursehandouts, coursehomeworks, coursevideos, coursestarterpacks, coursequizzes)
+		template_values.update(coursecontent_template_values)		
 		logging.info('template_values='+str(template_values))
-		template = JINJA_ENVIRONMENT.get_template('course.html')
+		template = JINJA_ENVIRONMENT.get_template('coursecontent.html')
 		self.response.write(template.render(template_values))			
 
 class ForgotPage(webapp2.RequestHandler):
