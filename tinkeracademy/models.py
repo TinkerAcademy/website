@@ -114,7 +114,6 @@ class SignUp(db.Model):
 	ipaddress = db.StringProperty()
 	counter = db.IntegerProperty()
 	ipupdated = db.BooleanProperty()
-	emailupdated = db.BooleanProperty()
 
 class OtherCities(db.Model):
 	cityname = db.StringProperty()
@@ -126,7 +125,7 @@ class Email(db.Model):
 	senderemailid = db.StringProperty()
 	receiveremailid = db.StringProperty()
 	typeid = db.StringProperty()
-	counter = db.IntegerProperty()
+	emailupdated = db.BooleanProperty()
 	subject = db.TextProperty()
 	body = db.TextProperty()
 	filename = db.StringProperty()

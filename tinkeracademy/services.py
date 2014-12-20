@@ -107,7 +107,7 @@ class EmailService(object):
 		email.senderemailid = senderemailid
 		email.receiveremailid = receiveremailid
 		email.typeid = emailtype
-		email.counter = 0
+		email.emailupdated = False
 		email.subject = db.Text(subject)
 		email.body = db.Text(body)
 		if attachment:
@@ -119,7 +119,7 @@ class EmailService(object):
 		return 1
 	def sendnext(self):
 		query = Email.all()
-		query.filter("counter = ", 0)
+		query.filter("emailupdated = ", False)
 		p = None
 		for p in query.run(limit=1):
 			senderemailid = str(p.senderemailid)
@@ -127,21 +127,38 @@ class EmailService(object):
 			subject = str(p.subject)
 			body = str(p.body)
 			filename = str(p.filename)
+			attachment = None
 			if filename:
-				pass
+				googledriveservice = GoogleDriveService()
+				fileresource = googledriveservice.getfile(filename)
+				if fileresource:
+					filecontents = googledriveservice.getfilecontents(fileresource, constants.GOOGLE_DRIVE_EMAIL_ATTACHMENT_PDF_CONTENT_TYPE)
+					filetitle = googledriveservice.getfiletitle(fileresource)
+					fileroot, ext = os.path.splitext(filetitle)
+					filetitle = fileroot + '.pdf'
+					if filecontents:
+						attachment = mail.Attachment(filetitle, filecontents)
 			try:
 				message = mail.EmailMessage(sender=senderemailid, subject=subject)
 				message.to = receiveremailid
 				message.html = body
+				if attachment:
+					message.attachments = [attachment]
 				message.send()
 				logging.info('sent email senderemailid=' + str(senderemailid) \
 					+ ', toaddress=' + str(receiveremailid) \
-					+ ', with subject=' + str(subject))
-				return 1
+					+ ', with subject=' + str(subject))				
 			except:
 				logging.error('error sending email to ' + str(receiveremailid))
 				sys_err = sys.exc_info()
 				logging.error(sys_err[1])
+			try:
+				p.emailupdated = True
+				p.put()
+			except:
+				logging.error('error updating Email.emailupdated ' + str(receiveremailid))
+				sys_err = sys.exc_info()
+				logging.error(sys_err[1])				
 		return 0
 
 class ForgotStudentIDService(object):
@@ -459,10 +476,11 @@ class SignUpService(object):
 			p.counter += 1
 			p.ipaddress = ipaddress
 			p.ipupdated = False
-			p.emailupdated = False
 			p.put()
+			filename = constants.GOOGLE_DRIVE_EMAIL_ATTACHMENT_KEY
+			attachment = mail.Attachment(filename, None)			
 			emailservice = EmailService()	
-			emailservice.register(constants.EMAIL_TYPE_SIGNUP, constants.EMAIL_ID_SIGNUP, emailid, constants.EMAIL_SIGNUP_SUBJECT, readtextfilecontents(constants.EMAIL_SIGNUP_BODY_FILENAME))
+			emailservice.register(constants.EMAIL_TYPE_SIGNUP, constants.EMAIL_ID_SIGNUP, emailid, constants.EMAIL_SIGNUP_SUBJECT, readtextfilecontents(constants.EMAIL_SIGNUP_BODY_FILENAME), attachment)
 			return 1
 		except Exception as e:
 			logging.error("error signing up " + str(emailid))
