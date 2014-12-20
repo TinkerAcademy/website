@@ -21,8 +21,19 @@ from google.appengine.api import urlfetch
 
 urlfetch.set_default_fetch_deadline(60)
 
+oldfetch =urlfetch.fetch
+
+def newfetch(url, payload=None, method=urlfetch.GET, headers={},
+				allow_truncated=False, follow_redirects=True,
+				deadline=None, *args, **kwargs):
+	return oldfetch(url, payload, method, headers, allow_truncated, 
+				follow_redirects, 60.0, *args, **kwargs)
+
+urlfetch.fetch = newfetch
+
 import socket
 
+socket.setdefaulttimeout(60)
 socket._GLOBAL_DEFAULT_TIMEOUT = 60
 
 JINJA_ENVIRONMENT = jinja2.Environment(
