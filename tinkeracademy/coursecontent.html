@@ -7,14 +7,18 @@
 	<body>
 		{% include 'header.html' %}
 		<h1>{{course.coursename}}</h1>
-		<h2>Course Contents - {{coursecontent.coursecontentname}}</h2>
+		<h2>{{coursecontent.coursecontentname}}</h2>
+		<h3>Steps to complete at Home</h3>
+		<h4>Due by {{coursecontent.coursecontenthomeworkduedate}}</h4>
 		{% for coursestarterpack in coursestarterpacks %}		
 		<table>
 			<tr>
 				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td><span><a href="{{coursestarterpack.coursestarterpackdownloadurl|safe}}" target="_blank">{{coursestarterpack.coursestarterpackdescription}}</a></span></td>
+				<td><span>0% (Not Started)</span></td>
 			</tr>
 		</table>
 		{% endfor %}
@@ -22,9 +26,11 @@
 		<table>
 			<tr>
 				<td><span>{{coursevideo.coursevideoname}}</span></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td><span><a href="{{coursevideo.coursevideodownloadurl|safe}}" target="_blank">{{coursevideo.coursevideodescription}}</a></span></td>
+				<td><span>0% (Not Started)</span></td>
 			</tr>
 		</table>
 		{% endfor %}
@@ -32,12 +38,30 @@
 		<table>
 			<tr>
 				<td><span>{{coursequiz.coursequizname}}</span></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td><span><a href="{{coursequiz.coursequizdownloadurl|safe}}" target="_blank">{{coursequiz.coursequizdescription}}</a></span></td>
+				<td><span>0% (Not Started)</span></td>
 			</tr>
 		</table>
 		{% endfor %}
+		{% if coursecontent.coursecontentclassdate %}
+		<h3>Steps to complete during Class</h3>
+		<h4>Your next class is on {{coursecontent.coursecontentclassdate}}. Join Class</h4>
+		{% for coursehomework in coursehomeworks %}		
+		<table>
+			<tr>
+				<td><span>{{coursehomework.coursehomeworkname}}</span></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><span><a href="{{coursehomework.coursehomeworkdownloadurl|safe}}" target="_blank">{{coursehomework.coursehomeworkdescription}}</a></span></td>
+				<td><span>0% (Not Started)</span></td>
+			</tr>
+		</table>
+		{% endfor %}
+		{% endif %}
 	</body>
 </html>
 {% endautoescape %}
