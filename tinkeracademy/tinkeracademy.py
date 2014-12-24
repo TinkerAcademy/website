@@ -19,7 +19,8 @@ from pages import 	MainPage, \
 					SignUpStatusPage
 
 from tasks import 	EmailTask, \
-					DatabaseUpdateTask
+					DatabaseUpdateTask, \
+					TokenUpdateTask
 
 application = webapp2.WSGIApplication([
 										('/', MainPage),
@@ -36,6 +37,7 @@ application = webapp2.WSGIApplication([
 										('/signupstatus', SignUpStatusPage),
 										('/task/email', EmailTask),
 										('/task/databaseupdate', DatabaseUpdateTask),
+										('/task/tokenupdate', TokenUpdateTask),
 									], debug=True)
 
 

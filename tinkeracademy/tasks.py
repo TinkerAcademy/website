@@ -10,6 +10,7 @@ import httplib2
 from services import EmailService
 from services import DatabaseService
 from pageutils import isadminuser
+from environment import updatetokens
 
 class EmailTask(webapp2.RequestHandler):
 	def get(self):
@@ -30,4 +31,6 @@ class DatabaseUpdateTask(webapp2.RequestHandler):
 		else:
 			logging.error("database update from non-admin user from ipaddress=" + str(ipaddress))
 
-
+class TokenUpdateTask(webapp2.RequestHandler):
+	def get(self):
+		updatetokens()
