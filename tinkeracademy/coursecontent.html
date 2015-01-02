@@ -8,60 +8,88 @@
 		{% include 'header.html' %}
 		<h1>{{course.coursename}}</h1>
 		<h2>{{coursecontent.coursecontentname}}</h2>
-		<h3>Steps to complete at Home</h3>
-		<h4>Due by {{coursecontent.coursecontenthomeworkduedate}}</h4>
+		<h3>Starter Pack</h3>
 		{% for coursestarterpack in coursestarterpacks %}		
 		<table>
 			<tr>
-				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><span><a href="{{coursestarterpack.coursestarterpackdownloadurl|safe}}" target="_blank">{{coursestarterpack.coursestarterpackdescription}}</a></span></td>
-				<td><span>0% (Not Started)</span></td>
+				<td><span><a href="{{coursestarterpack.coursestarterpackdownloadurl|safe}}" target="_blank">Download {{coursestarterpack.coursestarterpackdescription}}</a></span></td>
 			</tr>
 		</table>
 		{% endfor %}
+		<h3>Course Videos</h3>
 		{% for coursevideo in coursevideos %}		
 		<table>
 			<tr>
-				<td><span>{{coursevideo.coursevideoname}}</span></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><span><a href="{{coursevideo.coursevideodownloadurl|safe}}" target="_blank">{{coursevideo.coursevideodescription}}</a></span></td>
-				<td><span>0% (Not Started)</span></td>
+				<td><span><a href="{{coursevideo.coursevideodownloadurl|safe}}" target="_blank">Watch {{coursevideo.coursevideodescription}}</a></span></td>
 			</tr>
 		</table>
 		{% endfor %}
+		<h3>Quiz</h3>
 		{% for coursequiz in coursequizs %}		
 		<table>
 			<tr>
-				<td><span>{{coursequiz.coursequizname}}</span></td>
-				<td></td>
+				<td><span><a href="{{coursequiz.coursequizdownloadurl|safe}}" target="_blank">Download {{coursequiz.coursequizdescription}}</a></span></td>
 			</tr>
 			<tr>
-				<td><span><a href="{{coursequiz.coursequizdownloadurl|safe}}" target="_blank">{{coursequiz.coursequizdescription}}</a></span></td>
-				<td><span>0% (Not Started)</span></td>
+				<td>Submit Quiz</td>
+			</tr>
+			<tr>
+				<td>
+					<form action="/submitquiz">
+					<table>
+						<tr>
+							<td><input type="file" name="pic" accept="application/*"></td>
+						</tr>
+						<tr>
+		  					<td><input type="submit"></td>
+						</tr>
+					</table>
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<td>Previous Submissions</td>
 			</tr>
 		</table>
 		{% endfor %}
-		{% if coursecontent.coursecontentclassdate %}
-		<h3>Steps to complete during Class</h3>
-		<h4>Your next class is on {{coursecontent.coursecontentclassdate}}. Join Class</h4>
+		<h3>Homework</h3>
 		{% for coursehomework in coursehomeworks %}		
 		<table>
 			<tr>
-				<td><span>{{coursehomework.coursehomeworkname}}</span></td>
-				<td></td>
+				<td><span><a href="{{coursehomework.coursehomeworkdownloadurl|safe}}" target="_blank">Download {{coursehomework.coursehomeworkdescription}}</a></span></td>
 			</tr>
 			<tr>
-				<td><span><a href="{{coursehomework.coursehomeworkdownloadurl|safe}}" target="_blank">{{coursehomework.coursehomeworkdescription}}</a></span></td>
-				<td><span>0% (Not Started)</span></td>
+				<td>Submit Homework</td>
+			</tr>
+			<tr>
+				<td>
+					<form action="/submithomework">
+					<table>
+						<tr>
+							<td><input type="file" name="pic" accept="application/zip"></td>
+						</tr>
+						<tr>
+		  					<td><input type="submit"></td>
+						</tr>
+					</table>
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<td>Previous Submissions</td>
+			</tr>
+			<tr>
+				<td>
+					<table>
+						<tr>
+							<th><span>Date</span></th>
+		  					<th><span>Status</span></th>
+						</tr>
+					</table>
+				</td>
 			</tr>
 		</table>
 		{% endfor %}
-		{% endif %}
 	</body>
 </html>
 {% endautoescape %}

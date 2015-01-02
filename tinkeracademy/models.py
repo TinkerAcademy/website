@@ -16,6 +16,10 @@ class User(db.Model):
 	emailid2 = db.StringProperty()
 	username = db.StringProperty()
 	studentid = db.StringProperty()
+	courseid1 = db.StringProperty()
+	courseid2 = db.StringProperty()
+	courseid3 = db.StringProperty()
+	courseid4 = db.StringProperty()
 
 class UserCourse(db.Model):
 	studentid = db.IntegerProperty()

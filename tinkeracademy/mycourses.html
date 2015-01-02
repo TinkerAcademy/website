@@ -9,13 +9,17 @@
 		<h1>Courses</h1>
 		<table>
 			{% for course in courses %}
-			<tr>
-				<td>
-					<div>
-						<a href="{{courseurl|safe}}">{{courseurllinktext}}</a>
-					</div>
-				</td>
-			</tr>
+			<table>
+				<tr>				
+					<td><span><a href="{{'/course?c='+course.courseid|safe}}">{{course.coursename}}</a></span></td>
+				</tr>
+				<tr>
+					<td><span>{{course.coursestartdate}} Ages {{course.courseminage}}Y - {{course.coursemaxage}}Y</span></td>
+				</tr>
+				<tr>
+					<td><span>{{course.coursedescription}}</span></td>
+				</tr>
+			</table>
 			{% endfor %}
 		</table>
 	</body>

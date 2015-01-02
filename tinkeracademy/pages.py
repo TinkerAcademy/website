@@ -135,8 +135,8 @@ class MyCoursesPage(webapp2.RequestHandler):
 		uid, insession = attemptlogin(self.request)
 		coursesservice = CoursesService()
 		userservice = UserService()
-		studentid = userservice.getstudentidforsession(uid)
-		usercourses = coursesservice.listusercourses(studentid)
+		emailid = userservice.getemailidforsession(uid)
+		usercourses = coursesservice.listusercourses(emailid)
 		template_values = {}
 		header_template_values = buildheadertemplatevalues(insession, uid)
 		template_values.update(header_template_values)

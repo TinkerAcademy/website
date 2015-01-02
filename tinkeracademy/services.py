@@ -193,9 +193,14 @@ class MemcacheService(object):
 		if uid:
 			return memcache.get(uid, namespace = 'Session')
 		return None
+	def getemailidforsession(self, uid):
+		if uid:
+			return memcache.get(uid, namespace = 'SessionEmail')
+		return None
 	def registersession(self, emailid, studentid):
 		uid = str(uuid.uuid4())
 		memcache.set(uid, studentid, namespace = 'Session')
+		memcache.set(uid, emailid, namespace = 'SessionEmail')
 		return uid
 	def deregistersession(self, uid):
 		if uid:
@@ -320,8 +325,22 @@ class CoursesService(object):
 			if deltadays <= 28 and deltadays >= -7:
 				results.append(course)
 		return results
-	def listusercourses(self, studentid):
+	def listusercourses(self, emailid):
 		courses = self.listcourses()
+		userservice = UserService()
+		user = userservice.getuserdetails(emailid)
+		logging.info('user.courseid1='+str(user.courseid1))
+		usercourses = []
+		for course in courses:
+			logging.info('course.courseid='+str(course.courseid))
+			if course.courseid == user.courseid1:
+				usercourses.append(course)
+			elif course.courseid == user.courseid2:
+				usercourses.append(course)
+			elif course.courseid == user.courseid3:
+				usercourses.append(course)
+			elif course.courseid == user.courseid4:
+				usercourses.append(course)
 		return usercourses
 	def _processcoursestarterpackrows(self, rows):
 		coursestarterpacks = []
@@ -463,6 +482,10 @@ class UserService(object):
 			if isuser:
 				user.username = processstr(entry, 'student')
 				user.studentid = processstr(entry, 'studentid')
+				user.courseid1 = processstr(entry, 'courseid1')
+				user.courseid2 = processstr(entry, 'courseid2')
+				user.courseid3 = processstr(entry, 'courseid3')
+				user.courseid4 = processstr(entry, 'courseid4')
 				user.emailid = entryemailid
 				user.emailid2 = entryemailid2
 				break
@@ -495,6 +518,12 @@ class UserService(object):
 		if uid:
 			cacheservice = MemcacheService()
 			return cacheservice.getstudentidforsession(uid)
+		return None
+	def getemailidforsession(self, uid):
+		if uid:
+			cacheservice = MemcacheService()
+			return cacheservice.getemailidforsession(uid)
+		return None
 
 class SignUpService(object):
 	def signup(self, emailid, ipaddress):
