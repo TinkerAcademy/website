@@ -13,6 +13,16 @@ from services import UserService
 from services import CoursesService
 from services import SignUpService
 
+def attemptlogin(request):
+	uid = extractkeyfromrequest(request, 'u')
+	emailid = request.get('emailid')
+	studentid = request.get('studentid')	
+	if emailid and studentid:
+		userservice = UserService()
+		uid = userservice.registersession(emailid, studentid)
+	insession = isinsession(uid)
+	return (uid, insession)
+
 def buildheadertemplatevalues(insession, uid):
 	template_values = {}
 	if insession:

@@ -18,6 +18,7 @@ from pageutils import isinsession
 from pageutils import issessionrequest
 from pageutils import isadminuser
 from pageutils import createloginurl
+from pageutils import attemptlogin
 
 from environment import JINJA_ENVIRONMENT
 
@@ -31,8 +32,7 @@ from services import StaffService
 
 class AboutPage(webapp2.RequestHandler):
 	def get(self):
-		uid = extractkeyfromrequest(self.request, 'u')
-		insession = isinsession(uid)
+		uid, insession = attemptlogin(self.request)
 		staffservice = StaffService()
 		staff = staffservice.getstaff()
 		channelpartnersservice = ChannelPartnersService()
@@ -50,8 +50,7 @@ class AboutPage(webapp2.RequestHandler):
 
 class AllCoursesPage(webapp2.RequestHandler):
 	def get(self):
-		uid = extractkeyfromrequest(self.request, 'u')
-		insession = isinsession(uid)
+		uid, insession = attemptlogin(self.request)
 		coursesservice = CoursesService()
 		courses = coursesservice.listcourses()
 		template_values = {}
@@ -65,8 +64,7 @@ class AllCoursesPage(webapp2.RequestHandler):
 
 class CoursePage(webapp2.RequestHandler):
 	def get(self):
-		uid = extractkeyfromrequest(self.request, 'u')
-		insession = isinsession(uid)
+		uid, insession = attemptlogin(self.request)
 		courseid = extractkeyfromrequest(self.request, 'c')
 		coursesservice = CoursesService()
 		course = coursesservice.getcourse(courseid)	
@@ -87,8 +85,7 @@ class CoursePage(webapp2.RequestHandler):
 
 class CourseContentsPage(webapp2.RequestHandler):
 	def get(self):
-		uid = extractkeyfromrequest(self.request, 'u')
-		insession = isinsession(uid)
+		uid, insession = attemptlogin(self.request)
 		courseid = extractkeyfromrequest(self.request, 'c')
 		coursecontentid = extractkeyfromrequest(self.request, 'cc')
 		coursesservice = CoursesService()
@@ -110,18 +107,18 @@ class CourseContentsPage(webapp2.RequestHandler):
 
 class ForgotPage(webapp2.RequestHandler):
 	def get(self):
-		uid = extractkeyfromrequest(self.request, 'u')
-		insession = isinsession(uid)
+		uid, insession = attemptlogin(self.request)
 		emailid = extractkeyfromrequest(self.request, 'e')
 		if emailid is None:
 			emailid = ''
 		returnvalue = extractkeyfromrequest(self.request, 'r')
-		hasreturnvalue = True
 		if returnvalue is None:
-			hasreturnvalue = False	
+			returnvalue = 0
+		else:
+			returnvalue = int(returnvalue)
 		template_values = {	
 			'emailid' : emailid,
-			'hasreturnvalue': hasreturnvalue,
+			'returnvalue': returnvalue,
 		}
 		header_template_values = buildheadertemplatevalues(insession, uid)
 		template_values.update(header_template_values)
@@ -135,8 +132,7 @@ class ForgotPage(webapp2.RequestHandler):
 
 class MyCoursesPage(webapp2.RequestHandler):
 	def get(self):
-		uid = extractkeyfromrequest(self.request, 'u')
-		insession = isinsession(uid)
+		uid, insession = attemptlogin(self.request)
 		coursesservice = CoursesService()
 		userservice = UserService()
 		studentid = userservice.getstudentidforsession(uid)
@@ -151,8 +147,7 @@ class MyCoursesPage(webapp2.RequestHandler):
 
 class MainPage(webapp2.RequestHandler):
 	def get(self):
-		uid = extractkeyfromrequest(self.request, 'u')
-		insession = isinsession(uid)
+		uid, insession = attemptlogin(self.request)
 		coursesservice = CoursesService()
 		courses = coursesservice.listupcomingcourses()
 		template_values = {}
@@ -165,15 +160,19 @@ class MainPage(webapp2.RequestHandler):
 
 class SignInPage(webapp2.RequestHandler):
 	def get(self):
-		uid = extractkeyfromrequest(self.request, 'u')
-		insession = isinsession(uid)
+		uid, insession = attemptlogin(self.request)
 		emailid = extractkeyfromrequest(self.request, 'e')
+		iserror = extractkeyfromrequest(self.request, 'x') != None
+		errormsg = ''
+		if iserror:
+			errormsg = 'Unable to signin'
 		if emailid is None:
 			emailid = ''
 		template_values = {	
+			'errormsg': errormsg,
 			'emailid' : emailid,
 			'forgoturl' : '/forgot?e='+str(emailid),
-			'forgoturllinktext' : 'Forgot Student ID' 
+			'forgoturllinktext' : 'Forgot Student ID?' 
 		}
 		header_template_values = buildheadertemplatevalues(insession, uid)
 		template_values.update(header_template_values)
@@ -181,13 +180,11 @@ class SignInPage(webapp2.RequestHandler):
 		self.response.write(template.render(template_values))
 	def post(self):
 		emailid = self.request.get('emailid')
-		studentid = self.request.get('studentid')
-		userservice = UserService()
-		uid = userservice.registersession(emailid, studentid)
+		uid, insession = attemptlogin(self.request)
 		if uid:
 			self.redirect('/?u=' + str(uid))
 		else:
-			self.redirect('/signin?e='+str(emailid))
+			self.redirect('/signin?e='+str(emailid)+'&x=1')
 
 class SignOutPage(webapp2.RequestHandler):
 	def get(self):
@@ -199,8 +196,7 @@ class SignOutPage(webapp2.RequestHandler):
 
 class SignUpPage(webapp2.RequestHandler):
 	def get(self):
-		uid =extractkeyfromrequest(self.request, 'u')
-		insession = issessionrequest(self.request)
+		uid, insession = attemptlogin(self.request)
 		emailid = extractkeyfromrequest(self.request, 'e')
 		if emailid is None:
 			emailid = ''
@@ -247,8 +243,7 @@ class SignUpPage(webapp2.RequestHandler):
 
 class SignUpStatusPage(webapp2.RequestHandler):
 	def get(self):
-		uid =extractkeyfromrequest(self.request, 'u')
-		insession = issessionrequest(self.request)
+		uid, insession = attemptlogin(self.request)
 		returnvalue = extractkeyfromrequest(self.request, 'r')
 		hasreturnvalue = True
 		if returnvalue is None:

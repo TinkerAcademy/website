@@ -8,8 +8,11 @@
 		<h1>Forgot Student ID</h1>
 		<form action="/forgot" method="post">
 			<div><span>Email:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
-			{% if hasreturnvalue %}
-			<div><span>An email will be sent to {{emailid}} within 5 minutes.</span></div>
+			{% if returnvalue == 1 %}
+			<div><span>Sorry, your email "{{emailid}}" is not registered with us.</span></div>
+			{% endif %}
+			{% if returnvalue == 2 %}
+			<div><span>An email will be sent to "{{emailid}}" in the next 10 minutes.</span></div>
 			{% endif %}
 			<div><input type="submit"></div>
 		</form>

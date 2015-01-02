@@ -164,8 +164,24 @@ class EmailService(object):
 class ForgotStudentIDService(object):
 	def sendemail(self, emailid):
 		fromid = constants.EMAIL_ID_PASSWORD_RECOVERY
-		emailservice = EmailService()
-		return emailservice.send(fromid, emailid, 'Password Recovery', 'Your Student ID is ######')
+		userservice = UserService()
+		isvalidemailid = userservice.isvalidemailid(emailid)
+		if isvalidemailid:
+			emailid, emailid2, username, studentid = userservice.getuserdetails(emailid)
+			if emailid is None:
+				emailid = ''
+			if emailid2 is None:
+				emailid2 = ''
+			logging.info('got valid email id')
+			emailservice = EmailService()
+			emailbody = readtextfilecontents(constants.EMAIL_PASSWORD_RECOVERY_BODY_FILENAME)
+			emailbody = emailbody.replace('$EMAILID$', emailid)
+			emailbody = emailbody.replace('$EMAILID2$', emailid2)
+			emailbody = emailbody.replace('$USERNAME$', username)
+			emailbody = emailbody.replace('$STUDENTID$', studentid)
+			emailservice.register(constants.EMAIL_TYPE_PASSWORD_RECOVERY, constants.EMAIL_ID_PASSWORD_RECOVERY, emailid, constants.EMAIL_PASSWORD_RECOVERY_SUBJECT, emailbody)
+			return 2
+		return 1
 
 class MemcacheService(object):
 	def hassession(self, uid):
@@ -185,19 +201,6 @@ class MemcacheService(object):
 		if uid:
 			return memcache.delete(uid, namespace = 'Session')
 		return False
-	def getcourses(self):
-		courses = memcache.get('courses', namespace = 'Courses')
-		return courses
-	def setcourses(self, courses):
-		memcache.set('courses', courses, namespace = 'Courses')
-	def getusercourses(self, studentid):
-		courses = []
-		if studentid:
-			courses = memcache.get(studentid, namespace = 'UserCourses')
-		return courses
-	def setusercourses(self, studentid, courses):
-		if studentid:
-			memcache.set(studentid, courses, namespace = 'UserCourses')
 
 class StaffService(object):
 	def getstaff(self):
@@ -318,16 +321,7 @@ class CoursesService(object):
 				results.append(course)
 		return results
 	def listusercourses(self, studentid):
-		cacheservice = MemcacheService()
 		courses = self.listcourses()
-		usercourses = cacheservice.getusercourses(studentid)
-		if (not usercourses) or len(usercourses) == 0:
-			usercourses = []			
-			query = UserCourse.all()
-			query.filter("studentid = ", studentid)
-			for p in query.run(limit=100):
-				usercourses.append(p)
-			cacheservice.setusercourses(studentid, usercourses)
 		return usercourses
 	def _processcoursestarterpackrows(self, rows):
 		coursestarterpacks = []
@@ -441,6 +435,36 @@ class CoursesService(object):
 
 
 class UserService(object):
+	def isvalidemailid(self, emailid):
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_STUDENTSMASTER_WORKSHEET_KEY)
+		entries = rows.entry
+		for entry in entries:
+			entryemailid = processstr(entry, 'studentemail')
+			if entryemailid == emailid:
+				return True
+			entryemailid = processstr(entry, 'studentemail2')
+			if entryemailid == emailid:
+				return True
+		return False
+	def getuserdetails(self, emailid):
+		googlespreadsheetservice = GoogleSpreadsheetService()
+		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_STUDENTSMASTER_WORKSHEET_KEY)
+		entries = rows.entry
+		for entry in entries:
+			isuser = False
+			entryemailid = processstr(entry, 'studentemail')
+			if entryemailid == emailid:
+				isuser = True
+			entryemailid2 = processstr(entry, 'studentemail2')
+			if entryemailid2 == emailid:
+				isuser = True
+			if isuser:
+				entryusername = processstr(entry, 'student')
+				entrystudentid = processstr(entry, 'studentid')
+				return (entryemailid, entryemailid2, entryusername, entrystudentid)
+		return (None, None, None, None)
+
 	def isuserindb(self, emailid, studentid):
 		if emailid and studentid:
 			query = User.all()
@@ -448,8 +472,7 @@ class UserService(object):
 			query.filter("studentid = ", studentid)
 			for p in query.run(limit=1):
 				return True
-		#FIXME: return False
-		return True
+		return False
 	def hassession(self, uid):
 		if uid:
 			cacheservice = MemcacheService()
