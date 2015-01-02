@@ -13,6 +13,8 @@ class ChannelPartner(db.Model):
 
 class User(db.Model):
 	emailid = db.StringProperty()
+	emailid2 = db.StringProperty()
+	username = db.StringProperty()
 	studentid = db.StringProperty()
 
 class UserCourse(db.Model):

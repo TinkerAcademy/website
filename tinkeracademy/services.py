@@ -167,18 +167,18 @@ class ForgotStudentIDService(object):
 		userservice = UserService()
 		isvalidemailid = userservice.isvalidemailid(emailid)
 		if isvalidemailid:
-			emailid, emailid2, username, studentid = userservice.getuserdetails(emailid)
-			if emailid is None:
-				emailid = ''
-			if emailid2 is None:
-				emailid2 = ''
+			user = userservice.getuserdetails(emailid)
+			if user.emailid is None:
+				user.emailid = ''
+			if user.emailid2 is None:
+				user.emailid2 = ''
 			logging.info('got valid email id')
 			emailservice = EmailService()
 			emailbody = readtextfilecontents(constants.EMAIL_PASSWORD_RECOVERY_BODY_FILENAME)
-			emailbody = emailbody.replace('$EMAILID$', emailid)
-			emailbody = emailbody.replace('$EMAILID2$', emailid2)
-			emailbody = emailbody.replace('$USERNAME$', username)
-			emailbody = emailbody.replace('$STUDENTID$', studentid)
+			emailbody = emailbody.replace('$EMAILID$', user.emailid)
+			emailbody = emailbody.replace('$EMAILID2$', user.emailid2)
+			emailbody = emailbody.replace('$USERNAME$', user.username)
+			emailbody = emailbody.replace('$STUDENTID$', user.studentid)
 			emailservice.register(constants.EMAIL_TYPE_PASSWORD_RECOVERY, constants.EMAIL_ID_PASSWORD_RECOVERY, emailid, constants.EMAIL_PASSWORD_RECOVERY_SUBJECT, emailbody)
 			return 2
 		return 1
@@ -451,6 +451,7 @@ class UserService(object):
 		googlespreadsheetservice = GoogleSpreadsheetService()
 		rows = googlespreadsheetservice.getrows(constants.GOOGLE_DRIVE_SPREADSHEET_KEY, constants.GOOGLE_DRIVE_STUDENTSMASTER_WORKSHEET_KEY)
 		entries = rows.entry
+		user = User()
 		for entry in entries:
 			isuser = False
 			entryemailid = processstr(entry, 'studentemail')
@@ -460,18 +461,18 @@ class UserService(object):
 			if entryemailid2 == emailid:
 				isuser = True
 			if isuser:
-				entryusername = processstr(entry, 'student')
-				entrystudentid = processstr(entry, 'studentid')
-				return (entryemailid, entryemailid2, entryusername, entrystudentid)
-		return (None, None, None, None)
-
+				user.username = processstr(entry, 'student')
+				user.studentid = processstr(entry, 'studentid')
+				user.emailid = entryemailid
+				user.emailid2 = entryemailid2
+				break
+		return user
 	def isuserindb(self, emailid, studentid):
-		if emailid and studentid:
-			query = User.all()
-			query.filter("emailid = ", emailid)
-			query.filter("studentid = ", studentid)
-			for p in query.run(limit=1):
-				return True
+		user = self.getuserdetails(emailid)
+		if emailid is not None and studentid is not None:
+			if studentid == user.studentid:
+				if emailid == user.emailid or emailid == user.emailid2:					
+					return True
 		return False
 	def hassession(self, uid):
 		if uid:
