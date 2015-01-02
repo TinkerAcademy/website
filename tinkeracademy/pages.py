@@ -125,7 +125,7 @@ class ForgotPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('forgot.html')
 		self.response.write(template.render(template_values))
 	def post(self):
-		emailid = self.request.get('emailid')
+		emailid = self.request.get('e')
 		forgotservice = ForgotStudentIDService()
 		returnvalue = forgotservice.sendemail(emailid)
 		self.redirect('/forgot?e='+str(emailid)+'&r='+str(returnvalue))
@@ -179,7 +179,7 @@ class SignInPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('signin.html')
 		self.response.write(template.render(template_values))
 	def post(self):
-		emailid = self.request.get('emailid')
+		emailid = self.request.get('e')
 		uid, insession = attemptlogin(self.request)
 		if uid:
 			self.redirect('/?u=' + str(uid))
@@ -221,7 +221,7 @@ class SignUpPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('signup.html')
 		self.response.write(template.render(template_values))
 	def post(self):
-		emailid = self.request.get('emailid')
+		emailid = self.request.get('e')
 		if emailid:
 			emailid = emailid.strip()
 		validationservice = ValidationService()
@@ -258,3 +258,28 @@ class SignUpStatusPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('signupstatus.html')
 		self.response.write(template.render(template_values))
 
+class SubmitHomeworkPage(webapp2.RequestHandler):
+	def post(self):
+		uid, insession = attemptlogin(self.request)
+		if insession:
+			pass
+		self._done()
+	def _done(self):
+		uid, insession = attemptlogin(self.request)
+		c = extractkeyfromrequest(self.request, 'c')
+		cc = extractkeyfromrequest(self.request, 'cc')
+		if c and cc and uid:
+			self.redirect('/coursecontent?c='+str(c)+'&cc='+str(cc)+'&u='+uid)
+
+class SubmitQuizPage(webapp2.RequestHandler):
+	def post(self):
+		uid, insession = attemptlogin(self.request)
+		if insession:
+			pass
+		self._done()
+	def _done(self):
+		uid, insession = attemptlogin(self.request)
+		c = extractkeyfromrequest(self.request, 'c')
+		cc = extractkeyfromrequest(self.request, 'cc')
+		if c and cc and uid:
+			self.redirect('/coursecontent?c='+str(c)+'&cc='+str(cc)+'&u='+uid)

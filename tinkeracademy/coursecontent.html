@@ -7,38 +7,56 @@
 	<body>
 		{% include 'header.html' %}
 		<h1>{{course.coursename}}</h1>
+		{% if not UID %}
+		<div><span>You are not signed in. <a href="{{signinurl+'?u='+UID|safe}}">{{signinurllinktext}}</a></span></div>
+		{% endif  %}
 		<h2>{{coursecontent.coursecontentname}}</h2>
 		<h3>Starter Pack</h3>
 		{% for coursestarterpack in coursestarterpacks %}		
 		<table>
+			{% if UID %}
 			<tr>
-				<td><span><a href="{{coursestarterpack.coursestarterpackdownloadurl|safe}}" target="_blank">Download {{coursestarterpack.coursestarterpackdescription}}</a></span></td>
+				<td><span><a href="{{coursestarterpack.coursestarterpackdownloadurl+'?u='+UID|safe}}" target="_blank">Download {{coursestarterpack.coursestarterpackdescription}}</a></span></td>
 			</tr>
+			{% endif  %}
+			{% if not UID %}
+			<tr>
+				<td><span>{{coursestarterpack.coursestarterpackdescription}}</span></td>
+			</tr>
+			{% endif  %}
 		</table>
 		{% endfor %}
 		<h3>Course Videos</h3>
 		{% for coursevideo in coursevideos %}		
 		<table>
+			{% if UID %}
 			<tr>
-				<td><span><a href="{{coursevideo.coursevideodownloadurl|safe}}" target="_blank">Watch {{coursevideo.coursevideodescription}}</a></span></td>
+				<td><span><a href="{{coursevideo.coursevideodownloadurl+'?u='+UID|safe}}" target="_blank">Watch {{coursevideo.coursevideodescription}}</a></span></td>
 			</tr>
+			{% endif  %}
+			{% if not UID %}
+			<tr>
+				<td><span>{{coursevideo.coursevideodescription}}</span></td>
+			</tr>
+			{% endif  %}
 		</table>
 		{% endfor %}
 		<h3>Quiz</h3>
 		{% for coursequiz in coursequizs %}		
 		<table>
+			{% if UID %}
 			<tr>
-				<td><span><a href="{{coursequiz.coursequizdownloadurl|safe}}" target="_blank">Download {{coursequiz.coursequizdescription}}</a></span></td>
+				<td><span><a href="{{coursequiz.coursequizdownloadurl+'?u='+UID|safe}}" target="_blank">Download {{coursequiz.coursequizdescription}}</a></span></td>
 			</tr>
 			<tr>
 				<td>Submit Quiz</td>
 			</tr>
 			<tr>
 				<td>
-					<form action="/submitquiz">
+					<form action="/submitquiz+'?u='+UID">
 					<table>
 						<tr>
-							<td><input type="file" name="pic" accept="application/*"></td>
+							<td><input type="file" id="q" name="q"></td>
 						</tr>
 						<tr>
 		  					<td><input type="submit"></td>
@@ -50,11 +68,18 @@
 			<tr>
 				<td>Previous Submissions</td>
 			</tr>
+			{% endif  %}
+			{% if not UID %}
+			<tr>
+				<td><span>{{coursequiz.coursequizdescription}}</span></td>
+			</tr>
+			{% endif  %}
 		</table>
 		{% endfor %}
 		<h3>Homework</h3>
 		{% for coursehomework in coursehomeworks %}		
 		<table>
+			{% if UID %}
 			<tr>
 				<td><span><a href="{{coursehomework.coursehomeworkdownloadurl|safe}}" target="_blank">Download {{coursehomework.coursehomeworkdescription}}</a></span></td>
 			</tr>
@@ -63,10 +88,10 @@
 			</tr>
 			<tr>
 				<td>
-					<form action="/submithomework">
+					<form method="post" action="/submithomework?u={{UID}}&c={{COURSE}}&cc={{COURSECONTENT}}">
 					<table>
 						<tr>
-							<td><input type="file" name="pic" accept="application/zip"></td>
+							<td><input type="file" id="h" name="h"></td>
 						</tr>
 						<tr>
 		  					<td><input type="submit"></td>
@@ -88,6 +113,12 @@
 					</table>
 				</td>
 			</tr>
+			{% endif  %}
+			{% if not UID %}
+			<tr>
+				<td><span>{{coursehomework.coursehomeworkdescription}}</span></td>
+			</tr>
+			{% endif  %}
 		</table>
 		{% endfor %}
 	</body>

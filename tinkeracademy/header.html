@@ -1,19 +1,19 @@
 <h1>Tinker Academy</h1>
 {% if abouturl %}
-<a href="{{abouturl|safe}}">{{abouturllinktext}}</a>
+<a href="{{abouturl+'?u='+UID|safe}}">{{abouturllinktext}}</a>
 {% endif %}
 {% if allcoursesurl %}
-<a href="{{allcoursesurl|safe}}">{{allcoursesurllinktext}}</a>
+<a href="{{allcoursesurl+'?u='+UID|safe}}">{{allcoursesurllinktext}}</a>
 {% endif %}
 {% if mycoursesurl %}
-<a href="{{mycoursesurl|safe}}">{{mycoursesurllinktext}}</a>
+<a href="{{mycoursesurl+'?u='+UID|safe}}">{{mycoursesurllinktext}}</a>
 {% endif %}
 {% if signinurl %}
-<a href="{{signinurl|safe}}">{{signinurllinktext}}</a>
+<a href="{{signinurl+'?u='+UID|safe}}">{{signinurllinktext}}</a>
 {% endif %}
 {% if signouturl %}
-<a href="{{signouturl|safe}}">{{signouturllinktext}}</a>
+<a href="{{signouturl+'?u='+UID|safe}}">{{signouturllinktext}}</a>
 {% endif %}
 {% if signupurl %}
-<a href="{{signupurl|safe}}">{{signupurllinktext}}</a>
+<a href="{{signupurl+'?u='+UID|safe}}">{{signupurllinktext}}</a>
 {% endif %}

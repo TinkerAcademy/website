@@ -16,7 +16,9 @@ from pages import 	MainPage, \
 					SignOutPage, \
 					AboutPage, \
 					SignUpPage, \
-					SignUpStatusPage
+					SignUpStatusPage, \
+					SubmitHomeworkPage, \
+					SubmitQuizPage
 
 from tasks import 	EmailTask, \
 					DatabaseUpdateTask, \
@@ -35,6 +37,8 @@ application = webapp2.WSGIApplication([
 										('/signout', SignOutPage),
 										('/signup', SignUpPage),
 										('/signupstatus', SignUpStatusPage),
+										('/submithomework', SubmitHomeworkPage),
+										('/submitquiz', SubmitQuizPage),
 										('/task/email', EmailTask),
 										('/task/databaseupdate', DatabaseUpdateTask),
 										('/task/tokenupdate', TokenUpdateTask),

@@ -15,8 +15,8 @@ from services import SignUpService
 
 def attemptlogin(request):
 	uid = extractkeyfromrequest(request, 'u')
-	emailid = request.get('emailid')
-	studentid = request.get('studentid')	
+	emailid = request.get('e')
+	studentid = request.get('s')	
 	if emailid and studentid:
 		userservice = UserService()
 		uid = userservice.registersession(emailid, studentid)
@@ -26,28 +26,24 @@ def attemptlogin(request):
 def buildheadertemplatevalues(insession, uid):
 	template_values = {}
 	if insession:
-		template_values['abouturl'] = '/about?u=' + str(uid)
-		template_values['abouturllinktext'] = 'About'
+		template_values['UID']=uid	
 	else:
-		template_values['abouturl'] = '/about'
-		template_values['abouturllinktext'] = 'About'		
+		template_values.pop('UID', None)
+	template_values['abouturl'] = '/about'
+	template_values['abouturllinktext'] = 'About'
+	template_values['allcoursesurl'] = '/allcourses'
+	template_values['allcoursesurllinktext'] = 'All Courses'	
 	if insession:
-		template_values['allcoursesurl'] = '/allcourses?u='+str(uid)
-		template_values['allcoursesurllinktext'] = 'All Courses'
-	else:
-		template_values['allcoursesurl'] = '/allcourses'
-		template_values['allcoursesurllinktext'] = 'All Courses'
-	if insession:
-		template_values['mycoursesurl'] = '/mycourses?u=' + str(uid)
+		template_values['mycoursesurl'] = '/mycourses'
 		template_values['mycoursesurllinktext'] = 'My Courses'
 	if not insession:
 		template_values['signinurl'] = '/signin'
-		template_values['signinurllinktext'] = 'Sign In'
+		template_values['signinurllinktext'] = 'Sign In'	
 	if not insession:
 		template_values['signupurl'] = '/signup'
-		template_values['signupurllinktext'] = 'Register'
+		template_values['signupurllinktext'] = 'Register'	
 	if insession:
-		template_values['signouturl'] = '/signout?u=' + str(uid)
+		template_values['signouturl'] = '/signout'
 		template_values['signouturllinktext'] = 'Sign Out'
 	return template_values
 
@@ -84,6 +80,8 @@ def buildcoursetemplatevalues(insession, course, coursecontents):
 
 def buildcoursecontenttemplatevalues(insession, courseid, coursecontentid, course, coursecontents, coursehandouts, coursehomeworks, coursevideos, coursestarterpacks, coursequizs):
 	template_values = {}
+	template_values['COURSE'] = courseid
+	template_values['COURSECONTENT'] = coursecontentid
 	template_values['course'] = course
 	template_values['coursecontents'] = coursecontents
 	for coursecontent in coursecontents:

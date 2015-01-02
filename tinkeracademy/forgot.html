@@ -6,8 +6,8 @@
 	</head>	
 	<body>
 		<h1>Forgot Student ID</h1>
-		<form action="/forgot" method="post">
-			<div><span>Email:</span><input id="emailid" name="emailid" type="text" value="{{emailid}}"></div>
+		<form action="/forgot+'?u='+UID" method="post">
+			<div><span>Email:</span><input id="e" name="e" type="text" value="{{emailid}}"></div>
 			{% if returnvalue == 1 %}
 			<div><span>Sorry, your email "{{emailid}}" is not registered with us.</span></div>
 			{% endif %}

@@ -16,84 +16,9 @@
 				<td><span>{{coursecontent.coursecontentname}}</span></td>
 			</tr>
 			<tr>
-				<td><a href="{{coursecontent.coursecontenturl|safe}}" target="_blank">{{coursecontent.coursecontentdescription}}</a></td>
+				<td><a href="{{coursecontent.coursecontenturl+'&u='+UID|safe}}" target="_blank">{{coursecontent.coursecontentdescription}}</a></td>
 			</tr>
 		</table>
-<!-- 		
-		{% for coursestarterpack in coursestarterpacks %}		
-		{% if coursestarterpack.coursecontentid == coursecontent.coursecontentid %}		
-		<table>
-			<tr>
-				<td><span>Starter Pack</span></td>
-				<td><span>Download</span></td>
-			</tr>
-			<tr>
-				<td><span>{{coursestarterpack.coursestarterpackname}}</span></td>
-				<td><span><a href="{{coursestarterpack.coursestarterpackdownloadurl|safe}}" target="_blank">Download</a></span></td>
-			</tr>
-		{% endif %}
-		</table>
-		{% endfor %}
- -->		
-<!--  		{% for coursevideo in coursevideos %}		
-		{% if coursevideo.coursecontentid == coursecontent.coursecontentid %}		
-		<table>
-			<tr>
-				<td><span>Lectures</span></td>
-				<td><span>Video</span></td>
-				<td><span>Slides</span></td>
-			</tr>
-			<tr>
-				<td><span>{{coursevideo.coursevideoname}}</span></td>
-				<td><span><a href="{{coursevideo.coursevideodownloadurl|safe}}" target="_blank">Download</a></span></td>
-				<td><span>{{coursevideo.coursevideoname}}</span></td>
-			</tr>
-		{% endif %}
-		</table>
-		{% endfor %}
- -->		
-<!--  		{% for coursequiz in coursequizs %}		
-		{% if coursequiz.coursecontentid == coursecontent.coursecontentid %}		
-		<table>
-			<tr>
-				<td><span>Quiz</span></td>
-				<td><span>Download</span></td>
-			</tr>
-			<tr>
-				<td><span>{{coursequiz.coursequizname}}</span></td>
-				<td><span><a href="{{coursequiz.coursequizdownloadurl|safe}}" target="_blank">Download</a></span></td>
-			</tr>
-		{% endif %}
-		</table>
-		{% endfor %} -->
-		<!-- {% for coursehandout in coursehandouts %}		
-		{% if coursehandout.coursecontentid == coursecontent.coursecontentid %}		
-		<table>
-			<tr>
-				<td><span>Handout</span></td>
-				<td><span>Download</span></td>
-			</tr>
-			<tr>
-				<td><span>{{coursehandout.coursehandoutname}}</span></td>
-				<td><span><a href="{{coursehandout.coursehandoutdownloadurl|safe}}" target="_blank">Download</a></span></td>
-			</tr>
-		</table>
-		{% endif %}
-		{% endfor %} -->
-		<!-- {% for coursehomework in coursehomeworks %}		
-		{% if coursehomework.coursecontentid == coursecontent.coursecontentid %}		
-		<table>
-			<tr>
-				<td><span>Homework</span></td>
-				<td><span>Download</span></td>
-			</tr>
-			<tr>
-				<td><span>{{coursehomework.coursehomeworkname}}</span></td>
-				<td><span><a href="{{coursehomework.coursehomeworkdownloadurl|safe}}" target="_blank">Download</a></span></td>
-			</tr>
-		{% endif %}
-		</table>
-		{% endfor %} -->
 		{% endfor %}
 	</body>
 </html>
