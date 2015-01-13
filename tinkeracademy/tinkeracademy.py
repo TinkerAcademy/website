@@ -9,6 +9,7 @@ from environment import JINJA_ENVIRONMENT
 from pages import 	MainPage, \
 					CoursePage, \
 					CourseContentsPage, \
+					ClassroomPage, \
 					ForgotPage, \
 					AllCoursesPage, \
 					MyCoursesPage, \
@@ -28,6 +29,7 @@ application = webapp2.WSGIApplication([
 										('/', MainPage),
 										('/course', CoursePage),
 										('/coursecontent', CourseContentsPage),
+										('/classroom', ClassroomPage),
 										('/forgot', ForgotPage),
 										('/index.html', MainPage),
 										('/about', AboutPage),

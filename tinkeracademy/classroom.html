@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+	<head>
+		<title>Tinker Academy - Classroom</title>
+	</head>	
+	<body>
+		<h1>Courseware Updates</h1>
+		<table>
+			{% for staticfile in staticfiles %}
+			<table>
+				<tr>				
+					<td><span><a href="{{'/static/'+staticfile|safe}}">{{staticfile}}</a></span></td>
+				</tr>
+			</table>
+			{% endfor %}
+		</table>
+	</body>
+</html>
+{% endautoescape %}

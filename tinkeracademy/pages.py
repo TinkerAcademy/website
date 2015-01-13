@@ -103,7 +103,18 @@ class CourseContentsPage(webapp2.RequestHandler):
 		template_values.update(coursecontent_template_values)		
 		logging.info('template_values='+str(template_values))
 		template = JINJA_ENVIRONMENT.get_template('coursecontent.html')
-		self.response.write(template.render(template_values))			
+		self.response.write(template.render(template_values))	
+
+class ClassroomPage(webapp2.RequestHandler):
+	def get(self):
+		basedir = os.path.dirname(__file__)		
+		staticdir = os.path.join(basedir, 'static')
+		staticfiles = os.listdir(staticdir)
+		staticfiles = [staticfile for staticfile in staticfiles if not staticfile.startswith('.')]
+		template_values = {}
+		template_values['staticfiles'] = staticfiles
+		template = JINJA_ENVIRONMENT.get_template('classroom.html')
+		self.response.write(template.render(template_values))	
 
 class ForgotPage(webapp2.RequestHandler):
 	def get(self):
