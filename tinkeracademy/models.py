@@ -65,9 +65,9 @@ class UserQuiz(db.Model):
 
 class Course(db.Model):
 	courseid = db.StringProperty()
-	coursetag = db.StringProperty()
 	coursename = db.StringProperty()
 	coursedescription = db.TextProperty()
+	coursedetails = db.TextProperty()
 	courseyear = db.IntegerProperty()
 	coursestartdate = db.StringProperty()
 	courseenddate = db.StringProperty()

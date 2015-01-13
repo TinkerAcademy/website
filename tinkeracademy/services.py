@@ -425,9 +425,9 @@ class CoursesService(object):
 		for entry in entries:
 			course = Course()
 			course.courseid = processstr(entry, 'courseid')
-			course.coursetag = processstr(entry, 'coursetag')
 			course.coursename = processstr(entry, 'coursename')
 			course.coursedescription = processstr(entry, 'coursedescription')
+			course.coursedetails = processstr(entry, 'coursedetails')
 			course.courseyear = processint(entry, 'courseyear')
 			course.coursestartdate = processstr(entry, 'coursestartdate')
 			course.courseenddate = processstr(entry, 'courseenddate')
