@@ -26,7 +26,8 @@ from tasks import 	EmailTask, \
 					TokenUpdateTask
 
 application = webapp2.WSGIApplication([
-										('/', MainPage),
+										('/', ClassroomPage),
+										# ('/', MainPage),
 										('/course', CoursePage),
 										('/coursecontent', CourseContentsPage),
 										('/classroom', ClassroomPage),
