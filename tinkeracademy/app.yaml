@@ -8,6 +8,21 @@ handlers:
 - url: /static/(.*)$
   static_files: static/\1
   upload: static/.*$
+- url: /
+  static_files: index.html
+  upload: index.html
+- url: /index.html
+  static_files: index.html
+  upload: index.html
+- url: /trial.html
+  static_files: trial.html
+  upload: trial.html
+- url: /contact.html
+  static_files: contact.html
+  upload: contact.html
+- url: /tinkeracademy/(.*)$
+  static_files: tinkeracademy/\1
+  upload: tinkeracademy/.*$
 - url: /admin
   script: tinkeracademy.application 
 - url: /.*

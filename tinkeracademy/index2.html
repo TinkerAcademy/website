@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+	<head>
+		<title>Tinker Academy - Home Page</title>
+	</head>	
+	<body>
+		{% include 'header.html' %}
+		<h1>Upcoming Courses</h1>
+		{% for course in courses %}
+		<table>
+			<tr>				
+				<td><span><a href="{{'/course?c='+course.courseid|safe}}">{{course.coursename}}</a></span></td>
+			</tr>
+			<tr>
+				<td><span>Starts {{course.coursestartdate}}</span><span>&nbsp;<a href="{{signupurl|safe}}">Register</a></span></td>
+			</tr>
+			<tr>
+				<td><span>Ages {{course.courseminage}}Y - {{course.coursemaxage}}Y</span></td>
+			</tr>
+			<tr>
+				<td><span>{{course.coursedescription}}</span></td>
+			</tr>
+		</table>
+		{% endfor %}
+	</body>
+</html>
+{% endautoescape %}
