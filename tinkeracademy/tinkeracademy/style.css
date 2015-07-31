@@ -72,14 +72,14 @@ body {
     margin: 0;
     color: #444;
     font: 12px/28px 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
-    background: #3B3F41;
+    background: #FFFFFF;
     overflow-x: hidden;
 }
 
 img { border-style: none }
 
 a { 
-	color: #f74f4f;
+	color: #318CE7;
 	text-decoration: none;
 	-webkit-transition: .07s ease-in;  
 	-moz-transition: .07s ease-in;  
@@ -211,7 +211,7 @@ blockquote p:last-child {
 	position: relative;
 	width: 100%;
 	padding: 20px 50px;
-	background: #2c2f31;
+	background: #FFFFFF;
 }
 
 .header {
@@ -336,7 +336,7 @@ blockquote p:last-child {
 }
 
 .nav .current-menu-item > a, .nav a:hover {
-	color: #fff;
+	color: #777;
 }
 
 .nav > li {
@@ -458,7 +458,7 @@ blockquote p:last-child {
 }
 
 .hero h2 {
-	color: #fff;
+	color: #318CE7;
 	font-weight: 200;
 	font-size: 80px;
 	line-height: 90px;
