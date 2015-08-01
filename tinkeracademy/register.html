@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<title>contact | TINKER ACADEMY</title>
+		<title>curriculum | TINKER ACADEMY</title>
 		
 		<!-- media queries -->
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
@@ -46,13 +46,13 @@
 		<link rel="stylesheet" id="font_awesome_css-css" href="./tinkeracademy/font-awesome.css" type="text/css" media="screen">
 		<link rel="stylesheet" id="media_queries_css-css" href="./tinkeracademy/media-queries.css" type="text/css" media="screen">
 		<link rel="stylesheet" id="google_raleway-css" href="./tinkeracademy/css" type="text/css" media="all">
-		<link rel="stylesheet" id="google_opensans-css" href="./tinkeracademy/css(1)" type="text/css" media="all">
 		<link rel="stylesheet" id="jetpack_css-css" href="./tinkeracademy/jetpack.css" type="text/css" media="all">
+		<link rel="stylesheet" id="form-css" href="./tinkeracademy/form.css" type="text/css" media="all">
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
 		<link rel="prev" title="about" href="index.html">
-		<link rel="next" title="our curriculum" href="curriculum.html">
-		<link rel="next" title="join us" href="register.html">
+		<link rel="next" title="curriculum" href="curriculum.html">
+		<link rel="next" title="contact" href="contact.html">
 		<meta name="generator" content="WordPress 3.9.3">
 		<style type="text/css">
 			a, #cancel-comment-reply i, #content .meta a, .entry-title a:hover, .post-navigation a:hover, .post-navigation li:hover i, .logo-text:hover i, .pull-quote {
@@ -80,13 +80,12 @@
 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="curriculum.html">our curriculum</a></li>
 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html">join us</a></li>
 						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact us</a></li>
-
 					</ul>
 					<select class="select-menu">
 						<option value="#">Navigate to...</option>
 						<option value="index.html">&nbsp;about</option>
 						<option value="curriculum.html">&nbsp;our curriculum</option>
-						<option value="register.html">&nbsp;join us</option>
+						<option value="contact.html">&nbsp;contact us</option>
 					</select>
 					<div class="mobile-icon"></div>
 				</div>		    
@@ -102,24 +101,37 @@
 				<!-- titles -->
 								
 				<!-- grab the posts -->
-								
+
 				<article class="post-109 page type-page status-publish hentry post">
 					<div class="box-wrap">
 						<div class="box">
 							<header>
-								<h1 class="entry-title"><a href="contact.html" title="Permalink to contact" rel="bookmark">contact</a></h1>
+								<h1 class="entry-title"><a href="curriculum.html" title="Permalink to curriculum" rel="bookmark">join us</a></h1>
 							</header>
 							
-							<!-- grab the video -->
-															
-							<!-- grab the featured image -->
-															
-							<!-- post content -->
-							<div class="post-content">
-								<p><strong>TINKER ACADEMY</strong>&nbsp;can be reached at classes@tinkeracademy.com.</p>
-								<p>If you need to contact us <strong>urgently</strong>, call or text us at (408) 634 0810.</p>		
-								<p>Please include your name and the student&apos;s name clearly in the email.</p>					
-							</div><!-- post content -->
+							<form class="form-horizontal">
+							<fieldset>
+
+							<!-- Text input-->
+							<div class="control-group">
+							  <label class="control-label" for="email">Email</label>
+							  <div class="controls">
+							    <input id="email" name="email" type="text" placeholder="Email Address" class="input-xlarge" >
+							    
+							  </div>
+							</div>
+
+							<!-- Button -->
+							<div class="control-group">
+							  <div class="controls">
+							    <button id="join" name="join" class="btn btn-primary">Join</button>
+							  </div>
+							</div>
+
+							</fieldset>
+							</form>
+
+
 						</div><!-- box -->
 					</div><!-- box wrap -->
 				</article><!-- post-->

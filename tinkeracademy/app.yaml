@@ -17,6 +17,9 @@ handlers:
 - url: /curriculum.html
   static_files: curriculum.html
   upload: curriculum.html
+- url: /register.html
+  static_files: register.html
+  upload: register.html
 - url: /contact.html
   static_files: contact.html
   upload: contact.html
