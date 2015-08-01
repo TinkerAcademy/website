@@ -15,7 +15,7 @@ from gdata.spreadsheet.service import SpreadsheetsService
 # from oauth2client.appengine import AppAssertionCredentials
 from apiclient.discovery import build
 
-from oauth2client.client import SignedJwtAssertionCredentials
+# from oauth2client.client import SignedJwtAssertionCredentials
 
 from google.appengine.api import urlfetch
 

@@ -7,28 +7,35 @@ import webapp2
 from environment import JINJA_ENVIRONMENT
 
 from pages import 	MainPage, \
-					CoursePage, \
-					CourseContentsPage, \
-					ClassroomPage, \
-					ForgotPage, \
-					AllCoursesPage, \
-					MyCoursesPage, \
-					SignInPage, \
-					SignOutPage, \
-					AboutPage, \
-					SignUpPage, \
-					SignUpStatusPage, \
-					SubmitHomeworkPage, \
-					SubmitQuizPage
+					CurriculumPage, \
+					LoginPage, \
+					RegisterPage, \
+					ContactPage
+					# CoursePage, \
+					# CourseContentsPage, \
+					# ClassroomPage, \
+					# ForgotPage, \
+					# AllCoursesPage, \
+					# MyCoursesPage, \
+					# SignInPage, \
+					# SignOutPage, \
+					# AboutPage, \
+					# SignUpPage, \
+					# SignUpStatusPage, \
+					# SubmitHomeworkPage, \
+					# SubmitQuizPage
 
 from tasks import 	EmailTask, \
 					DatabaseUpdateTask, \
 					TokenUpdateTask
 
 application = webapp2.WSGIApplication([
-										# ('/', ClassroomPage),
-										# ('/', MainPage),
-										# ('/course', CoursePage),
+										('/', MainPage),
+										('/index.html', MainPage),
+										('/curriculum.html', CurriculumPage),
+										('/login.html', LoginPage),
+										('/register.html', RegisterPage),
+										('/contact.html', ContactPage),
 										# ('/coursecontent', CourseContentsPage),
 										# ('/classroom', ClassroomPage),
 										# ('/forgot', ForgotPage),

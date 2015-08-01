@@ -8,24 +8,24 @@ handlers:
 - url: /static/(.*)$
   static_files: static/\1
   upload: static/.*$
-- url: /
-  static_files: index.html
-  upload: index.html
-- url: /index.html
-  static_files: index.html
-  upload: index.html
-- url: /curriculum.html
-  static_files: curriculum.html
-  upload: curriculum.html
-- url: /login.html
-  static_files: login.html
-  upload: login.html
-- url: /register.html
-  static_files: register.html
-  upload: register.html
-- url: /contact.html
-  static_files: contact.html
-  upload: contact.html
+# - url: /
+#   static_files: index.html
+#   upload: index.html
+# - url: /index.html
+#   static_files: index.html
+#   upload: index.html
+# - url: /curriculum.html
+#   static_files: curriculum.html
+#   upload: curriculum.html
+# - url: /login.html
+#   static_files: login.html
+#   upload: login.html
+# - url: /register.html
+#   static_files: register.html
+#   upload: register.html
+# - url: /contact.html
+#   static_files: contact.html
+#   upload: contact.html
 - url: /tinkeracademy/(.*)$
   static_files: tinkeracademy/\1
   upload: tinkeracademy/.*$

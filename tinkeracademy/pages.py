@@ -116,6 +116,32 @@ class ClassroomPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('classroom.html')
 		self.response.write(template.render(template_values))	
 
+class ContactPage(webapp2.RequestHandler):
+	def get(self):
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		template_values = {}
+		# header_template_values = buildheadertemplatevalues(insession, uid)
+		# template_values.update(header_template_values)
+		# course_template_values = buildallcoursestemplatevalues(insession, courses)
+		# template_values.update(course_template_values)
+		template = JINJA_ENVIRONMENT.get_template('contact.html')
+		self.response.write(template.render(template_values))
+
+class CurriculumPage(webapp2.RequestHandler):
+	def get(self):
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		template_values = {}
+		# header_template_values = buildheadertemplatevalues(insession, uid)
+		# template_values.update(header_template_values)
+		# course_template_values = buildallcoursestemplatevalues(insession, courses)
+		# template_values.update(course_template_values)
+		template = JINJA_ENVIRONMENT.get_template('curriculum.html')
+		self.response.write(template.render(template_values))
+
 class ForgotPage(webapp2.RequestHandler):
 	def get(self):
 		uid, insession = attemptlogin(self.request)
@@ -141,6 +167,19 @@ class ForgotPage(webapp2.RequestHandler):
 		returnvalue = forgotservice.sendemail(emailid)
 		self.redirect('/forgot?e='+str(emailid)+'&r='+str(returnvalue))
 
+class LoginPage(webapp2.RequestHandler):
+	def get(self):
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		template_values = {}
+		# header_template_values = buildheadertemplatevalues(insession, uid)
+		# template_values.update(header_template_values)
+		# course_template_values = buildallcoursestemplatevalues(insession, courses)
+		# template_values.update(course_template_values)
+		template = JINJA_ENVIRONMENT.get_template('login.html')
+		self.response.write(template.render(template_values))
+
 class MyCoursesPage(webapp2.RequestHandler):
 	def get(self):
 		uid, insession = attemptlogin(self.request)
@@ -158,15 +197,28 @@ class MyCoursesPage(webapp2.RequestHandler):
 
 class MainPage(webapp2.RequestHandler):
 	def get(self):
-		uid, insession = attemptlogin(self.request)
-		coursesservice = CoursesService()
-		courses = coursesservice.listupcomingcourses()
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
 		template_values = {}
-		header_template_values = buildheadertemplatevalues(insession, uid)
-		template_values.update(header_template_values)
-		course_template_values = buildallcoursestemplatevalues(insession, courses)
-		template_values.update(course_template_values)
+		# header_template_values = buildheadertemplatevalues(insession, uid)
+		# template_values.update(header_template_values)
+		# course_template_values = buildallcoursestemplatevalues(insession, courses)
+		# template_values.update(course_template_values)
 		template = JINJA_ENVIRONMENT.get_template('index.html')
+		self.response.write(template.render(template_values))
+
+class RegisterPage(webapp2.RequestHandler):
+	def get(self):
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		template_values = {}
+		# header_template_values = buildheadertemplatevalues(insession, uid)
+		# template_values.update(header_template_values)
+		# course_template_values = buildallcoursestemplatevalues(insession, courses)
+		# template_values.update(course_template_values)
+		template = JINJA_ENVIRONMENT.get_template('register.html')
 		self.response.write(template.render(template_values))
 
 class SignInPage(webapp2.RequestHandler):
