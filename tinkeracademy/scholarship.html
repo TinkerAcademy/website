@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<title>pay | TINKER ACADEMY</title>
+		<title>scholarship | TINKER ACADEMY</title>
 		
 		<!-- media queries -->
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
@@ -39,11 +39,6 @@
 		<script type="text/javascript">
 			document.documentElement.className = 'js';
 		</script>
-		<script type="text/javascript">
-			function gotoscholarship() {
-				document.location.href = "/scholarship.html";
-			}
-		</script>		
 		
 		<!-- load scripts -->
 		<link rel="stylesheet" id="contact-form-7-css" href="./tinkeracademy/styles.css" type="text/css" media="all">
@@ -55,8 +50,8 @@
 		<link rel="stylesheet" id="form-css" href="./tinkeracademy/form.css" type="text/css" media="all">
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
-		<link rel="prev" title="curriculum" href="curriculum.html">
-		<link rel="next" title="about" href="index.html">
+		<link rel="prev" title="about" href="index.html">
+		<link rel="next" title="contact" href="contact.html">
 		<meta name="generator" content="WordPress 3.9.3">
 		<style type="text/css">
 			a, #cancel-comment-reply i, #content .meta a, .entry-title a:hover, .post-navigation a:hover, .post-navigation li:hover i, .logo-text:hover i, .pull-quote {
@@ -85,14 +80,13 @@
 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html">login</a></li>
 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html">join</a></li>
 						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>
-
 					</ul>
 					<select class="select-menu">
 						<option value="#">Navigate to...</option>
 						<option value="index.html">&nbsp;about</option>
 						<option value="curriculum.html">&nbsp;curriculum</option>
-						<option value="login.html">&nbsp;login</option>
 						<option value="register.html">&nbsp;join</option>
+						<option value="contact.html">&nbsp;contact</option>
 					</select>
 					<div class="mobile-icon"></div>
 				</div>		    
@@ -108,32 +102,27 @@
 				<!-- titles -->
 								
 				<!-- grab the posts -->
-					
+
 				<article class="post-109 page type-page status-publish hentry post">
 					<div class="box-wrap">
 						<div class="box">
 							<header>
-								<h1 class="entry-title"><a href="contact.html" title="Permalink to contact" rel="bookmark">pay</a></h1>
+								<h1 class="entry-title"><a href="curriculum.html" title="Permalink to curriculum" rel="bookmark">apply for scholarship</a></h1>
 							</header>
 							<div class="post-content">
-								<p><strong>The total payment for the classes is 212 dollars.</strong>&nbsp; </p>
-								<h1>
-								<form action="" method="POST">
-								  <script
-								    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-								    data-key="pk_test_8CsqsHCTUozELcAsZbPhjb3N"
-								    data-amount="2000"
-								    data-name="Demo Site"
-								    data-description="2 widgets ($20.00)"
-								    data-image="/tinkeracademy/TinkerAcademy.png">
-								  </script>
-								</form>	
-								</h1>						
-								<p>We offer scholarships if family income is less than 120,000 dollars per year.</p>
-							    <!-- <div class="controls"> -->
-							    <button id="join" name="join" class="btn btn-primary" onclick="gotoscholarship()">Apply For Scholarship</button>
-							    <!-- </div> -->
+								<p><strong>TINKER ACADEMY</strong>&nbsp;offers scholarships if family income is less than 120,000 dollars per year. Click on the Apply button if you qualify and you wish to apply for the Scholarship.</p>					
+							</div><!-- post content -->
+							<form class="form-horizontal">
+							<fieldset>
+							<!-- Button -->
+							<div class="control-group">
+							  <label class="control-label" for="singlebutton"><strong>I qualify</strong></label>
+							  <div class="controls">
+							    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Apply</button>
+							  </div>
 							</div>
+							</fieldset>
+							</form>							
 						</div><!-- box -->
 					</div><!-- box wrap -->
 				</article><!-- post-->
