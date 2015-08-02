@@ -34,7 +34,8 @@ from models import User, \
 				   Email, \
 				   ChannelPartner, \
 				   Staff, \
-				   OtherCities
+				   OtherCities, \
+				   TinkerAcademyUser				  
 
 class GeoService(object):
 	ipdatabase = loadgeoip()
@@ -551,6 +552,33 @@ class SignUpService(object):
 			sys_err = sys.exc_info()
 			logging.error(sys_err[1])
 		return 0
+
+class TinkerAcademyRegisterService(object):
+	def join(self, emailid):
+		query = TinkerAcademyUser.all()
+		query.filter("emailid1 = ", emailid)
+		p = None
+		for p in query.run(limit=1):
+			break
+		if not p:
+			query.filter("emailid2 = ", emailid)
+			for p in query.run(limit=1):
+				break
+		if not p:
+			query.filter("emailid3 = ", emailid)
+			for p in query.run(limit=1):
+				break
+		if p:
+			return -1
+		else:
+			emailservice = EmailService()
+			emailbody = readtextfilecontents(constants.EMAIL_PASSWORD_RECOVERY_BODY_FILENAME)
+			emailbody = emailbody.replace('$EMAILID$', user.emailid)
+			emailbody = emailbody.replace('$EMAILID2$', user.emailid2)
+			emailbody = emailbody.replace('$USERNAME$', user.username)
+			emailbody = emailbody.replace('$STUDENTID$', user.studentid)
+			emailservice.register(constants.EMAIL_TYPE_PASSWORD_RECOVERY, constants.EMAIL_ID_PASSWORD_RECOVERY, emailid, constants.EMAIL_PASSWORD_RECOVERY_SUBJECT, emailbody)
+
 
 class ValidationService(object):
 	def isvalidemail(self, emailid):

@@ -3,6 +3,15 @@ import os
 
 from google.appengine.ext import db
 
+class TinkerAcademyUser(db.Model):
+	studentid = db.StringProperty()
+	emailid1 = db.StringProperty()
+	emailid2 = db.StringProperty()
+	emailid3 = db.StringProperty()
+	scholarship = db.BooleanProperty()
+	paid = db.BooleanProperty()
+	stripe_customer_id = db.StringProperty()
+
 class ChannelPartner(db.Model):
 	channelpartnerid = db.StringProperty()
 	channelpartnercity = db.StringProperty()
