@@ -39,6 +39,11 @@
 		<script type="text/javascript">
 			document.documentElement.className = 'js';
 		</script>
+		<script type="text/javascript">
+			function gotopayment() {
+				document.location.href = "/payment.html";
+			}
+		</script>		
 		
 		<!-- load scripts -->
 		<link rel="stylesheet" id="contact-form-7-css" href="./tinkeracademy/styles.css" type="text/css" media="all">
@@ -48,6 +53,7 @@
 		<link rel="stylesheet" id="google_raleway-css" href="./tinkeracademy/css" type="text/css" media="all">
 		<link rel="stylesheet" id="google_opensans-css" href="./tinkeracademy/css(1)" type="text/css" media="all">
 		<link rel="stylesheet" id="jetpack_css-css" href="./tinkeracademy/jetpack.css" type="text/css" media="all">
+		<link rel="stylesheet" id="form-css" href="./tinkeracademy/form.css" type="text/css" media="all">
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
 		<link rel="prev" title="about" href="index.html">
@@ -98,7 +104,11 @@
 		<div class="inside-wrap clearfix">		
 		<div id="content">
 			<div class="posts">
-	
+
+				<div class="hero">
+					<h3>Week 1 and Week 2 are Trial Classes.</h3>
+				</div><!-- hero -->	
+
 				<!-- titles -->
 								
 				<!-- grab the posts -->
@@ -173,6 +183,12 @@
 				</article><!-- post-->
 
 				<br/>
+
+				<div class="hero">
+					<h3>You will need to pay to attend the rest of the classes.</h3>
+				</div><!-- hero -->	
+
+				<button id="pay" name="pay" class="btn btn-primary" onclick="gotopayment()">Pay with Card</button>
 
 				<article class="post-109 page type-page status-publish hentry post">
 					<div class="box-wrap">

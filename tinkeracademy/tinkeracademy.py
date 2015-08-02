@@ -10,7 +10,9 @@ from pages import 	MainPage, \
 					CurriculumPage, \
 					LoginPage, \
 					RegisterPage, \
-					ContactPage
+					ContactPage, \
+					AdminPage, \
+					PaymentPage
 					# CoursePage, \
 					# CourseContentsPage, \
 					# ClassroomPage, \
@@ -36,6 +38,8 @@ application = webapp2.WSGIApplication([
 										('/login.html', LoginPage),
 										('/register.html', RegisterPage),
 										('/contact.html', ContactPage),
+										('/admin.html', AdminPage),
+										('/payment.html', PaymentPage),
 										# ('/coursecontent', CourseContentsPage),
 										# ('/classroom', ClassroomPage),
 										# ('/forgot', ForgotPage),

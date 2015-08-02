@@ -30,6 +30,19 @@ from services import ValidationService
 from services import ChannelPartnersService
 from services import StaffService
 
+class AdminPage(webapp2.RequestHandler):
+	def get(self):
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		template_values = {}
+		# header_template_values = buildheadertemplatevalues(insession, uid)
+		# template_values.update(header_template_values)
+		# course_template_values = buildallcoursestemplatevalues(insession, courses)
+		# template_values.update(course_template_values)
+		template = JINJA_ENVIRONMENT.get_template('admin.html')
+		self.response.write(template.render(template_values))
+
 class AboutPage(webapp2.RequestHandler):
 	def get(self):
 		uid, insession = attemptlogin(self.request)
@@ -208,6 +221,19 @@ class MainPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('index.html')
 		self.response.write(template.render(template_values))
 
+class PaymentPage(webapp2.RequestHandler):
+	def get(self):
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		template_values = {}
+		# header_template_values = buildheadertemplatevalues(insession, uid)
+		# template_values.update(header_template_values)
+		# course_template_values = buildallcoursestemplatevalues(insession, courses)
+		# template_values.update(course_template_values)
+		template = JINJA_ENVIRONMENT.get_template('payment.html')
+		self.response.write(template.render(template_values))
+
 class RegisterPage(webapp2.RequestHandler):
 	def get(self):
 		# uid, insession = attemptlogin(self.request)
@@ -220,6 +246,12 @@ class RegisterPage(webapp2.RequestHandler):
 		# template_values.update(course_template_values)
 		template = JINJA_ENVIRONMENT.get_template('register.html')
 		self.response.write(template.render(template_values))
+	def post(self):
+		emailid = extractkeyfromrequest(self.request, 'email')
+		if emailid:
+			self.redirect('/curriculum.html')
+		else:
+			self.redirect('/register.html')
 
 class SignInPage(webapp2.RequestHandler):
 	def get(self):

@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<title>register | TINKER ACADEMY</title>
+		<title>admin | TINKER ACADEMY</title>
 		
 		<!-- media queries -->
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
@@ -85,7 +85,7 @@
 						<option value="#">Navigate to...</option>
 						<option value="index.html">&nbsp;about</option>
 						<option value="curriculum.html">&nbsp;curriculum</option>
-						<option value="login.html">&nbsp;login</option>
+						<option value="register.html">&nbsp;join</option>
 						<option value="contact.html">&nbsp;contact</option>
 					</select>
 					<div class="mobile-icon"></div>
@@ -107,25 +107,48 @@
 					<div class="box-wrap">
 						<div class="box">
 							<header>
-								<h1 class="entry-title"><a href="curriculum.html" title="Permalink to curriculum" rel="bookmark">join</a></h1>
+								<h1 class="entry-title"><a href="curriculum.html" title="Permalink to curriculum" rel="bookmark">student details</a></h1>
 							</header>
 							
-							<form class="form-horizontal" method="post">
+							<form class="form-horizontal">
 							<fieldset>
 
 							<!-- Text input-->
 							<div class="control-group">
-							  <label class="control-label" for="email">Email</label>
+							  <label class="control-label" for="email">Student ID</label>
 							  <div class="controls">
-							    <input id="email" name="email" type="text" placeholder="Email Address" class="input-xlarge" >
-							    
+							    <input id="studentid" name="studentid" type="text" placeholder="Enter Student ID" class="input-xlarge" >							    
 							  </div>
 							</div>
 
 							<!-- Button -->
 							<div class="control-group">
 							  <div class="controls">
-							    <button id="join" name="join" class="btn btn-primary">Join</button>
+							    <button id="update" name="update" class="btn btn-primary">Load</button>
+							  </div>
+							</div>
+
+							<!-- Text input-->
+							<div class="control-group">
+							  <label class="control-label" for="email">Email Addresses</label>
+							  <div class="controls">
+							    <input id="emailaddrs" name="emailaddrs" type="text" placeholder="Enter Email Addresses" class="input-xlarge" >							    
+							  </div>
+							</div>
+
+
+							<!-- Text input-->
+							<div class="control-group">
+							  <label class="control-label" for="email">Admin Password</label>
+							  <div class="controls">
+							    <input id="adminpw" name="adminpw" type="password" placeholder="Enter Admin Password" class="input-xlarge" >							    
+							  </div>
+							</div>
+
+							<!-- Button -->
+							<div class="control-group">
+							  <div class="controls">
+							    <button id="save" name="save" class="btn btn-primary">Save</button>
 							  </div>
 							</div>
 
@@ -136,6 +159,7 @@
 						</div><!-- box -->
 					</div><!-- box wrap -->
 				</article><!-- post-->
+
 				
 				</div>
 			
