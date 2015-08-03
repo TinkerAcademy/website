@@ -29,7 +29,8 @@ from services import ForgotStudentIDService
 from services import ValidationService
 from services import ChannelPartnersService
 from services import StaffService
-from services import TinkerAcademyRegisterService
+from services import TinkerAcademyUserService
+from services import MemcacheService
 
 class AdminPage(webapp2.RequestHandler):
 	def get(self):
@@ -193,6 +194,23 @@ class LoginPage(webapp2.RequestHandler):
 		# template_values.update(course_template_values)
 		template = JINJA_ENVIRONMENT.get_template('login.html')
 		self.response.write(template.render(template_values))
+	def post(self):
+		studentid = extractkeyfromrequest(self.request, 'studentid')
+		emailid = extractkeyfromrequest(self.request, 'email')
+		if emailid:
+			emailid = emailid.strip()
+		if studentid:
+			studentid = studentid.strip()
+			studentid = int(studentid)
+			userservice = TinkerAcademyUserService()
+			user = userservice.get(studentid)
+			if user:
+				if user.emailid1 == emailid or user.emailid2 == emailid or user.emailid3 == emailid:
+					sessionid = userservice.createsessionid(studentid)
+					if sessionid:
+						cacheservice = MemcacheService()
+						cacheservice.setsessionuser(sessionid, user)
+						self.redirect('/curriculum.html')
 
 class MyCoursesPage(webapp2.RequestHandler):
 	def get(self):
@@ -255,7 +273,7 @@ class RegisterPage(webapp2.RequestHandler):
 		validationservice = ValidationService()
 		isvalidemail = validationservice.isvalidemail(emailid)
 		if isvalidemail and name:
-			registerservice = TinkerAcademyRegisterService()
+			registerservice = TinkerAcademyUserService()
 			registerservice.register(name, emailid)
 			self.redirect('/curriculum.html')
 		else:

@@ -4,6 +4,7 @@ import sys
 import uuid
 import constants
 import json
+import hashlib
 
 from servicesutils import processstr, processtext, processint, processboolean, readtextfilecontents
 
@@ -188,7 +189,7 @@ class MemcacheService(object):
 	def getsessionuser(self, uid):
 		return memcache.get(uid, namespace = 'Session')
 	def setsessionuser(self, uid, user):
-		memcache.put(uid, user)
+		memcache.set(uid, user)
 	#@deprecated
 	def hassession(self, uid):
 		studentid = memcache.get(uid, namespace = 'Session')
@@ -562,7 +563,14 @@ class SignUpService(object):
 			logging.error(sys_err[1])
 		return 0
 
-class TinkerAcademyRegisterService(object):
+class TinkerAcademyUserService(object):
+	def get(self, studentid):
+		query = TinkerAcademyUser.all()
+		query.filter("studentid = ", studentid)
+		p = None
+		for p in query.run(limit=1):
+			break
+		return p
 	def register(self, studentname, emailid):
 		query = TinkerAcademyUser.all()
 		query.filter("emailid1 = ", emailid)
@@ -602,7 +610,9 @@ class TinkerAcademyRegisterService(object):
 		emailbody = emailbody.replace('$STUDENTNAME$', studentname)
 		emailbody = emailbody.replace('$STUDENTID$', str(p.studentid))
 		emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
-
+		return p
+	def createsessionid(self, studentid):
+		return hashlib.sha1(str(studentid)).hexdigest()
 
 class ValidationService(object):
 	def isvalidemail(self, emailid):
