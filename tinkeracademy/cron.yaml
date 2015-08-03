@@ -2,9 +2,9 @@ cron:
 - description: email job
   url: /task/email
   schedule: every 1 minutes
-- description: token update
-  url: /task/tokenupdate
-  schedule: every 55 minutes
-- description: update database from spreadsheet
-  url: /task/databaseupdate
-  schedule: every 1 hours
+# - description: token update
+#   url: /task/tokenupdate
+#   schedule: every 55 minutes
+# - description: update database from spreadsheet
+#   url: /task/databaseupdate
+#   schedule: every 1 hours

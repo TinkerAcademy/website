@@ -4,7 +4,8 @@ import os
 from google.appengine.ext import db
 
 class TinkerAcademyUser(db.Model):
-	studentid = db.StringProperty()
+	studentid = db.IntegerProperty()
+	studentname = db.StringProperty()
 	emailid1 = db.StringProperty()
 	emailid2 = db.StringProperty()
 	emailid3 = db.StringProperty()

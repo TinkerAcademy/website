@@ -129,16 +129,16 @@ class EmailService(object):
 			body = str(p.body)
 			filename = str(p.filename)
 			attachment = None
-			if filename:
-				googledriveservice = GoogleDriveService()
-				fileresource = googledriveservice.getfile(filename)
-				if fileresource:
-					filecontents = googledriveservice.getfilecontents(fileresource, constants.GOOGLE_DRIVE_EMAIL_ATTACHMENT_PDF_CONTENT_TYPE)
-					filetitle = googledriveservice.getfiletitle(fileresource)
-					fileroot, ext = os.path.splitext(filetitle)
-					filetitle = fileroot + '.pdf'
-					if filecontents:
-						attachment = mail.Attachment(filetitle, filecontents)
+			# if filename:
+			# 	googledriveservice = GoogleDriveService()
+			# 	fileresource = googledriveservice.getfile(filename)
+			# 	if fileresource:
+			# 		filecontents = googledriveservice.getfilecontents(fileresource, constants.GOOGLE_DRIVE_EMAIL_ATTACHMENT_PDF_CONTENT_TYPE)
+			# 		filetitle = googledriveservice.getfiletitle(fileresource)
+			# 		fileroot, ext = os.path.splitext(filetitle)
+			# 		filetitle = fileroot + '.pdf'
+			# 		if filecontents:
+			# 			attachment = mail.Attachment(filetitle, filecontents)
 			try:
 				message = mail.EmailMessage(sender=senderemailid, subject=subject)
 				message.to = receiveremailid
@@ -185,24 +185,33 @@ class ForgotStudentIDService(object):
 		return 1
 
 class MemcacheService(object):
+	def getsessionuser(self, uid):
+		return memcache.get(uid, namespace = 'Session')
+	def setsessionuser(self, uid, user):
+		memcache.put(uid, user)
+	#@deprecated
 	def hassession(self, uid):
 		studentid = memcache.get(uid, namespace = 'Session')
 		if studentid:
 			return True
 		return False
+	#@deprecated
 	def getstudentidforsession(self, uid):
 		if uid:
 			return memcache.get(uid, namespace = 'Session')
 		return None
+	#@deprecated
 	def getemailidforsession(self, uid):
 		if uid:
 			return memcache.get(uid, namespace = 'SessionEmail')
 		return None
+	#@deprecated
 	def registersession(self, emailid, studentid):
 		uid = str(uuid.uuid4())
 		memcache.set(uid, studentid, namespace = 'Session')
 		memcache.set(uid, emailid, namespace = 'SessionEmail')
 		return uid
+	#@deprecated
 	def deregistersession(self, uid):
 		if uid:
 			return memcache.delete(uid, namespace = 'Session')
@@ -554,30 +563,45 @@ class SignUpService(object):
 		return 0
 
 class TinkerAcademyRegisterService(object):
-	def join(self, emailid):
+	def register(self, studentname, emailid):
 		query = TinkerAcademyUser.all()
 		query.filter("emailid1 = ", emailid)
 		p = None
 		for p in query.run(limit=1):
 			break
 		if not p:
+			query = TinkerAcademyUser.all()
 			query.filter("emailid2 = ", emailid)
 			for p in query.run(limit=1):
 				break
 		if not p:
+			query = TinkerAcademyUser.all()
 			query.filter("emailid3 = ", emailid)
 			for p in query.run(limit=1):
 				break
-		if p:
-			return -1
-		else:
-			emailservice = EmailService()
-			emailbody = readtextfilecontents(constants.EMAIL_PASSWORD_RECOVERY_BODY_FILENAME)
-			emailbody = emailbody.replace('$EMAILID$', user.emailid)
-			emailbody = emailbody.replace('$EMAILID2$', user.emailid2)
-			emailbody = emailbody.replace('$USERNAME$', user.username)
-			emailbody = emailbody.replace('$STUDENTID$', user.studentid)
-			emailservice.register(constants.EMAIL_TYPE_PASSWORD_RECOVERY, constants.EMAIL_ID_PASSWORD_RECOVERY, emailid, constants.EMAIL_PASSWORD_RECOVERY_SUBJECT, emailbody)
+		if not p:
+			p = TinkerAcademyUser()
+			p.emailid1 = emailid
+			studentid = 2015000
+			query = TinkerAcademyUser.all()
+			for e in query.run():
+				if studentid < e.studentid:
+					studentid = e.studentid
+			studentid = studentid + 1;
+			p.studentid = studentid
+			p.studentname = studentname
+			p.emailid2 = None
+			p.emailid3 = None
+			p.scholarship = False
+			p.paid = False
+			p.stripe_customer_id = None
+			p.put()
+		emailservice = EmailService()
+		emailbody = readtextfilecontents(constants.EMAIL_TA_REGISTER_FILENAME)
+		emailbody = emailbody.replace('$EMAILID$', emailid)
+		emailbody = emailbody.replace('$STUDENTNAME$', studentname)
+		emailbody = emailbody.replace('$STUDENTID$', str(p.studentid))
+		emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
 
 
 class ValidationService(object):

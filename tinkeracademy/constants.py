@@ -1,12 +1,20 @@
 EMAIL_DOMAIN_APPSPOT='tinkeracademy.appspotmail.com'
+# Sign Up
 EMAIL_ID_SIGNUP='signup'
-EMAIL_ID_PASSWORD_RECOVERY='passwordrecovery'
 EMAIL_TYPE_SIGNUP='signup'
-EMAIL_TYPE_PASSWORD_RECOVERY='passwordrecovery'
 EMAIL_SIGNUP_SUBJECT='Programming Our Future, Tinker Academy'
-EMAIL_PASSWORD_RECOVERY_SUBJECT='Student ID Recovery, Tinker Academy'
 EMAIL_SIGNUP_BODY_FILENAME='ProgrammingOurFuture.html'
+# Password Recovery
+EMAIL_ID_PASSWORD_RECOVERY='passwordrecovery'
+EMAIL_TYPE_PASSWORD_RECOVERY='passwordrecovery'
+EMAIL_PASSWORD_RECOVERY_SUBJECT='Student ID Recovery, Tinker Academy'
 EMAIL_PASSWORD_RECOVERY_BODY_FILENAME='PasswordRecovery.html'
+# TinkerAcademyRegister
+EMAIL_TA_REGISTER_ID='registration'
+EMAIL_TA_REGISTER_TYPE='registration'
+EMAIL_TA_REGISTER_SIGNUP_SUBJECT='Welcome To Tinker Academy'
+EMAIL_TA_REGISTER_FILENAME='WelcomeToTinkerAcademy.html'
+
 INPUT_INVALID_EMAILID=1
 SPREADSHEET_TYPE_COURSES='courses'
 SPREADSHEET_TYPE_STUDENTS='students'

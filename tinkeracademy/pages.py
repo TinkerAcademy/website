@@ -29,6 +29,7 @@ from services import ForgotStudentIDService
 from services import ValidationService
 from services import ChannelPartnersService
 from services import StaffService
+from services import TinkerAcademyRegisterService
 
 class AdminPage(webapp2.RequestHandler):
 	def get(self):
@@ -248,7 +249,14 @@ class RegisterPage(webapp2.RequestHandler):
 		self.response.write(template.render(template_values))
 	def post(self):
 		emailid = extractkeyfromrequest(self.request, 'email')
+		name = extractkeyfromrequest(self.request, 'name')
 		if emailid:
+			emailid = emailid.strip()
+		validationservice = ValidationService()
+		isvalidemail = validationservice.isvalidemail(emailid)
+		if isvalidemail and name:
+			registerservice = TinkerAcademyRegisterService()
+			registerservice.register(name, emailid)
 			self.redirect('/curriculum.html')
 		else:
 			self.redirect('/register.html')

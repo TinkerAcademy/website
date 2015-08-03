@@ -42,6 +42,7 @@ application = webapp2.WSGIApplication([
 										('/admin.html', AdminPage),
 										('/payment.html', PaymentPage),
 										('/scholarship.html', ScholarshipPage),
+										('/task/email', EmailTask),
 										# ('/coursecontent', CourseContentsPage),
 										# ('/classroom', ClassroomPage),
 										# ('/forgot', ForgotPage),
@@ -54,7 +55,6 @@ application = webapp2.WSGIApplication([
 										# ('/signupstatus', SignUpStatusPage),
 										# ('/submithomework', SubmitHomeworkPage),
 										# ('/submitquiz', SubmitQuizPage),
-										# ('/task/email', EmailTask),
 										# ('/task/databaseupdate', DatabaseUpdateTask),
 										# ('/task/tokenupdate', TokenUpdateTask),
 									], debug=True)
