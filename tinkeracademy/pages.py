@@ -146,10 +146,27 @@ class ContactPage(webapp2.RequestHandler):
 
 class CurriculumPage(webapp2.RequestHandler):
 	def get(self):
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user_status_str = extractkeyfromrequest(self.request, 'u')
+		if user_status_str:
+			user_status_str = user_status_str.strip()
+		user_status = 0
+		if user_status_str:
+			user_status = int(user_status_str)
+		user = None
+		if sessionid:
+			userservice = TinkerAcademyUserService()
+			user = userservice.get(sessionid)
 		# uid, insession = attemptlogin(self.request)
 		# coursesservice = CoursesService()
 		# courses = coursesservice.listupcomingcourses()
-		template_values = {}
+		template_values = {
+			'sessionid' : sessionid,
+			'user' : user,
+			'user_status' : user_status
+		}
 		# header_template_values = buildheadertemplatevalues(insession, uid)
 		# template_values.update(header_template_values)
 		# course_template_values = buildallcoursestemplatevalues(insession, courses)
@@ -203,14 +220,11 @@ class LoginPage(webapp2.RequestHandler):
 			studentid = studentid.strip()
 			studentid = int(studentid)
 			userservice = TinkerAcademyUserService()
-			user = userservice.get(studentid)
-			if user:
-				if user.emailid1 == emailid or user.emailid2 == emailid or user.emailid3 == emailid:
-					sessionid = userservice.createsessionid(studentid)
-					if sessionid:
-						cacheservice = MemcacheService()
-						cacheservice.setsessionuser(sessionid, user)
-						self.redirect('/curriculum.html')
+			sessionid = userservice.login(studentid, emailid)
+			if sessionid:
+				self.redirect('/curriculum.html?s='+str(sessionid))
+			else:
+				self.redirect('/login.html')
 
 class MyCoursesPage(webapp2.RequestHandler):
 	def get(self):
@@ -274,8 +288,8 @@ class RegisterPage(webapp2.RequestHandler):
 		isvalidemail = validationservice.isvalidemail(emailid)
 		if isvalidemail and name:
 			registerservice = TinkerAcademyUserService()
-			registerservice.register(name, emailid)
-			self.redirect('/curriculum.html')
+			sessionid = registerservice.register(name, emailid)
+			self.redirect('/curriculum.html?s='+str(sessionid)+'&u=1')
 		else:
 			self.redirect('/register.html')
 

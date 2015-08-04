@@ -571,6 +571,16 @@ class TinkerAcademyUserService(object):
 		for p in query.run(limit=1):
 			break
 		return p
+	def login(self, studentid, emailid):
+		sessionid = None
+		user = userservice.get(studentid)
+		if user:
+			if user.emailid1 == emailid or user.emailid2 == emailid or user.emailid3 == emailid:
+				sessionid = self.createsessionid(studentid)
+				if sessionid:
+					cacheservice = MemcacheService()
+					cacheservice.setsessionuser(sessionid, user)
+		return sessionid
 	def register(self, studentname, emailid):
 		query = TinkerAcademyUser.all()
 		query.filter("emailid1 = ", emailid)
@@ -610,7 +620,12 @@ class TinkerAcademyUserService(object):
 		emailbody = emailbody.replace('$STUDENTNAME$', studentname)
 		emailbody = emailbody.replace('$STUDENTID$', str(p.studentid))
 		emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
-		return p
+		sessionid = None
+		if studentid:
+			sessionid = self.createsessionid(studentid)
+			cacheservice = MemcacheService()
+			cacheservice.setsessionuser(sessionid, p)
+		return sessionid
 	def createsessionid(self, studentid):
 		return hashlib.sha1(str(studentid)).hexdigest()
 
