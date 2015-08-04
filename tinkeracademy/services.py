@@ -189,7 +189,7 @@ class MemcacheService(object):
 	def getsessionuser(self, uid):
 		return memcache.get(uid, namespace = 'Session')
 	def setsessionuser(self, uid, user):
-		memcache.set(uid, user)
+		memcache.set(uid, user, namespace = 'Session')
 	#@deprecated
 	def hassession(self, uid):
 		studentid = memcache.get(uid, namespace = 'Session')
@@ -564,7 +564,7 @@ class SignUpService(object):
 		return 0
 
 class TinkerAcademyUserService(object):
-	def get(self, studentid):
+	def finduserbystudentid(self, studentid):
 		query = TinkerAcademyUser.all()
 		query.filter("studentid = ", studentid)
 		p = None
@@ -573,7 +573,7 @@ class TinkerAcademyUserService(object):
 		return p
 	def login(self, studentid, emailid):
 		sessionid = None
-		user = userservice.get(studentid)
+		user = self.finduserbystudentid(studentid)
 		if user:
 			if user.emailid1 == emailid or user.emailid2 == emailid or user.emailid3 == emailid:
 				sessionid = self.createsessionid(studentid)
@@ -611,7 +611,7 @@ class TinkerAcademyUserService(object):
 			p.emailid2 = None
 			p.emailid3 = None
 			p.scholarship = False
-			p.paid = False
+			p.userstatus = 1
 			p.stripe_customer_id = None
 			p.put()
 		emailservice = EmailService()
@@ -620,12 +620,7 @@ class TinkerAcademyUserService(object):
 		emailbody = emailbody.replace('$STUDENTNAME$', studentname)
 		emailbody = emailbody.replace('$STUDENTID$', str(p.studentid))
 		emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
-		sessionid = None
-		if studentid:
-			sessionid = self.createsessionid(studentid)
-			cacheservice = MemcacheService()
-			cacheservice.setsessionuser(sessionid, p)
-		return sessionid
+		return self.login(p.studentid, emailid)
 	def createsessionid(self, studentid):
 		return hashlib.sha1(str(studentid)).hexdigest()
 

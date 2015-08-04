@@ -10,7 +10,7 @@ class TinkerAcademyUser(db.Model):
 	emailid2 = db.StringProperty()
 	emailid3 = db.StringProperty()
 	scholarship = db.BooleanProperty()
-	paid = db.BooleanProperty()
+	userstatus = db.IntegerProperty()
 	stripe_customer_id = db.StringProperty()
 
 class ChannelPartner(db.Model):

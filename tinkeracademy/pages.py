@@ -149,23 +149,16 @@ class CurriculumPage(webapp2.RequestHandler):
 		sessionid = extractkeyfromrequest(self.request, 's')
 		if sessionid:
 			sessionid = sessionid.strip()
-		user_status_str = extractkeyfromrequest(self.request, 'u')
-		if user_status_str:
-			user_status_str = user_status_str.strip()
-		user_status = 0
-		if user_status_str:
-			user_status = int(user_status_str)
 		user = None
 		if sessionid:
-			userservice = TinkerAcademyUserService()
-			user = userservice.get(sessionid)
+			cacheservice = MemcacheService()
+			user = cacheservice.getsessionuser(sessionid)
 		# uid, insession = attemptlogin(self.request)
 		# coursesservice = CoursesService()
 		# courses = coursesservice.listupcomingcourses()
 		template_values = {
 			'sessionid' : sessionid,
 			'user' : user,
-			'user_status' : user_status
 		}
 		# header_template_values = buildheadertemplatevalues(insession, uid)
 		# template_values.update(header_template_values)
@@ -287,9 +280,9 @@ class RegisterPage(webapp2.RequestHandler):
 		validationservice = ValidationService()
 		isvalidemail = validationservice.isvalidemail(emailid)
 		if isvalidemail and name:
-			registerservice = TinkerAcademyUserService()
-			sessionid = registerservice.register(name, emailid)
-			self.redirect('/curriculum.html?s='+str(sessionid)+'&u=1')
+			userservice = TinkerAcademyUserService()
+			sessionid = userservice.register(name, emailid)			
+			self.redirect('/curriculum.html?s='+str(sessionid))
 		else:
 			self.redirect('/register.html')
 

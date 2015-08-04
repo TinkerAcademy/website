@@ -55,8 +55,13 @@
 		<link rel="stylesheet" id="form-css" href="./tinkeracademy/form.css" type="text/css" media="all">
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
+		{% if sessionid %}
+		<link rel="prev" title="about" href="index.html?s={{sessionid}}">
+		<link rel="next" title="contact" href="contact.html?s={{sessionid}}">
+		{% else %}
 		<link rel="prev" title="about" href="index.html">
 		<link rel="next" title="contact" href="contact.html">
+		{% endif %}
 		<meta name="generator" content="WordPress 3.9.3">
 		<style type="text/css">
 			a, #cancel-comment-reply i, #content .meta a, .entry-title a:hover, .post-navigation a:hover, .post-navigation li:hover i, .logo-text:hover i, .pull-quote {
@@ -75,23 +80,44 @@
 		<header class="header">
 			<!-- grab the logo and site title -->
 			<h1 class="logo-image">
+    			{% if sessionid %}
+				<a href="index.html?s={{sessionid}}">TINKER ACADEMY</a>
+    			{% else %}
 				<a href="index.html">TINKER ACADEMY</a>
+    			{% endif %}
 			</h1>		    
 		    <nav role="navigation" class="header-nav">	
 		    	<!-- nav menu -->
 		    	<div class="menu-home-container">
 		    		<ul id="menu-home" class="nav">
+		    			{% if sessionid %}
+		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="curriculum.html?s={{sessionid}}">curriculum</a></li>
+		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li>
+		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html?s={{sessionid}}">join</a></li>
+						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html?s={{sessionid}}">contact</a></li>
+		    			{% else %}
 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="curriculum.html">curriculum</a></li>
 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html">login</a></li>
 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html">join</a></li>
 						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>
+		    			{% endif %}
 					</ul>
 					<select class="select-menu">
+		    			{% if sessionid %}
+						<option value="#">Navigate to...</option>
+						<option value="index.html?s={{sessionid}}">&nbsp;about</option>
+						<option value="login.html?s={{sessionid}}">&nbsp;login</option>
+						<option value="curriculum.html?s={{sessionid}}">&nbsp;curriculum</option>
+						<option value="register.html?s={{sessionid}}">&nbsp;join</option>
+						<option value="contact.html?s={{sessionid}}">&nbsp;contact</option>
+		    			{% else %}
 						<option value="#">Navigate to...</option>
 						<option value="index.html">&nbsp;about</option>
 						<option value="login.html">&nbsp;login</option>
+						<option value="curriculum.html">&nbsp;curriculum</option>
 						<option value="register.html">&nbsp;join</option>
 						<option value="contact.html">&nbsp;contact</option>
+		    			{% endif %}
 					</select>
 					<div class="mobile-icon"></div>
 				</div>		    
@@ -104,9 +130,11 @@
 		<div id="content">
 			<div class="posts">
 
-				<div class="hero">
-					<h3>A email with login details has been sent to your email address.</h3>
-				</div><!-- hero -->	
+				{% if user and user.userstatus == 1 %}
+					<div class="hero">
+						<h3>A email with login details has been sent to your email address.</h3>
+					</div><!-- hero -->	
+				{% endif %}
 
 				<div class="hero">
 					<h3>Next class is on Saturday, September 5, 2015 at 10:00 AM Pacific, 12:00 noon Central, 01:00 pm Eastern.</h3>
