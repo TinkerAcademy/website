@@ -186,6 +186,32 @@ class ForgotStudentIDService(object):
 		return 1
 
 class MemcacheService(object):
+	def buildstorekey(self, uid):
+		store_key = uid + "keys"
+		return store_key		
+	def getstore(self, uid):
+		store_key = self.buildstorekey(uid)
+		store = memcache.get(store_key)
+		if not store:
+			store = {}
+		memcache.set(store_key, store)
+		return store		
+	def putinsession(self, uid, key, value):
+		store = self.getstore(uid)
+		store[key] = value
+		store_key = self.buildstorekey(uid)
+		memcache.set(store_key, store)
+	def getfromsession(self, uid, key):
+		store = self.getstore(uid)
+		if store and key in store:
+			return store[key]
+		return None
+	def clearfromsession(self, uid, key):
+		store = self.getstore(uid)
+		if key in store:
+			store[key] = None		
+		store_key = self.buildstorekey(uid)
+		memcache.set(store_key, store)
 	def getsessionuser(self, uid):
 		return memcache.get(uid, namespace = 'Session')
 	def setsessionuser(self, uid, user):

@@ -84,10 +84,17 @@
 			    	<!-- nav menu -->
 			    	<div class="menu-home-container">
 			    		<ul id="menu-home" class="nav">
+		    				{% if sessionid %}
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="curriculum.html?s={{sessionid}}">curriculum</a></li>
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li>
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="register.html?s={{sessionid}}">join</a></li>
+				    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html?s={{sessionid}}">contact</a></li>
+		    				{% else %}
 				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="curriculum.html">curriculum</a></li>
 				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html">login</a></li>
 				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="register.html">join</a></li>
-				    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>
+				    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>		
+				    		{% endif %}
 				    	</ul>
 				    	<select class="select-menu">
 				    		<option value="#">Navigate to...</option>

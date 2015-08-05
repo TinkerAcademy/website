@@ -133,19 +133,6 @@ class ClassroomPage(webapp2.RequestHandler):
 
 class ContactPage(webapp2.RequestHandler):
 	def get(self):
-		# uid, insession = attemptlogin(self.request)
-		# coursesservice = CoursesService()
-		# courses = coursesservice.listupcomingcourses()
-		template_values = {}
-		# header_template_values = buildheadertemplatevalues(insession, uid)
-		# template_values.update(header_template_values)
-		# course_template_values = buildallcoursestemplatevalues(insession, courses)
-		# template_values.update(course_template_values)
-		template = JINJA_ENVIRONMENT.get_template('contact.html')
-		self.response.write(template.render(template_values))
-
-class CurriculumPage(webapp2.RequestHandler):
-	def get(self):
 		sessionid = extractkeyfromrequest(self.request, 's')
 		if sessionid:
 			sessionid = sessionid.strip()
@@ -159,7 +146,39 @@ class CurriculumPage(webapp2.RequestHandler):
 		template_values = {
 			'sessionid' : sessionid,
 			'user' : user,
+			'newuser' : False,
 		}
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		# header_template_values = buildheadertemplatevalues(insession, uid)
+		# template_values.update(header_template_values)
+		# course_template_values = buildallcoursestemplatevalues(insession, courses)
+		# template_values.update(course_template_values)
+		template = JINJA_ENVIRONMENT.get_template('contact.html')
+		self.response.write(template.render(template_values))
+
+class CurriculumPage(webapp2.RequestHandler):
+	def get(self):
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		newuser = None
+		cacheservice = MemcacheService()
+		if sessionid:
+			user = cacheservice.getsessionuser(sessionid)
+			newuser = cacheservice.getfromsession(sessionid, "newuser")			
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		template_values = {
+			'sessionid' : sessionid,
+			'user' : user,
+			"newuser" : newuser,
+		}
+		if sessionid:
+			cacheservice.clearfromsession(sessionid, "newuser")
 		# header_template_values = buildheadertemplatevalues(insession, uid)
 		# template_values.update(header_template_values)
 		# course_template_values = buildallcoursestemplatevalues(insession, courses)
@@ -194,15 +213,29 @@ class ForgotPage(webapp2.RequestHandler):
 
 class LoginPage(webapp2.RequestHandler):
 	def get(self):
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		if sessionid:
+			cacheservice = MemcacheService()
+			user = cacheservice.getsessionuser(sessionid)
 		# uid, insession = attemptlogin(self.request)
 		# coursesservice = CoursesService()
 		# courses = coursesservice.listupcomingcourses()
-		template_values = {}
+		template_values = {
+			'sessionid' : sessionid,
+			'user' : user,
+			'newuser' : False,
+		}
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
 		# header_template_values = buildheadertemplatevalues(insession, uid)
 		# template_values.update(header_template_values)
 		# course_template_values = buildallcoursestemplatevalues(insession, courses)
 		# template_values.update(course_template_values)
-		template = JINJA_ENVIRONMENT.get_template('login.html')
+		template = JINJA_ENVIRONMENT.get_template('login.html')		
 		self.response.write(template.render(template_values))
 	def post(self):
 		studentid = extractkeyfromrequest(self.request, 'studentid')
@@ -231,15 +264,29 @@ class MyCoursesPage(webapp2.RequestHandler):
 		template_values.update(header_template_values)
 		course_template_values = buildmycoursestemplatevalues(insession, uid, usercourses)
 		template_values.update(course_template_values)
-		template = JINJA_ENVIRONMENT.get_template('mycourses.html')
+		template = JINJA_ENVIRONMENT.get_template('mycourses.html?s='+str(sessionid))
 		self.response.write(template.render(template_values))
 
 class MainPage(webapp2.RequestHandler):
 	def get(self):
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		if sessionid:
+			cacheservice = MemcacheService()
+			user = cacheservice.getsessionuser(sessionid)
 		# uid, insession = attemptlogin(self.request)
 		# coursesservice = CoursesService()
 		# courses = coursesservice.listupcomingcourses()
-		template_values = {}
+		template_values = {
+			'sessionid' : sessionid,
+			'user' : user,
+			'newuser' : False,
+		}
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
 		# header_template_values = buildheadertemplatevalues(insession, uid)
 		# template_values.update(header_template_values)
 		# course_template_values = buildallcoursestemplatevalues(insession, courses)
@@ -262,10 +309,24 @@ class PaymentPage(webapp2.RequestHandler):
 
 class RegisterPage(webapp2.RequestHandler):
 	def get(self):
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		if sessionid:
+			cacheservice = MemcacheService()
+			user = cacheservice.getsessionuser(sessionid)
 		# uid, insession = attemptlogin(self.request)
 		# coursesservice = CoursesService()
 		# courses = coursesservice.listupcomingcourses()
-		template_values = {}
+		template_values = {
+			'sessionid' : sessionid,
+			'user' : user,
+			'newuser' : False,
+		}
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
 		# header_template_values = buildheadertemplatevalues(insession, uid)
 		# template_values.update(header_template_values)
 		# course_template_values = buildallcoursestemplatevalues(insession, courses)
@@ -281,7 +342,9 @@ class RegisterPage(webapp2.RequestHandler):
 		isvalidemail = validationservice.isvalidemail(emailid)
 		if isvalidemail and name:
 			userservice = TinkerAcademyUserService()
-			sessionid = userservice.register(name, emailid)			
+			sessionid = userservice.register(name, emailid)		
+			cacheservice = MemcacheService()
+			cacheservice.putinsession(sessionid, "newuser", True)	
 			self.redirect('/curriculum.html?s='+str(sessionid))
 		else:
 			self.redirect('/register.html')
