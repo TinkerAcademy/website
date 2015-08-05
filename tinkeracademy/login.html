@@ -50,8 +50,13 @@
 		<link rel="stylesheet" id="form-css" href="./tinkeracademy/form.css" type="text/css" media="all">
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
-		<link rel="prev" title="about" href="index.html">
+		{% if sessionid %}
+		<link rel="prev" title="about" href="index.html?s={{sessionid}}">
+		<link rel="next" title="contact" href="contact.html?s={{sessionid}}">
+		{% else %}
+	    <link rel="prev" title="about" href="index.html">
 		<link rel="next" title="contact" href="contact.html">
+		{% endif %}
 		<meta name="generator" content="WordPress 3.9.3">
 		<style type="text/css">
 			a, #cancel-comment-reply i, #content .meta a, .entry-title a:hover, .post-navigation a:hover, .post-navigation li:hover i, .logo-text:hover i, .pull-quote {
