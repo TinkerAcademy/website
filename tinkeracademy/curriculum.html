@@ -135,9 +135,11 @@
 						<h3>You have 2 free Trial classes.We have sent you an email with details.The next class on September 5, 2015.</h3>
 					</div><!-- hero -->	
 				{% else %}
+					{% if user and user.userstatus >= 1 %}
 					<div class="hero">
 						<h3>The next class on September 5, 2015.</h3>
 					</div><!-- hero -->	
+					{% endif %}
 				{% endif %}
 
 				<!-- titles -->
