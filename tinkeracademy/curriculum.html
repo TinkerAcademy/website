@@ -261,11 +261,13 @@
 
 				<br/>
 
+				{% if user and user.userstatus == 1 %}
 				<div class="hero">
 					<h3>You will need to pay to attend the rest of the classes.</h3>
 				</div><!-- hero -->	
 
 				<button id="pay" name="pay" class="btn btn-primary" onclick="gotopayment()">Payment Details</button>
+				{% endif %}
 
 				<article class="post-109 page type-page status-publish hentry post">
 					<div class="box-wrap">
@@ -277,7 +279,20 @@
 							<!-- grab the video -->
 															
 							<!-- grab the featured image -->
-															
+							{% if user and user.userstatus == 2 %}							
+							<div class="post-content">
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understanding Class Definition, Method Definition, Method Invocation</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand String literals</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand Float literals</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand int literals</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Creating Objects in Java using the new operator and constructor</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Add a Recipe - Alternative Shapes</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Add a Recipe - Specify Stack Size</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Add a Recipe - More Recipes</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - A Brief Look at the Game Registry API</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">What is an API?</a></p>	
+							</div><!-- post content -->
+							{% else %}
 							<div class="post-content">
 								<p>Understanding Class Definition, Method Definition, Method Invocation</p>
 								<p>Understand String literals</p>
@@ -290,6 +305,7 @@
 								<p>Hands On Activity - A Brief Look at the Game Registry API</p>
 								<p>What is an API?</p>												
 							</div><!-- post content -->
+							{% endif %}							
 
 						</div><!-- box -->
 					</div><!-- box wrap -->
@@ -307,7 +323,24 @@
 							<!-- grab the video -->
 															
 							<!-- grab the featured image -->
-															
+							{% if user and user.userstatus == 2 %}
+							<div class="post-content">
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand Variables - Variable Declarations Part 1</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand Variables - Variable Declarations Part 2</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand Variables - Variable Declarations Part 3</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand Variables - Assigning Values To Variables Part 1</a></p>
+								<p>U<a href="http://www.youtube.com/watch?v=y9iNfqPI3og">nderstand Variables - Assigning Values To Variables Part 2</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand Variables -The current value of a Variable</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Using Variables to create Recipes</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Create Shapeless Recipes</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Add Shapeless Recipes</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Create a Smelting Recipe</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Using Special Item Stacks</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Create a Knockback Sword</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand Datatypes - Part 1</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand Datatypes - Part 2</a></p>
+							</div><!-- post content -->
+							{% else %}
 							<div class="post-content">
 								<p>Understand Variables - Variable Declarations Part 1</p>
 								<p>Understand Variables - Variable Declarations Part 2</p>
@@ -324,6 +357,7 @@
 								<p>Understand Datatypes - Part 1</p>
 								<p>Understand Datatypes - Part 2</p>
 							</div><!-- post content -->
+							{% endif %}							
 
 						</div><!-- box -->
 					</div><!-- box wrap -->
@@ -341,12 +375,17 @@
 							<!-- grab the video -->
 															
 							<!-- grab the featured image -->
-															
+							{% if user and user.userstatus == 2 %}
+							<div class="post-content">
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Concept Review</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Mid Term Exam</a></p>		
+							</div><!-- post content -->
+							{% else %}
 							<div class="post-content">
 								<p>Concept Review</p>
 								<p>Mid Term Exam</p>								
 							</div><!-- post content -->
-
+							{% endif %}							
 						</div><!-- box -->
 					</div><!-- box wrap -->
 				</article><!-- post-->
@@ -363,7 +402,27 @@
 							<!-- grab the video -->
 															
 							<!-- grab the featured image -->
-															
+							{% if user and user.userstatus == 2 %}
+							<div class="post-content">
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand the int DataType</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Using the int DataType in expressions</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand the String DataType</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Using the String DataType in expressions</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand the boolean DataType</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Using the boolean values to control decisions</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Using the boolean DataType in expressions Part 1</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Using the boolean DataType in expressions Part 2</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Adding a Mob Spawn</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Removing a Mob Spawn</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Adding a Chest Item</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Adding a Chest Item</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Removing a Chest Item</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Create a Recipe for Grass using a dirt block and a vine block</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Create a Smelting Recipe for Flint using a Gravel Block</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Add Enderman to the possible mob spawns in a Dungeon</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Add Diamond Blocks to the possible items in a Dungeon</a></p>
+							</div><!-- post content -->
+							{% else %}
 							<div class="post-content">
 								<p>Understand the int DataType</p>
 								<p>Using the int DataType in expressions</p>
@@ -383,7 +442,7 @@
 								<p>Hands On Activity - Add Enderman to the possible mob spawns in a Dungeon</p>
 								<p>Hands On Activity - Add Diamond Blocks to the possible items in a Dungeon</p>
 							</div><!-- post content -->
-
+							{% endif %}							
 						</div><!-- box -->
 					</div><!-- box wrap -->
 				</article><!-- post-->
@@ -400,7 +459,23 @@
 							<!-- grab the video -->
 															
 							<!-- grab the featured image -->
-															
+							{% if user and user.userstatus == 2 %}													
+							<div class="post-content">
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand Java Statements</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Types Of Statements</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Introduction to Blocks</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Types Of Blocks</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Introduction To Expressions</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand Variables - Variable Scope within a method</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Understand Variables - Variable Scope across methods</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Introduction to Control Structures - If Then Statements</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Introduction to Control Structures - If Else Then Statements</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Introduction to Control Structures - For Loops</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Introduction to Arrays</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Using For Loops and Arrays to Craft Recipes</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Using If then Else to Craft Recipes and Change Mobs</a></p>
+							</div><!-- post content -->
+							{% else %}
 							<div class="post-content">
 								<p>Understand Java Statements</p>
 								<p>Types Of Statements</p>
@@ -414,9 +489,9 @@
 								<p>Introduction to Control Structures - For Loops</p>
 								<p>Introduction to Arrays</p>
 								<p>Hands On Activity - Using For Loops and Arrays to Craft Recipes</p>
-								<p>Hands On Activity - Using If then Else to Craft Recipes and Change Mobs</p>								
+								<p>Hands On Activity - Using If then Else to Craft Recipes and Change Mobs</p>
 							</div><!-- post content -->
-
+							{% endif %}							
 						</div><!-- box -->
 					</div><!-- box wrap -->
 				</article><!-- post-->
@@ -433,7 +508,18 @@
 							<!-- grab the video -->
 															
 							<!-- grab the featured image -->
-															
+							{% if user and user.userstatus == 2 %}													
+							<div class="post-content">
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Adding Behavior to the Blueprint - Methods</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Adding a the preInit method</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Create an Item File</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Create a Texture</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Set the Texture for the Item</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Set the Creative Tab for the Item</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">Hands On Activity - Run Your Mod</a></p>
+								<p><a href="http://www.youtube.com/watch?v=y9iNfqPI3og">End Term Final Exams</a></p>						
+							</div><!-- post content -->
+							{% else %}
 							<div class="post-content">
 								<p>Adding Behavior to the Blueprint - Methods</p>
 								<p>Hands On Activity - Adding a the preInit method</p>
@@ -444,7 +530,7 @@
 								<p>Hands On Activity - Run Your Mod</p>
 								<p>End Term Final Exams</p>						
 							</div><!-- post content -->
-
+							{% endif %}							
 						</div><!-- box -->
 					</div><!-- box wrap -->
 				</article><!-- post-->
