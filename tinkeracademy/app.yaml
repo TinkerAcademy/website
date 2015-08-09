@@ -25,9 +25,6 @@ handlers:
 # - url: /contact.html
 #   static_files: contact.html
 #   upload: contact.html
-- url: /favicon.ico
-  static_files: favicon.ico
-  upload: favicon.ico
 - url: /tinkeracademy/(.*)$
   static_files: tinkeracademy/\1
   upload: tinkeracademy/.*$
