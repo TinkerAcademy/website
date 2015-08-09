@@ -5,9 +5,8 @@ api_version: 1
 threadsafe: true
 
 handlers:
-- url: /static/(.*)$
-  static_files: static/\1
-  upload: static/.*$
+- url: /forgedoc
+  static_dir: static/forgedoc
 # - url: /
 #   static_files: index.html
 #   upload: index.html
