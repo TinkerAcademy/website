@@ -51,10 +51,10 @@
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
 		{% if sessionid %}
-		<link rel="prev" title="curriculum" href="curriculum.html?s={{sessionid}}">
+		<link rel="prev" title="register" href="register.html?s={{sessionid}}">
 		<link rel="next" title="about" href="index.html?s={{sessionid}}">
 		{% else %}
-		<link rel="prev" title="curriculum" href="curriculum.html">
+		<link rel="prev" title="register" href="register.html">
 		<link rel="next" title="about" href="index.html">
 		{% endif %}		
 		<meta name="generator" content="WordPress 3.9.3">
@@ -82,24 +82,24 @@
 		    	<div class="menu-home-container">
 		    		<ul id="menu-home" class="nav">
 		    			{% if sessionid %}
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="curriculum.html?s={{sessionid}}">curriculum</a></li>
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li>
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html?s={{sessionid}}">join</a></li>
-						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html?s={{sessionid}}">contact</a></li>
+<!-- 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="curriculum.html?s={{sessionid}}">curriculum</a></li>-->
+		    			<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li> -->
+		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html?s={{sessionid}}">register</a></li>
+ 						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html?s={{sessionid}}">contact</a></li>
 		    			{% else %}
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="curriculum.html">curriculum</a></li>
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html">login</a></li>
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html">join</a></li>
-						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>
+<!-- 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="curriculum.html">curriculum</a></li>-->
+		    			<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html">login</a></li> -->
+		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html">register</a></li>
+ 						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>
 		    			{% endif %}
 					</ul>
 					<select class="select-menu">
 						<option value="#">Navigate to...</option>
 						<option value="index.html">&nbsp;about</option>
-						<option value="curriculum.html">&nbsp;curriculum</option>
-						<option value="login.html">&nbsp;login</option>
-						<option value="register.html">&nbsp;join</option>
-					</select>
+<!-- 						<option value="curriculum.html">&nbsp;curriculum</option>-->
+						<!-- <option value="login.html">&nbsp;login</option> -->
+						<option value="register.html">&nbsp;register</option>
+ 					</select>
 					<div class="mobile-icon"></div>
 				</div>		    
 			</nav>	
@@ -119,7 +119,7 @@
 					<div class="box-wrap">
 						<div class="box">
 							<header>
-								<h1 class="entry-title"><a href="contact.html" title="Permalink to contact" rel="bookmark">contact</a></h1>
+								<h1 class="entry-title"><a href="contact.html" title="Permalink to contact" rel="bookmark">Contact</a></h1>
 							</header>
 							
 							<!-- grab the video -->

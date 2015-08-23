@@ -83,23 +83,23 @@
 		    	<div class="menu-home-container">
 		    		<ul id="menu-home" class="nav">
 		    			{% if sessionid %}
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="curriculum.html?s={{sessionid}}">curriculum</a></li>
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li>
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html?s={{sessionid}}">join</a></li>
+<!-- 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="curriculum.html?s={{sessionid}}">curriculum</a></li>-->
+		    			<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li> -->
+ 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html?s={{sessionid}}">register</a></li>
 						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html?s={{sessionid}}">contact</a></li>
 		    			{% else %}
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="curriculum.html">curriculum</a></li>
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html">login</a></li>
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html">join</a></li>
-						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>
+<!-- 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="curriculum.html">curriculum</a></li>-->
+		    			<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html">login</a></li> -->
+		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html">register</a></li>
+ 						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>
 				    	{% endif %}
 					</ul>
 					<select class="select-menu">
 						<option value="#">Navigate to...</option>
 						<option value="index.html">&nbsp;about</option>
-						<option value="curriculum.html">&nbsp;curriculum</option>
-						<option value="login.html">&nbsp;login</option>
-						<option value="contact.html">&nbsp;contact</option>
+<!-- 						<option value="curriculum.html">&nbsp;curriculum</option>-->
+						<!-- <option value="login.html">&nbsp;login</option> -->
+ 						<option value="contact.html">&nbsp;contact</option>
 					</select>
 					<div class="mobile-icon"></div>
 				</div>		    
@@ -115,12 +115,19 @@
 				<!-- titles -->
 								
 				<!-- grab the posts -->
-
 				<article class="post-109 page type-page status-publish hentry post">
+					{% if isnewuser %}
+					<div class="box-wrap">
+						<div class="box">
+							<h3>Thank You for registering :)</h3>
+							<h4>We just sent you an welcome email with the class details. Class starts October 03, 2015.</h4>
+						</div><!-- box -->
+					</div><!-- box wrap -->
+					{% else %}
 					<div class="box-wrap">
 						<div class="box">
 							<header>
-								<h1 class="entry-title"><a href="curriculum.html" title="Permalink to curriculum" rel="bookmark">join</a></h1>
+								<h1 class="entry-title"><a href="curriculum.html" title="Permalink to curriculum" rel="bookmark">Register</a></h1>
 							</header>
 							
 							<form class="form-horizontal" method="post">
@@ -144,10 +151,29 @@
 							  </div>
 							</div>
 
+							<!-- Text input-->
+							<div class="control-group">
+							  <label class="control-label" for="email">Favorite Minecraft Mod?</label>
+							  <div class="controls">
+							    <input id="favmod" name="favmod" type="text" placeholder="Your Favorite Minecraft Mod" class="input-xlarge" >
+							    
+							  </div>
+							</div>
+
+							<!-- Select Basic -->
+							<div class="control-group">
+							  <label class="control-label" for="selectbasic">Class</label>
+							  <div class="controls">
+							    <select id="class" name="class" class="input-large">
+							      <option>Oct 2015 - Mar 2016</option>
+							    </select>
+							  </div>
+							</div>
+
 							<!-- Button -->
 							<div class="control-group">
 							  <div class="controls">
-							    <button id="join" name="join" class="btn btn-primary">Join</button>
+							    <button id="join" name="join" class="btn btn-primary">Register</button>
 							  </div>
 							</div>
 
@@ -157,6 +183,7 @@
 
 						</div><!-- box -->
 					</div><!-- box wrap -->
+					{% endif %}
 				</article><!-- post-->
 				
 				</div>

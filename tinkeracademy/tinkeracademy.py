@@ -36,7 +36,7 @@ application = webapp2.WSGIApplication([
 										('/', MainPage),
 										('/index.html', MainPage),
 										('/curriculum.html', CurriculumPage),
-										('/login.html', LoginPage),
+										# ('/login.html', LoginPage),
 										('/register.html', RegisterPage),
 										('/contact.html', ContactPage),
 										('/admin.html', AdminPage),

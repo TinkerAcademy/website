@@ -226,7 +226,6 @@ class LoginPage(webapp2.RequestHandler):
 		template_values = {
 			'sessionid' : sessionid,
 			'user' : user,
-			'newuser' : False,
 		}
 		# uid, insession = attemptlogin(self.request)
 		# coursesservice = CoursesService()
@@ -248,7 +247,7 @@ class LoginPage(webapp2.RequestHandler):
 			userservice = TinkerAcademyUserService()
 			sessionid = userservice.login(studentid, emailid)
 			if sessionid:
-				self.redirect('/curriculum.html?s='+str(sessionid))
+				self.redirect('/login.html?s='+str(sessionid))
 			else:
 				self.redirect('/login.html')
 
@@ -313,17 +312,21 @@ class RegisterPage(webapp2.RequestHandler):
 		if sessionid:
 			sessionid = sessionid.strip()
 		user = None
+		isnewuser = False
 		if sessionid:
 			cacheservice = MemcacheService()
 			user = cacheservice.getsessionuser(sessionid)
+			isnewuser = cacheservice.getfromsession(sessionid, "newuser")	
 		# uid, insession = attemptlogin(self.request)
 		# coursesservice = CoursesService()
 		# courses = coursesservice.listupcomingcourses()
 		template_values = {
 			'sessionid' : sessionid,
 			'user' : user,
-			'newuser' : False,
+			'isnewuser' : isnewuser,
 		}
+		if sessionid:
+			cacheservice.clearfromsession(sessionid, "newuser")
 		# uid, insession = attemptlogin(self.request)
 		# coursesservice = CoursesService()
 		# courses = coursesservice.listupcomingcourses()
@@ -336,16 +339,18 @@ class RegisterPage(webapp2.RequestHandler):
 	def post(self):
 		emailid = extractkeyfromrequest(self.request, 'email')
 		name = extractkeyfromrequest(self.request, 'name')
+		claz = extractkeyfromrequest(self.request, 'class')
+		favmod = extractkeyfromrequest(self.request, 'favmod')
 		if emailid:
 			emailid = emailid.strip()
 		validationservice = ValidationService()
 		isvalidemail = validationservice.isvalidemail(emailid)
 		if isvalidemail and name:
 			userservice = TinkerAcademyUserService()
-			sessionid = userservice.register(name, emailid)		
+			sessionid = userservice.register(name, emailid, claz, favmod)		
 			cacheservice = MemcacheService()
 			cacheservice.putinsession(sessionid, "newuser", True)	
-			self.redirect('/curriculum.html?s='+str(sessionid))
+			self.redirect('/register.html?s='+str(sessionid))
 		else:
 			self.redirect('/register.html')
 
