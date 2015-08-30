@@ -86,7 +86,9 @@
 	    text-indent: 9px;
 	    color: #fff;
 	    text-align: center;
-	    background: #1d1f20;
+	    background-image: url("icon-menu.png");
+	    background-size: 30px 30px;
+	    background-repeat: no-repeat;
 	    cursor: default;
 	    z-index: 1;
 	}

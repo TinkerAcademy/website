@@ -11,6 +11,8 @@ class TinkerAcademyUser(db.Model):
 	emailid3 = db.StringProperty()
 	claz = db.StringProperty()
 	favmod = db.StringProperty()
+	zipcode = db.StringProperty()
+	registerdate = db.DateProperty(auto_now_add=True)
 	scholarship = db.BooleanProperty()
 	userstatus = db.IntegerProperty()
 	stripe_customer_id = db.StringProperty()

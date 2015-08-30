@@ -607,7 +607,7 @@ class TinkerAcademyUserService(object):
 					cacheservice = MemcacheService()
 					cacheservice.setsessionuser(sessionid, user)
 		return sessionid
-	def register(self, studentname, emailid, claz, favmod):
+	def register(self, studentname, emailid, claz, favmod, zipcode):
 		query = TinkerAcademyUser.all()
 		query.filter("emailid1 = ", emailid)
 		p = None
@@ -640,7 +640,10 @@ class TinkerAcademyUserService(object):
 			p.userstatus = 1
 			p.stripe_customer_id = None
 		p.claz = claz
-		p.favmod = favmod
+		if favmod:
+			p.favmod = favmod
+		if zipcode:
+			p.zipcode = zipcode
 		p.put()
 		emailservice = EmailService()
 		emailbody = readtextfilecontents(constants.EMAIL_TA_REGISTER_FILENAME)

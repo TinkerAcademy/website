@@ -341,13 +341,14 @@ class RegisterPage(webapp2.RequestHandler):
 		name = extractkeyfromrequest(self.request, 'name')
 		claz = extractkeyfromrequest(self.request, 'class')
 		favmod = extractkeyfromrequest(self.request, 'favmod')
+		zipcode = extractkeyfromrequest(self.request, 'zipcode')
 		if emailid:
 			emailid = emailid.strip()
 		validationservice = ValidationService()
 		isvalidemail = validationservice.isvalidemail(emailid)
 		if isvalidemail and name:
 			userservice = TinkerAcademyUserService()
-			sessionid = userservice.register(name, emailid, claz, favmod)		
+			sessionid = userservice.register(name, emailid, claz, favmod, zipcode)		
 			cacheservice = MemcacheService()
 			cacheservice.putinsession(sessionid, "newuser", True)	
 			self.redirect('/register.html?s='+str(sessionid))
