@@ -1,0 +1,16 @@
+.flipcard {
+	width: 400px ; 
+	height: 246px;
+	margin: 36px;
+	font: 12px/28px 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+	float:left;
+}
+.front {
+	background-color: #318CE7;
+	font: 12px/28px 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+	padding: 20px;
+}
+.back {
+	background-color: #318CE7;
+	font: 12px/28px 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+}
