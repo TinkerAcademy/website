@@ -9,6 +9,8 @@ handlers:
   static_dir: static/forgedoc
 - url: /forge
   static_dir: static/forge
+- url: /identicons
+  static_dir: static/identicons
 # - url: /
 #   static_files: index.html
 #   upload: index.html
