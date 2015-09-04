@@ -10,6 +10,7 @@ from pages import 	MainPage, \
 					CurriculumPage, \
 					LoginPage, \
 					RegisterPage, \
+					AboutUsPage, \
 					ContactPage, \
 					AdminPage, \
 					PaymentPage, \
@@ -36,9 +37,11 @@ from tasks import 	EmailTask, \
 application = webapp2.WSGIApplication([
 										('/', MainPage),
 										('/index.html', MainPage),
+										('/about.html', AboutUsPage),
 										('/curriculum.html', CurriculumPage),
 										# ('/login.html', LoginPage),
 										('/showcase.html', ShowcasePage),
+										('/aboutus.html', AboutUsPage),
 										('/register.html', RegisterPage),
 										('/contact.html', ContactPage),
 										('/admin.html', AdminPage),
