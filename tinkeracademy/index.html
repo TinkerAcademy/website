@@ -49,10 +49,12 @@
 		<link rel="stylesheet" id="media_queries_css-css" href="./tinkeracademy/media-queries.css" type="text/css" media="screen">
 		<link rel="stylesheet" id="google_raleway-css" href="./tinkeracademy/css" type="text/css" media="all">
 		<link rel="stylesheet" id="jetpack_css-css" href="./tinkeracademy/jetpack.css" type="text/css" media="all">
+		<link rel="stylesheet" id="flip.css" href="./tinkeracademy/flip.css" type="text/css" media="all">
 		<meta name="msapplication-TileColor" content="#da532c">
 		<meta name="theme-color" content="#ffffff">
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
+		<script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.16/dist/jquery.flip.min.js"></script>
 		{% if sessionid %}
 		<link rel="prev" title="contact" href="contact.html?s={{sessionid}}">
 		<link rel="next" title="join" href="register.html?s={{sessionid}}">
@@ -74,6 +76,13 @@
 			
 			
 		</style>
+		<script type="text/javascript">
+			jQuery(document).ready(function( $ ) { 
+				$(".flipcard").flip({
+				  axis: 'x'
+				});
+			});			
+		</script>
     </head>
 	<body class="home page page-id-112 page-template page-template-blocks-php">
 		<div class="header-wrap clearfix">
@@ -119,41 +128,86 @@
 		</div>
 
 		<div id="wrapper" class="clearfix">
-			<div class="inside-wrap clearfix">		
-				<div id="content">
-					<div class="hero">
-						<h2>Programming Using Java (&amp; Minecraft) </h2>
-						<h3>We keep our classes small</h3>
-						<h4>We believe students best learn to code in <b>small classes</b>. Each class has just 8 students.</h4>
-						<h3>We teach students problem solving</h3>
-						<h4>Coding is a complex problem solving activity. Our students <b>write complex code</b> and <b>solve problems</b> in Java using the Minecraft API. </h4>
-						<h3>We make coding interesting ( &amp; fun :) )</h3>
-						<h4>Our students are <b>highly engaged in class</b> because they are excited and having fun coding Minecraft mods.</h4>
-						<h3>We focus on core concepts</h3>
-						<h4>We focus class time on <b>core programming concepts</b>. We believe in deep conceptual learning over superficial syntactic learning.</h4>
-						<h3>Sounds Interesting?</h3>
-						<h4><a href="./register.html">Register</a> for our trial classes. We offer half year long classes.</h4>
-<!-- 						<h2><iframe width="420" height="315" src="https://www.youtube.com/embed/tm1CREaQn1I" frameborder="0" allowfullscreen></iframe><iframe width="420" height="315" src="https://www.youtube.com/embed/k1DDdCUE890" frameborder="0" allowfullscreen></iframe></iframe><iframe width="420" height="315" src="https://www.youtube.com/embed/HfEEF1ip__8" frameborder="0" allowfullscreen></iframe></h2>
- -->						<h2> API </h2>
-						<a href="./forgedoc/index.html" target="_blank"><h3>Minecraft Forge 1.8 API</h3></a>
-						<a href="https://docs.oracle.com/javase/8/docs/api/" target="_blank"><h3>Java 8 API</h3></a>
-						<h2> References </h2>
-						<a href="http://minecraft.gamepedia.com/Data_values" target="_blank"><h3>Minecraft Data Values</h3></a>
-						<a href="http://minecraft.gamepedia.com/Experience" target="_blank"><h3>Minecraft Experience Values</h3></a>			
-						<a href="http://minecraft.gamepedia.com/Minecraft_Wiki" target="_blank"><h3>Official Minecraft Wiki</h3></a>			
-						<h2> Downloads </h2>
-						<a href="./forge/forge-1.8-11.14.3.1450-src.zip" target="_blank"><h3>Forge 1.8 Src</h3></a>
-						<a href="./forge/forge-1.8-11.14.3.1450-installer.jar" target="_blank"><h3>Forge 1.8 (Mac)</h3></a>
-						<a href="./forge/forge-1.8-11.14.3.1450-installer-win.exe" target="_blank"><h3>Forge 1.8 (Win)</h3></a>
-						<a href="http://www.eclipse.org/downloads/packages/eclipse-ide-java-developers/marsr" target="_blank"><h3>Eclipse IDE Downloads Page</h3></a>
-						<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank"><h3>Java SE Downloads Page</h3></a>
-						<a href="https://minecraft.net/download" target="_blank"><h3>Minecraft Downloads Page</h3></a>
-					</div><!-- hero -->
-				</div><!-- content -->
-				<!-- footer -->
-			</div><!-- inside wrap -->
-		</div><!-- wrapper -->		
-		
+		<div class="inside-wrap clearfix">		
+		<div id="content">
+			<div class="posts">
+	
+				<!-- titles -->
+								
+				<!-- grab the posts -->
+				<article class="post-109 page type-page status-publish hentry post">
+					<div class="box-wrap">
+						<div class="box">
+							<h1 class="entry-title"><a href="curriculum.html" title="Permalink to curriculum" rel="bookmark">Programming Using Java (&amp; Minecraft)</a></h1>
+						</div><!-- box -->
+						<div class="flipcard"> 
+				            <div class="front" style="background-color: #c85b2f"> 
+				               <header>
+								<h1>Small classes are better.</h1>
+								</header>
+				            </div> 
+				            <div class="back">
+				            	<header>
+									<h3>Small class sizes are effective. Our Java classes have just 8 students.</h3>
+								</header>
+				            </div> 
+				        </div>				        
+						<div class="flipcard"> 
+				            <div class="front" style="background-color: #72a7ee"> 
+				               <header>
+								<h1>Code is complex problem solving.</h1>
+								</header>
+				            </div> 
+				            <div class="back">
+								<!--<h2><iframe width="364" height="210" src="https://www.youtube.com/embed/tm1CREaQn1I" frameborder="0" allowfullscreen></iframe></h2>-->
+				            	<header>
+									<h3>Our students <b>write complex code</b> and <b>solve problems</b> in Java using the Minecraft API.</h3>
+								</header>
+				            </div> 
+				        </div>				        									        
+						<div class="flipcard"> 
+				            <div class="front" style="background-color: #dedea9"> 
+				               <header>
+								<h1>We make coding fun :)</h1>
+								</header>
+				            </div> 
+				            <div class="back">
+				            	<header>
+									<h3>Our students are <b>highly engaged in class</b> because they are excited and having fun :) coding Minecraft mods.</h3>
+								</header>
+				            </div> 
+				        </div>				        
+						<div class="flipcard"> 
+				            <div class="front" style="background-color: #a366a3"> 
+				               <header>
+								<h1>We focus on core concepts.</h1>
+								</header>
+				            </div> 
+				            <div class="back">
+				            	<header>
+									<h3>We believe in deep conceptual learning of <b>core programming concepts</b> over superficial syntactic learning.</h3>
+								</header>
+				            </div> 
+				        </div>				        
+						<div class="flipcard"> 
+				            <div class="front" style="background-color: #5397ab"> 
+				               <header>
+								<h1>Sounds Interesting?</h1>
+								</header>
+				            </div> 
+				            <div class="back">
+				            	<header>
+									<h1><a href="./register.html" style="color: black;">Register for our trial classes.</a></h1><h3>We offer half year long classes.</h3>
+								</header>
+				            </div> 
+				        </div>				        
+					</div><!-- box wrap -->
+				</article><!-- post-->
+				
+				</div>
+									
+		</div><!-- wrapper -->
+
 		<footer id="footer">
 			<div id="footer-inside">
 				<div class="copyright">© 2015 <a href="index.html">TINKER ACADEMY</a></div>
