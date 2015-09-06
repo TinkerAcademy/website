@@ -387,6 +387,33 @@ class PaymentPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('payment.html')
 		self.response.write(template.render(template_values))
 
+class ProgrammingUsingJavaPage(webapp2.RequestHandler):
+	def get(self):
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		quizsubmitted = False
+		if sessionid:
+			cacheservice = MemcacheService()
+			user = cacheservice.getsessionuser(sessionid)
+			quizsubmitted = cacheservice.getfromsession(sessionid, "quizsubmitted")	
+		template_values = {
+			'sessionid' : sessionid,
+			'user' : user,
+			'quizsubmitted' : quizsubmitted
+		}
+		if sessionid:
+			cacheservice.clearfromsession(sessionid, "quizsubmitted")
+		template = JINJA_ENVIRONMENT.get_template('programmingusingjava.html')
+		self.response.write(template.render(template_values))		
+	def post(self):			
+		userservice = TinkerAcademyUserService()
+		sessionid = userservice.anonlogin()
+		cacheservice = MemcacheService()
+		cacheservice.putinsession(sessionid, "quizsubmitted", True)	
+		self.redirect('/programmingusingjava.html?s='+str(sessionid))
+
 class RegisterPage(webapp2.RequestHandler):
 	def get(self):
 		sessionid = extractkeyfromrequest(self.request, 's')
