@@ -607,6 +607,14 @@ class TinkerAcademyUserService(object):
 					cacheservice = MemcacheService()
 					cacheservice.setsessionuser(sessionid, user)
 		return sessionid
+	def anonlogin(self):
+		sessionid = None
+		sessionid = self.createanonsessionid()
+		if sessionid:
+			user = TinkerAcademyUser()
+			cacheservice = MemcacheService()
+			cacheservice.setsessionuser(sessionid, user)
+		return sessionid
 	def register(self, studentname, emailid, claz, favmod, zipcode):
 		query = TinkerAcademyUser.all()
 		query.filter("emailid1 = ", emailid)
@@ -652,6 +660,8 @@ class TinkerAcademyUserService(object):
 		emailbody = emailbody.replace('$STUDENTID$', str(p.studentid))
 		emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
 		return self.login(p.studentid, emailid)
+	def createanonsessionid(self):
+		return hashlib.sha1('anon').hexdigest()
 	def createsessionid(self, studentid):
 		return hashlib.sha1(str(studentid)).hexdigest()
 

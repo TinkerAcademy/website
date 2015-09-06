@@ -88,7 +88,34 @@ class AboutUsPage(webapp2.RequestHandler):
 		# course_template_values = buildallcoursestemplatevalues(insession, courses)
 		# template_values.update(course_template_values)
 		template = JINJA_ENVIRONMENT.get_template('aboutus.html')
+		self.response.write(template.render(template_values))
+
+class APComputerSciencePage(webapp2.RequestHandler):
+	def get(self):
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		quizsubmitted = False
+		if sessionid:
+			cacheservice = MemcacheService()
+			user = cacheservice.getsessionuser(sessionid)
+			quizsubmitted = cacheservice.getfromsession(sessionid, "quizsubmitted")	
+		template_values = {
+			'sessionid' : sessionid,
+			'user' : user,
+			'quizsubmitted' : quizsubmitted
+		}
+		if sessionid:
+			cacheservice.clearfromsession(sessionid, "quizsubmitted")
+		template = JINJA_ENVIRONMENT.get_template('apcomputerscience.html')
 		self.response.write(template.render(template_values))		
+	def post(self):			
+		userservice = TinkerAcademyUserService()
+		sessionid = userservice.anonlogin()
+		cacheservice = MemcacheService()
+		cacheservice.putinsession(sessionid, "quizsubmitted", True)	
+		self.redirect('/apcomputerscience.html?s='+str(sessionid))
 
 class AllCoursesPage(webapp2.RequestHandler):
 	def get(self):

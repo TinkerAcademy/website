@@ -5,6 +5,12 @@
 	font: 12px/28px 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
 	float:left;
 }
+.flipcardxpand {
+	width: 400px ; 
+	margin: 36px;
+	font: 12px/28px 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+	float:left;
+}
 .front {
     padding: 20px;    
 }

@@ -51,7 +51,7 @@
 		<link rel="stylesheet" id="flip.css" href="./tinkeracademy/flip.css" type="text/css" media="all">
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
-		<script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.16/dist/jquery.flip.min.js"></script>
+		<script src="./tinkeracademy/flip.local.js"></script>
 		{% if sessionid %}
 		<link rel="prev" title="register" href="register.html?s={{sessionid}}">
 		<link rel="next" title="about" href="index.html?s={{sessionid}}">
@@ -72,18 +72,33 @@
 			}
 		</style>
 		<script type="text/javascript">
+			var lookup = {
+				'installmac' : [ 200, 330 ],
+				'installwin' : [ 200, 330 ],
+				'lesson1' : [ 200, 2400 ],
+				'quiz1' : [ 200, 800 ]
+			}
 			jQuery(document).ready(function( $ ) { 
-				$(".flipcard").flip({
-				  axis: 'x'
+				$(".flipcardxpand").each(function(index, elem) {
+						$(elem).flip({
+						  axis: 'x',
+						  frontHeight: lookup[elem.id][0],
+						  backHeight: lookup[elem.id][1]
+						})
+					}
+				);
+				$(".quizback").click(function(event){
+    				event.stopPropagation();
 				});
 			});			
+
 		</script>
     </head>
 	<body>
 		<div class="header-wrap clearfix">
 			<header class="header">
 				<!-- grab the logo and site title -->
-						    	<h1 class="logo-image">
+					<h1 class="logo-image">
 						<a href="index.html">TINKER ACADEMY</a>
 					</h1>
 			    		    
@@ -92,18 +107,8 @@
 			    	<div class="menu-home-container">
 			    		<ul id="menu-home" class="nav">
 		    				{% if sessionid %}
-<!-- 				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="curriculum.html?s={{sessionid}}">curriculum</a></li>
- --> 				    		<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li> -->
-							<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="showcase.html?s={{sessionid}}">showcase</a></li>
-				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="register.html?s={{sessionid}}">register</a></li>
-				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="aboutus.html?s={{sessionid}}">about</a></li>
 				    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html?s={{sessionid}}">contact</a></li>
 		    				{% else %}
-				    		<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="curriculum.html">curriculum</a></li> -->
- 				    		<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html">login</a></li> -->
-				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="showcase.html?s={{sessionid}}">showcase</a></li>
-				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="register.html">register</a></li>
-				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="aboutus.html">about</a></li>
 	 			    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>		
 				    		{% endif %}
 				    	</ul>
@@ -111,8 +116,6 @@
 				    		<option value="#">Navigate to...</option>
 				    		<option value="index.html">&nbsp;home</option>
 				    		<!-- <option value="login.html">&nbsp;login</option> -->
-				    		<option value="showcase.html">&nbsp;showcase</option>				    		
-				    		<option value="register.html">&nbsp;register</option>
 				    		<option value="contact.html">&nbsp;contact</option>
 				    	</select>
 				    	<div class="mobile-icon"></div>
@@ -129,95 +132,163 @@
 				<!-- titles -->
 								
 				<!-- grab the posts -->
-				<article class="post-109 page type-page status-publish hentry post">
-					<div class="box-wrap">
-						<div class="box">
-							<h1 class="entry-title"><a href="aboutus.html" title="Permalink to curriculum" rel="bookmark">About Us</a></h1>
-						</div><!-- box -->
-						<div class="flipcard"> 
-				            <div class="front" style="background-color: #c85b2f"> 
-				               <header>
-				               	<img src="./staff/Ron.png" width="160" align="right"/>
-								<h1>RON</h1>
-								<h2>President &amp; CEO</h2>
-								</header>
-				            </div> 
-				            <div class="back">
-				            	<header>
-									<h2>Ron heads the education curriculum at Tinker Academy.</h2>
-									<h4>When he is not tinkering with virtual machines, he can be found designing games for a major game publisher.</h4>
-								</header>
-				            </div> 
-				        </div>		
-						<div class="flipcard"> 
-				            <div class="front" style="background-color: #5397ab"> 
-				               <header>
-				               	<img src="./staff/Amit.png" width="140" align="right"/>
-								<h1>AMIT</h1>
-								<h2>&#x2605; Teaching Instructor &#x2605;</h2>
-				            </div> 
-				            <div class="back">
-				            	<header>
-									<h2>Amit is our star Teaching Instructor.</h2>
-								</header>
-				            </div> 
-				        </div>
-				        <div class="flipcard"> 
-				            <div class="front" style="background-color: #e1bd40"> 
-				               <header>
-				               	<img src="./staff/Daniel.png" width="140" align="right"/>
-								<h1>DANIEL</h1>
-								<h2>&#x2605; Teaching Instructor &#x2605;</h2>
-				            </div> 
-				            <div class="back">
-				            	<header>
-									<h2>Daniel is our star Teaching Instructor.</h2>
-								</header>
-				            </div> 
-				        </div>				        
-						<div class="flipcard"> 
-				            <div class="front" style="background-color: #a366a3"> 
-				               <header>
-				               	<img src="./staff/Pratibha.png" width="130" align="right"/>
-								<h1>PRATIBHA</h1>
-								<h2>&#x2605; Teaching Instructor &#x2605;</h2>
-								</header>
-				            </div> 
-				            <div class="back">
-				            	<header>
-									<h2>Pratibha is our star Teaching Instructor.</h2>
-									<h4>A true allrounder, Pratibha is a leader, an athlete, a dancer and a Lego&trade; robotics enthusiast. When Pratibha is not immersed in code, she can be found hanging out with her friends or Girl Scouts troop.</h4>
-								</header>
-				            </div> 
-				        </div>				        
-				        <div class="flipcard"> 
-				            <div class="front" style="background-color: #dedea9"> 
-				               <header>
-				               	<img src="./staff/Raymond.png" width="140" align="right"/>
-								<h1>RAYMOND</h1>
-								<h2>&#x2605; Teaching Instructor &#x2605;</h2>
-								</header>
-				            </div> 
-				            <div class="back">
-				            	<header>
-									<h2>Raymond is our star Teaching Instructor.</h2>
-									<h4>Ron thinks Raymond should interview at Google. No, Seriously! When Raymond is not impressing people with his encylopedic knowledge of dank memes, he can be found hanging out with friends or demonstrating ping pong wizardry.</h4>
-								</header>
-				            </div> 
-				        </div>		        										        
-					</div><!-- box wrap -->
-				</article><!-- post-->
+				<div class="box">
+					<h1 class="entry-title"><a href="showcase.html" title="Permalink to Showcase" rel="bookmark">Week 1</a></h1>
+				</div><!-- box -->
+				<div class="flipcardxpand" id='installmac'> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		               <header>
+		               	<img alt="Mac" src="./icons/Mac.png" width="105" align="right"/>
+						<h1>Installation</h1>
+						<h3>Mac</h3>
+						</header>
+		            </div> 
+		            <div class="back">
+		            	<header>
+		            		<h2>Install JDK 1.8 &amp; Eclipse</h2>
+							<h2><iframe width="360" height="224" src="https://www.youtube.com/embed/2E9dfpDPGTs" frameborder="0" allowfullscreen></iframe></h2>
+						</header>
+		            </div> 
+		        </div>
+				<div class="flipcardxpand" id="installwin"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		               <header>
+		               	<img alt="Windows" src="./icons/Windows.png" width="105" align="right"/>
+						<h1>Installation</h1>
+						<h3>Windows</h3>
+						</header>
+		            </div> 
+		            <div class="back">
+		            	<header>
+		            		<h2>Install JDK 1.8 &amp; Eclipse</h2>
+							<h2><iframe width="360" height="224" src="https://www.youtube.com/embed/j-X-JNTlN78" frameborder="0" allowfullscreen></iframe></h2>
+						</header>
+		            </div> 
+		        </div>
+				<div class="flipcardxpand" id="lesson1"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		            	<img alt="Videos" src="./icons/Youtube.png" width="128" align="right"/>
+		                <header>
+						<h1>Week 1 Videos</h1>
+						</header>
+		            </div> 
+		            <div class="back">
+		            	<header>
+		            		<h2>What is a Program?</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/ksWW7-IZAiE" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>What is a Java Program?</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/QNX8-lsb5P0" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>What is an Operating System?</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/szBCi0AEZjo" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>Operating Systems are different</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/8-r9tUbstu8" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>Origin &amp; History Of Java</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/eDEdLn8IJ_I" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>Magic Of Java</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/QTIBGPJkvg4" frameborder="0" allowfullscreen></iframe></h2>	
+						</header>
+		            </div> 
+		        </div>
+
+		        <div class="flipcardxpand" id="quiz1"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		               <header>
+						<h1>Week 1 Quiz</h1>
+						{% if quizsubmitted %}
+						<h3>Quiz Submitted</h3>
+						{% endif %}
+						</header>
+		            </div> 
+		            <div class="back quizback">
+		            	<form class="form-horizontal" method="post">
+						<fieldset>
+		            	<header>
+		            		<h4>What is a Program?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="quiz11" value="1">
+      							A file containing source code
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="quiz11" value="2">
+      							A file containing machine code
+    						</label>
+    						</div>   
+    						<h3></h3> 						
+    						<h4>What is a Programming Language?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="quiz12" value="1">
+      							A language used to write source code
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="quiz12" value="2">
+      							A language used to write machine code
+    						</label>
+    						</div>
+    						<h3></h3> 						
+    						<h4>What is Compilation?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="quiz13" value="1">
+      							Process to convert machine code to source code
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="quiz13" value="2">
+      							Process to convert source code to machine code
+    						</label>
+    						</div>
+    						<h3></h3> 						
+    						<h4>Why can't a C program compiled on Linux run on a Mac?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="quiz14" value="1">
+      							The C Program contains Linux source code
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="quiz14" value="2">
+      							The C Program contains Linux system calls
+    						</label>
+    						</div>
+    						<h3></h3> 						
+    						<h4>Why can a Java program compiled on Linux run on a Mac?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="quiz15" value="1">
+      							The JVM translates the program byte code to Mac system calls
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="quiz15" value="2">
+      							The JVM translates the program source code to Mac system calls
+    						</label>
+    						</div>
+    						<div class="control-group">
+							  <div class="controls">
+							    <button id="quiz1submit" name="quiz1submit" class="btn btn-primary">Submit</button>
+							  </div>
+							</div>
+						</header>
+						</fieldset>
+						</form>
+		            </div> 
+		        </div>
 				
-				</div>
+			</div> <!-- posts -->
 									
 		</div><!-- wrapper -->
-	
-		<footer id="footer">
-			<div id="footer-inside">
-				<div class="copyright">© 2015 <a href="index.html">TINKER ACADEMY</a></div>
-			</div>
-		</footer><!--footer-->
-		
+		</div>
+		</div>
+
 	<link rel="stylesheet" id="okaysocial_style-css" href="./tinkeracademy/social-style.css" type="text/css" media="all">
 	<link rel="stylesheet" id="okaysocial_icon_style-css" href="./tinkeracademy/social-icons.css" type="text/css" media="all">
 	<link rel="stylesheet" id="okaysocial_icon_font-css" href="./tinkeracademy/fontello.css" type="text/css" media="all">

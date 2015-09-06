@@ -13,6 +13,8 @@ handlers:
   static_dir: static/identicons
 - url: /staff
   static_dir: static/staff
+- url: /icons
+  static_dir: static/icons
 # - url: /
 #   static_files: index.html
 #   upload: index.html
