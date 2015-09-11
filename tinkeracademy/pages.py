@@ -421,10 +421,13 @@ class RegisterPage(webapp2.RequestHandler):
 			sessionid = sessionid.strip()
 		user = None
 		isnewuser = False
+		isfuture = False
 		if sessionid:
 			cacheservice = MemcacheService()
 			user = cacheservice.getsessionuser(sessionid)
 			isnewuser = cacheservice.getfromsession(sessionid, "newuser")	
+			claz = cacheservice.getfromsession(sessionid, "claz")
+			isfuture = claz == 'Future Sessions'
 		# uid, insession = attemptlogin(self.request)
 		# coursesservice = CoursesService()
 		# courses = coursesservice.listupcomingcourses()
@@ -432,6 +435,7 @@ class RegisterPage(webapp2.RequestHandler):
 			'sessionid' : sessionid,
 			'user' : user,
 			'isnewuser' : isnewuser,
+			'isfuture' : isfuture
 		}
 		if sessionid:
 			cacheservice.clearfromsession(sessionid, "newuser")
@@ -459,6 +463,7 @@ class RegisterPage(webapp2.RequestHandler):
 			sessionid = userservice.register(name, emailid, claz, favmod, zipcode)		
 			cacheservice = MemcacheService()
 			cacheservice.putinsession(sessionid, "newuser", True)	
+			cacheservice.putinsession(sessionid, "claz", claz)
 			self.redirect('/register.html?s='+str(sessionid))
 		else:
 			self.redirect('/register.html')

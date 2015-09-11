@@ -647,18 +647,20 @@ class TinkerAcademyUserService(object):
 			p.scholarship = False
 			p.userstatus = 1
 			p.stripe_customer_id = None
-		p.claz = claz
+			p.claz = claz
 		if favmod:
 			p.favmod = favmod
 		if zipcode:
 			p.zipcode = zipcode
 		p.put()
-		emailservice = EmailService()
-		emailbody = readtextfilecontents(constants.EMAIL_TA_REGISTER_FILENAME)
-		emailbody = emailbody.replace('$EMAILID$', emailid)
-		emailbody = emailbody.replace('$STUDENTNAME$', studentname)
-		emailbody = emailbody.replace('$STUDENTID$', str(p.studentid))
-		emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
+		isfutureclaz = claz == 'Future Sessions'
+		if not isfutureclaz:
+			emailservice = EmailService()
+			emailbody = readtextfilecontents(constants.EMAIL_TA_REGISTER_FILENAME)
+			emailbody = emailbody.replace('$EMAILID$', emailid)
+			emailbody = emailbody.replace('$STUDENTNAME$', studentname)
+			emailbody = emailbody.replace('$STUDENTID$', str(p.studentid))
+			emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
 		return self.login(p.studentid, emailid)
 	def createanonsessionid(self):
 		return hashlib.sha1('anon').hexdigest()

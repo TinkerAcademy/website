@@ -125,8 +125,13 @@
 					{% if isnewuser %}
 					<div class="box-wrap">
 						<div class="box">
+							{% if isfuture %}
+							<h3>Thank You for registering :)</h3>
+							<h4>We will update you on future sessions.</h4>
+							{% else %}
 							<h3>Thank You for registering :)</h3>
 							<h4>We just sent you an welcome email with the class details. Class starts October 03, 2015.</h4>
+							{% endif %}
 						</div><!-- box -->
 					</div><!-- box wrap -->
 					{% else %}
@@ -180,7 +185,8 @@
 							  <label class="control-label" for="selectbasic">Class</label>
 							  <div class="controls">
 							    <select id="class" name="class" class="input-large">
-							      <option>Oct 2015 - Mar 2016</option>
+							      <!--<option disabled>Oct 2015 - Mar 2016</option>-->
+							      <option>Future Sessions</option>
 							    </select>
 							  </div>
 							</div>
