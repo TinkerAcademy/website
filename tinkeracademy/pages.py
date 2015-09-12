@@ -131,26 +131,53 @@ class AllCoursesPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('allcourses.html')
 		self.response.write(template.render(template_values))
 
+# class CoursePage(webapp2.RequestHandler):
+# 	def get(self):
+# 		uid, insession = attemptlogin(self.request)
+# 		courseid = extractkeyfromrequest(self.request, 'c')
+# 		coursesservice = CoursesService()
+# 		course = coursesservice.getcourse(courseid)	
+# 		coursecontents = coursesservice.getcoursecontents(courseid)
+# 		# coursehandouts = coursesservice.getcoursehandouts(courseid)
+# 		# coursehomeworks = coursesservice.getcoursehomeworks(courseid)
+# 		# coursevideos = coursesservice.getcoursevideos(courseid)
+# 		# coursestarterpacks = coursesservice.getcoursestarterpacks(courseid)		
+# 		# coursequizzes = coursesservice.getcoursequizzes(courseid)
+# 		template_values = {}
+# 		header_template_values = buildheadertemplatevalues(insession, uid)
+# 		template_values.update(header_template_values)
+# 		course_template_values = buildcoursetemplatevalues(insession, course, coursecontents)
+# 		template_values.update(course_template_values)		
+# 		logging.info('template_values='+str(template_values))
+# 		template = JINJA_ENVIRONMENT.get_template('course.html')
+# 		self.response.write(template.render(template_values))		
+
 class CoursePage(webapp2.RequestHandler):
 	def get(self):
-		uid, insession = attemptlogin(self.request)
-		courseid = extractkeyfromrequest(self.request, 'c')
-		coursesservice = CoursesService()
-		course = coursesservice.getcourse(courseid)	
-		coursecontents = coursesservice.getcoursecontents(courseid)
-		# coursehandouts = coursesservice.getcoursehandouts(courseid)
-		# coursehomeworks = coursesservice.getcoursehomeworks(courseid)
-		# coursevideos = coursesservice.getcoursevideos(courseid)
-		# coursestarterpacks = coursesservice.getcoursestarterpacks(courseid)		
-		# coursequizzes = coursesservice.getcoursequizzes(courseid)
-		template_values = {}
-		header_template_values = buildheadertemplatevalues(insession, uid)
-		template_values.update(header_template_values)
-		course_template_values = buildcoursetemplatevalues(insession, course, coursecontents)
-		template_values.update(course_template_values)		
-		logging.info('template_values='+str(template_values))
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		if sessionid:
+			cacheservice = MemcacheService()
+			user = cacheservice.getsessionuser(sessionid)
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		template_values = {
+			'sessionid' : sessionid,
+			'user' : user,
+			'newuser' : False,
+		}
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		# header_template_values = buildheadertemplatevalues(insession, uid)
+		# template_values.update(header_template_values)
+		# course_template_values = buildallcoursestemplatevalues(insession, courses)
+		# template_values.update(course_template_values)
 		template = JINJA_ENVIRONMENT.get_template('course.html')
-		self.response.write(template.render(template_values))			
+		self.response.write(template.render(template_values))
 
 class CourseContentsPage(webapp2.RequestHandler):
 	def get(self):
@@ -326,9 +353,11 @@ class LoginPage(webapp2.RequestHandler):
 			studentid = studentid.strip()
 			studentid = int(studentid)
 			userservice = TinkerAcademyUserService()
-			sessionid = userservice.login(studentid, emailid)
-			if sessionid:
-				self.redirect('/login.html?s='+str(sessionid))
+			user = userservice.finduserbystudentid(studentid)
+			if user:
+				sessionid = userservice.login(user)
+				if sessionid:
+					self.redirect('/course.html?s='+str(sessionid))
 			else:
 				self.redirect('/login.html')
 

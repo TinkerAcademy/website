@@ -1,25 +1,14 @@
-<!DOCTYPE html>
-{% autoescape true %}
-<html>
-	<head>
-		<title>Tinker Academy - Course - {{course.coursename}}</title>
-	</head>
-	<body>
-		{% include 'header.html' %}
-		<h1>Course</h1>
-		<div><span>{{course.coursename}}</span></div>
-		<div><span>{{course.coursedescription}}</span></div>		
-		<div><span>Ages {{course.courseminage}}Y-{{course.coursemaxage}}Y</span></div>
-		{% for coursecontent in coursecontents %}
-		<table>
-			<tr>
-				<td><span>{{coursecontent.coursecontentname}}</span></td>
-			</tr>
-			<tr>
-				<td><a href="{{coursecontent.coursecontenturl+'&u='+UID|safe}}" target="_blank">{{coursecontent.coursecontentdescription}}</a></td>
-			</tr>
-		</table>
-		{% endfor %}
-	</body>
-</html>
-{% endautoescape %}
+{% if user %}
+{% if user.claz == 'Sep 2015 - Nov 2015 (AP)' %}
+{% include 'apcomputerscience.html' %}
+{% else %}
+{% endif %}
+{% if user.claz == 'Sep 2015 - Nov 2015' %}
+{% include 'programmingusingjava.html' %}
+{% endif %}
+{% if user.claz == 'Oct 2015 - Mar 2016' %}
+{% include 'programmingusingjava.html' %}
+{% endif %}
+{% else %}
+{% include 'login.html' %}
+{% endif %}
