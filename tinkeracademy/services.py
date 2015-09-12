@@ -597,15 +597,10 @@ class TinkerAcademyUserService(object):
 		for p in query.run(limit=1):
 			break
 		return p
-	def login(self, studentid, emailid):
-		sessionid = None
-		user = self.finduserbystudentid(studentid)
-		if user:
-			if user.emailid1 == emailid or user.emailid2 == emailid or user.emailid3 == emailid:
-				sessionid = self.createsessionid(studentid)
-				if sessionid:
-					cacheservice = MemcacheService()
-					cacheservice.setsessionuser(sessionid, user)
+	def login(self, user):
+		sessionid = self.createsessionid(user.studentid)
+		cacheservice = MemcacheService()
+		cacheservice.setsessionuser(sessionid, user)
 		return sessionid
 	def anonlogin(self):
 		sessionid = None
@@ -631,7 +626,7 @@ class TinkerAcademyUserService(object):
 			query.filter("emailid3 = ", emailid)
 			for p in query.run(limit=1):
 				break
-		if not p:
+		if not p or p.claz != claz:
 			p = TinkerAcademyUser()
 			p.emailid1 = emailid
 			studentid = 2015000
@@ -654,14 +649,15 @@ class TinkerAcademyUserService(object):
 			p.zipcode = zipcode
 		p.put()
 		isfutureclaz = claz == 'Future Sessions'
-		if not isfutureclaz:
+		isrecservicesclaz = claz == 'Sep 2015 - Nov 2015' or claz == 'Sep 2015 - Nov 2015 (AP)'
+		if not isfutureclaz and not isrecservicesclaz:
 			emailservice = EmailService()
 			emailbody = readtextfilecontents(constants.EMAIL_TA_REGISTER_FILENAME)
 			emailbody = emailbody.replace('$EMAILID$', emailid)
 			emailbody = emailbody.replace('$STUDENTNAME$', studentname)
 			emailbody = emailbody.replace('$STUDENTID$', str(p.studentid))
 			emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
-		return self.login(p.studentid, emailid)
+		return self.login(p)
 	def createanonsessionid(self):
 		return hashlib.sha1('anon').hexdigest()
 	def createsessionid(self, studentid):
