@@ -18,7 +18,8 @@ from pages import 	MainPage, \
 					ShowcasePage, \
 					APComputerSciencePage, \
 					ProgrammingUsingJavaPage, \
-					CoursePage
+					CoursePage, \
+					AchievementsPage
 					# CourseContentsPage, \
 					# ClassroomPage, \
 					# ForgotPage, \
@@ -46,6 +47,7 @@ application = webapp2.WSGIApplication([
 										('/apcomputerscience.html', APComputerSciencePage),										
 										('/programmingusingjava.html', ProgrammingUsingJavaPage),										
 										('/showcase.html', ShowcasePage),
+										('/achievements.html', AchievementsPage),
 										('/aboutus.html', AboutUsPage),
 										('/register.html', RegisterPage),
 										('/contact.html', ContactPage),
