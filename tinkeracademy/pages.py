@@ -14,6 +14,8 @@ from pageutils import buildcoursecontenttemplatevalues
 from pageutils import buildchannelpartnertemplatevalues
 from pageutils import buildstafftemplatevalues
 from pageutils import extractkeyfromrequest
+from pageutils import extractkeyvaluesfromrequest
+from pageutils import evaluatequiz
 from pageutils import isinsession
 from pageutils import issessionrequest
 from pageutils import isadminuser
@@ -123,15 +125,84 @@ class APComputerSciencePage(webapp2.RequestHandler):
 		if sessionid:
 			sessionid = sessionid.strip()
 		user = None
-		quizsubmitted = False
+		quiz1submitted = False
+		quiz2submitted = False
+		quiz3submitted = False
+		quiz4submitted = False
+		quiz5submitted = False
+		quiz6submitted = False
+		quiz7submitted = False
+		quiz8submitted = False
+		quiz1results = 0
+		quiz2results = 0
+		quiz3results = 0
+		quiz4results = 0
+		quiz5results = 0
+		quiz6results = 0
+		quiz7results = 0
+		quiz8results = 0
+		quiz1len = 0
+		quiz2len = 0
+		quiz3len = 0
+		quiz4len = 0
+		quiz5len = 0
+		quiz6len = 0
+		quiz7len = 0
+		quiz8len = 0
 		if sessionid:
 			cacheservice = MemcacheService()
 			user = cacheservice.getsessionuser(sessionid)
-			quizsubmitted = cacheservice.getfromsession(sessionid, "quizsubmitted")	
+			quiz1submitted = cacheservice.getfromsession(sessionid, "quiz1submitted")	
+			quiz2submitted = cacheservice.getfromsession(sessionid, "quiz2submitted")	
+			quiz3submitted = cacheservice.getfromsession(sessionid, "quiz3submitted")	
+			quiz4submitted = cacheservice.getfromsession(sessionid, "quiz4submitted")	
+			quiz5submitted = cacheservice.getfromsession(sessionid, "quiz5submitted")	
+			quiz6submitted = cacheservice.getfromsession(sessionid, "quiz6submitted")	
+			quiz7submitted = cacheservice.getfromsession(sessionid, "quiz7submitted")	
+			quiz8submitted = cacheservice.getfromsession(sessionid, "quiz8submitted")	
+			quiz1results = cacheservice.getfromsession(sessionid, "quiz1results")	
+			quiz2results = cacheservice.getfromsession(sessionid, "quiz2results")	
+			quiz3results = cacheservice.getfromsession(sessionid, "quiz3results")	
+			quiz4results = cacheservice.getfromsession(sessionid, "quiz4results")	
+			quiz5results = cacheservice.getfromsession(sessionid, "quiz5results")	
+			quiz6results = cacheservice.getfromsession(sessionid, "quiz6results")	
+			quiz7results = cacheservice.getfromsession(sessionid, "quiz7results")	
+			quiz8results = cacheservice.getfromsession(sessionid, "quiz8results")	
+			quiz1len = cacheservice.getfromsession(sessionid, "quiz1len")	
+			quiz2len = cacheservice.getfromsession(sessionid, "quiz2len")	
+			quiz3len = cacheservice.getfromsession(sessionid, "quiz3len")	
+			quiz4len = cacheservice.getfromsession(sessionid, "quiz4len")	
+			quiz5len = cacheservice.getfromsession(sessionid, "quiz5len")	
+			quiz6len = cacheservice.getfromsession(sessionid, "quiz6len")	
+			quiz7len = cacheservice.getfromsession(sessionid, "quiz7len")	
+			quiz8len = cacheservice.getfromsession(sessionid, "quiz8len")	
 		template_values = {
 			'sessionid' : sessionid,
 			'user' : user,
-			'quizsubmitted' : quizsubmitted
+			'quiz1submitted' : quiz1submitted,
+			'quiz2submitted' : quiz2submitted,
+			'quiz3submitted' : quiz3submitted,
+			'quiz4submitted' : quiz4submitted,
+			'quiz5submitted' : quiz5submitted,
+			'quiz6submitted' : quiz6submitted,
+			'quiz7submitted' : quiz7submitted,
+			'quiz8submitted' : quiz8submitted,
+			'quiz1results' : quiz1results,
+			'quiz2results' : quiz2results,
+			'quiz3results' : quiz3results,
+			'quiz4results' : quiz4results,
+			'quiz5results' : quiz5results,
+			'quiz6results' : quiz6results,
+			'quiz7results' : quiz7results,
+			'quiz8results' : quiz8results,
+			'quiz1len' : quiz1len,
+			'quiz2len' : quiz2len,
+			'quiz3len' : quiz3len,
+			'quiz4len' : quiz4len,
+			'quiz5len' : quiz5len,
+			'quiz6len' : quiz6len,
+			'quiz7len' : quiz7len,
+			'quiz8len' : quiz8len
 		}
 		if sessionid:
 			cacheservice.clearfromsession(sessionid, "quizsubmitted")
@@ -652,6 +723,51 @@ class SubmitHomeworkPage(webapp2.RequestHandler):
 		cc = extractkeyfromrequest(self.request, 'cc')
 		if c and cc and uid:
 			self.redirect('/coursecontent?c='+str(c)+'&cc='+str(cc)+'&u='+uid)
+
+class SaveQuizPage(webapp2.RequestHandler):
+	def post(self):			
+		answerdict = [
+			{},{},
+			{
+				"q1":1, "q2":2, "q3":1, "q4":2, "q5":2, "free" : 1
+			}
+		]
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		source = None
+		if sessionid:
+			cacheservice = MemcacheService()
+			user = cacheservice.getsessionuser(sessionid)
+			if user:
+				if self.request.params:
+					quiz = extractkeyfromrequest(self.request, 'quiz')
+					quizint = int(quiz)
+					source = extractkeyfromrequest(self.request, 'source')
+					studentdict = self.request.params
+					quizresults = evaluatequiz(self.request.params, answerdict[quizint])
+					quizlen = len(answerdict[quizint])
+					if "free" in answerdict[quizint]:
+						quizresults = quizresults + 1
+					kvpairs = extractkeyvaluesfromrequest(self.request)
+					quizstr = kvpairs
+					setattr(user, "quiz" + quiz, quizstr)
+					setattr(user, "quiz" + quiz + "results", quizresults)
+					# logging.error("user=" + str(user.studentid) + " user.quiz="+str(user.quiz))
+					user.put()
+					cacheservice.putinsession(sessionid, "quiz" + str(quiz) + "submitted", True)	
+					cacheservice.putinsession(sessionid, "quiz" + str(quiz) + "results", quizresults)	
+					cacheservice.putinsession(sessionid, "quiz" + str(quiz) + "len", quizlen)	
+		redirecthtml = "./index.html"
+		if source == "ap":
+			redirecthtml = "./apcomputerscience.html"
+		elif source == "pj":
+			redirecthtml = "./programmingusingjava.html"			
+		if sessionid:
+			redirecthtml = redirecthtml + "?s=" + str(sessionid)
+		self.redirect(redirecthtml)
+
 
 class SubmitQuizPage(webapp2.RequestHandler):
 	def post(self):

@@ -5,6 +5,7 @@ import logging
 import webapp2
 import pageutils
 import logging
+import json
 
 from environment import JINJA_ENVIRONMENT
 from google.appengine.api import users
@@ -108,6 +109,21 @@ def buildcoursecontenttemplatevalues(insession, courseid, coursecontentid, cours
 		if coursevideo.coursecontentid == coursecontentid:
 			template_values['coursevideos'].append(coursevideo)
 	return template_values
+
+def evaluatequiz(studentdict, answerdict):
+	#{ "quiz":2, "answers":{"quiz":2 , "source":"ap" , "s":"ccb5eca7f5baff157d911dbe67ed3a38e75a170f" , "q1":2 , "submit":1} }
+	correct = 0
+	for i in range(1,10):
+		key = "q" + str(i)
+		if key in answerdict:
+			if key in studentdict:
+				if int(answerdict[key]) == int(studentdict[key]):
+					correct = correct + 1
+	return correct
+
+def extractkeyvaluesfromrequest(request):
+	kv = json.dumps(request.GET.items())
+	return kv
 
 def extractkeyfromrequest(request, key):
 	uid = None

@@ -76,7 +76,9 @@
 				'installmac' : [ 200, 330 ],
 				'installwin' : [ 200, 330 ],
 				'lesson1' : [ 200, 2400 ],
-				'quiz1' : [ 200, 800 ]
+				'lesson2' : [ 200, 1600 ],
+				'quiz1' : [ 200, 800 ],
+				'quiz2' : [ 200, 1000 ]
 			}
 			jQuery(document).ready(function( $ ) { 
 				$(".flipcardxpand").each(function(index, elem) {
@@ -128,6 +130,143 @@
 
 		<div id="wrapper" class="clearfix">
 		<div class="inside-wrap clearfix">		
+		
+		<div id="content">
+			<div class="posts">	
+				<!-- titles -->								
+				<!-- grab the posts -->
+				<div class="box">
+					<h1 class="entry-title"><a href="showcase.html" title="Permalink to Showcase" rel="bookmark">Week 2</a></h1>
+				</div><!-- box -->
+				<div class="flipcardxpand" id="lesson2"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		            	<img alt="Videos" src="./icons/Youtube.png" width="128" align="right"/>
+		                <header>
+						<h1>Videos</h1>
+						<h3>Week 2</h3>
+						</header>
+		            </div> 
+		            <div class="back">
+		            	<header>
+		            		<h2>Activity - Compiling</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/Lh1wo91tBBs" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>Inside a Class File - Structure</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/Ee7holsy6-k" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>Inside a Class File - Locating The Program</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/9D8wZr3i4nw" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>Understanding the main method</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/u1NzavbK5ek" frameborder="0" allowfullscreen></iframe></h2>								
+						</header>
+		            </div> 
+		        </div> <!--lesson1-->
+				<div class="flipcardxpand" id="quiz2"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		               <header>
+						<h1>Quiz</h1>
+						<h3>Week 2</h3>
+						{% if quiz2submitted %}
+						<h4>Quiz Submitted, {{quiz2results}} / {{quiz2len}} correct</h4>
+						{% endif %}
+						</header>
+		            </div> 
+		            <div class="back quizback">
+		            	<form class="form-horizontal" method="post" action="./savequiz.html?quiz=2&amp;source=ap&amp;s={{sessionid}}">
+						<fieldset>
+		            	<header>
+		            		<h4>What should be the first line in the Java Source file "Main.java" created under the package "com.tinkeracademy.ap"?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="q1" value="1">
+      							package com.tinkeracademy.ap;
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q1" value="2">
+      							public class Main {
+    						</label>
+    						</div>   
+    						<h3></h3>
+		            		<h4>What is a file ending in .class?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="q2" value="1">
+      							A file containing source code
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q2" value="2">
+      							A file containing byte code
+    						</label>
+    						</div>   
+    						<h3></h3> 						
+    						<h4>What does the outer curly braces in a source file signify?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="q3" value="1">
+      							The first and last lines of a class definition
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q3" value="2">
+      							The first and last lines of a method definition
+    						</label>
+    						</div>
+    						<h3></h3> 						
+    						<h4>Your Java Source File has several method statements. Which statement will be executed first?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="q4" value="1">
+      							The first statement in the first method definition
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q4" value="2">
+      							The first statement in the "main" method definition
+    						</label>
+    						</div>
+    						<h3></h3> 						
+    						<h4>If you select File->New-Package, type in "com.tinkeracademy.ap" for the Name input field and select "Finish", how many packages get created?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="q5" value="1">
+      							1
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q5" value="2">
+      							3
+    						</label>
+    						</div>
+    						<h3></h3> 						
+    						<h4>Do you know Andy Hsu's email id? ( Bonus Question:) )</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="q6" value="1">Yes, I do</input>
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q6" value="2">No, I don't</input>
+    						</label>
+    						</div>
+    						<div class="control-group">
+							  <div class="controls">
+							    <button id="quiz1submit" name="submit" value="1" class="btn btn-primary">Submit</button>
+							  </div>
+							</div>
+						</header>
+						</fieldset>
+						</form>
+		            </div> 
+		        </div> <!--quiz-->
+			</div> <!-- posts -->
+		</div><!-- content -->
+
 		<div id="content">
 			<div class="posts">
 	
@@ -151,7 +290,7 @@
 							<h2><iframe width="360" height="224" src="https://www.youtube.com/embed/2E9dfpDPGTs" frameborder="0" allowfullscreen></iframe></h2>
 						</header>
 		            </div> 
-		        </div>
+		        </div> <!--installmac-->
 				<div class="flipcardxpand" id="installwin"> 
 		            <div class="front" style="background-color: #e6e770;"> 
 		               <header>
@@ -166,7 +305,7 @@
 							<h2><iframe width="360" height="224" src="https://www.youtube.com/embed/j-X-JNTlN78" frameborder="0" allowfullscreen></iframe></h2>
 						</header>
 		            </div> 
-		        </div>
+		        </div> <!--installwin-->
 				<div class="flipcardxpand" id="lesson1"> 
 		            <div class="front" style="background-color: #e6e770;"> 
 		            	<img alt="Videos" src="./icons/Youtube.png" width="128" align="right"/>
@@ -191,32 +330,31 @@
 							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/QTIBGPJkvg4" frameborder="0" allowfullscreen></iframe></h2>	
 						</header>
 		            </div> 
-		        </div>
-
+		        </div> <!--lesson1-->
 		        <div class="flipcardxpand" id="quiz1"> 
 		            <div class="front" style="background-color: #e6e770;"> 
 		               <header>
 						<h1>Quiz</h1>
 						<h3>Week 1</h3>
-						{% if quizsubmitted %}
+						{% if quiz1submitted %}
 						<h3>Quiz Submitted</h3>
 						{% endif %}
 						</header>
 		            </div> 
 		            <div class="back quizback">
-		            	<form class="form-horizontal" method="post">
+		            	<form class="form-horizontal" method="post" action="./savequiz.html?quiz=1&amp;source=ap&amp;s={{sessionid}}">
 						<fieldset>
 		            	<header>
 		            		<h4>What is a Program?</h4>
 		            		<div>
 		            		<label>
-      							<input type="radio" name="quiz11" value="1">
+      							<input type="radio" name="q1" value="1">
       							A file containing source code
     						</label>
     						</div>
     						<div>
     						<label>
-      							<input type="radio" name="quiz11" value="2">
+      							<input type="radio" name="q1" value="2">
       							A file containing machine code
     						</label>
     						</div>   
@@ -224,13 +362,13 @@
     						<h4>What is a Programming Language?</h4>
 		            		<div>
 		            		<label>
-      							<input type="radio" name="quiz12" value="1">
+      							<input type="radio" name="q2" value="1">
       							A language used to write source code
     						</label>
     						</div>
     						<div>
     						<label>
-      							<input type="radio" name="quiz12" value="2">
+      							<input type="radio" name="q2" value="2">
       							A language used to write machine code
     						</label>
     						</div>
@@ -238,13 +376,13 @@
     						<h4>What is Compilation?</h4>
 		            		<div>
 		            		<label>
-      							<input type="radio" name="quiz13" value="1">
+      							<input type="radio" name="q3" value="1">
       							Process to convert machine code to source code
     						</label>
     						</div>
     						<div>
     						<label>
-      							<input type="radio" name="quiz13" value="2">
+      							<input type="radio" name="q3" value="2">
       							Process to convert source code to machine code
     						</label>
     						</div>
@@ -252,13 +390,13 @@
     						<h4>Why can't a C program compiled on Linux run on a Mac?</h4>
 		            		<div>
 		            		<label>
-      							<input type="radio" name="quiz14" value="1">
+      							<input type="radio" name="q4" value="1">
       							The C Program contains Linux but no Mac source code
     						</label>
     						</div>
     						<div>
     						<label>
-      							<input type="radio" name="quiz14" value="2">
+      							<input type="radio" name="q4" value="2">
       							The C Program contains Linux but no Mac system calls
     						</label>
     						</div>
@@ -266,30 +404,31 @@
     						<h4>Why can a Java program compiled on Linux run on a Mac?</h4>
 		            		<div>
 		            		<label>
-      							<input type="radio" name="quiz15" value="1">
+      							<input type="radio" name="q5" value="1">
       							The JVM translates the program byte code to Mac system calls
     						</label>
     						</div>
     						<div>
     						<label>
-      							<input type="radio" name="quiz15" value="2">
+      							<input type="radio" name="q5" value="2">
       							The JVM translates the program source code to Mac system calls
     						</label>
     						</div>
     						<div class="control-group">
 							  <div class="controls">
-							    <button id="quiz1submit" name="quiz1submit" class="btn btn-primary">Submit</button>
+							    <button id="quiz1submit" name="submit" value="1" class="btn btn-primary">Submit</button>
 							  </div>
 							</div>
 						</header>
 						</fieldset>
 						</form>
 		            </div> 
-		        </div>
-				
+		        </div> <!--quiz-->
+
 			</div> <!-- posts -->
-									
-		</div><!-- wrapper -->
+
+		</div><!-- content -->
+
 		</div>
 		</div>
 
