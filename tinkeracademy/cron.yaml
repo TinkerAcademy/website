@@ -1,7 +1,7 @@
 cron:
 - description: email job
   url: /task/email
-  schedule: every 1 minutes
+  schedule: every 10 minutes
 # - description: token update
 #   url: /task/tokenupdate
 #   schedule: every 55 minutes

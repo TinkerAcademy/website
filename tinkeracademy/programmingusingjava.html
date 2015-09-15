@@ -76,7 +76,9 @@
 				'installmac' : [ 200, 660 ],
 				'installwin' : [ 200, 660 ],
 				'lesson1' : [ 200, 2400 ],
-				'quiz1' : [ 200, 800 ]
+				'lesson2' : [ 200, 2400 ],
+				'quiz1' : [ 200, 800 ],
+				'quiz2' : [ 200, 560 ]
 			}
 			jQuery(document).ready(function( $ ) { 
 				$(".flipcardxpand").each(function(index, elem) {
@@ -98,7 +100,7 @@
 		<div class="header-wrap clearfix">
 			<header class="header">
 				<!-- grab the logo and site title -->
-					<h1 class="logo-image">
+						    	<h1 class="logo-image">
 						<a href="index.html">TINKER ACADEMY</a>
 					</h1>
 			    		    
@@ -107,17 +109,33 @@
 			    	<div class="menu-home-container">
 			    		<ul id="menu-home" class="nav">
 		    				{% if sessionid %}
+<!-- 				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="curriculum.html?s={{sessionid}}">curriculum</a></li>
+ --> 				    		<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li> -->
+ 							<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="showcase.html?s={{sessionid}}">showcase</a></li>
+ 							<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="achievements.html?s={{sessionid}}">achievements</a></li>
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="register.html?s={{sessionid}}">register</a></li>
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li>
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="aboutus.html?s={{sessionid}}">about</a></li>
 				    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html?s={{sessionid}}">contact</a></li>
-				    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="login.html">login</a></li>
 		    				{% else %}
-	 			    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>
-	 			    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="login.html">login</a></li>	
+				    		<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="curriculum.html">curriculum</a></li> -->
+ 				    		<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html">login</a></li> -->
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="showcase.html">showcase</a></li>
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="achievements.html">achievements</a></li>				    	
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="register.html">register</a></li>
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html">login</a></li>
+				    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="aboutus.html">about</a></li>
+	 			    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>		
 				    		{% endif %}
 				    	</ul>
 				    	<select class="select-menu">
 				    		<option value="#">Navigate to...</option>
-				    		<option value="index.html">&nbsp;home</option>
+				    		<!-- <option value="curriculum.html">&nbsp;curriculum</option> -->
 				    		<!-- <option value="login.html">&nbsp;login</option> -->
+				    		<option value="showcase.html">&nbsp;showcase</option>
+				    		<option value="register.html">&nbsp;register</option>
+				    		<option value="login.html">&nbsp;login</option>
+				    		<option value="aboutus.html">&nbsp;about</option>
 				    		<option value="contact.html">&nbsp;contact</option>
 				    	</select>
 				    	<div class="mobile-icon"></div>
@@ -127,7 +145,125 @@
 		</div>
 
 		<div id="wrapper" class="clearfix">
-		<div class="inside-wrap clearfix">		
+		<div class="inside-wrap clearfix">	
+		<div id="content">
+			<div class="posts">
+	
+				<!-- titles -->
+								
+				<!-- grab the posts -->
+				<div class="box">
+					<h1 class="entry-title"><a href="showcase.html" title="Permalink to Showcase" rel="bookmark">Week 2</a></h1>
+				</div><!-- box -->
+
+				<div class="flipcardxpand" id="lesson2"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		            	<img alt="Videos" src="./icons/Youtube.png" width="128" align="right"/>
+		                <header>
+						<h1>Videos</h1>
+						<h3>Week 1</h3>
+						</header>
+		            </div> 
+		            <div class="back">
+		            	<header>
+		            		<h2>Basic Layout of an Eclipse Project</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/y01EA7wptLo" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>Understanding Eclipse Source Folders</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/gj-Ut6ELKT8" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>Understand Java Packages</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/NByyRNO4gG0" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>Create Your Own Package In Eclipse</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/NF2iviwqWbY" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>Create Your Own Mod in Eclipse</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/HNr7pSzDzrw" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2>Runningn Your Own Mod in Eclipse</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/X9D0Fs6uLys" frameborder="0" allowfullscreen></iframe></h2>	
+						</header>
+		            </div> 
+		        </div>	
+
+		        <div class="flipcardxpand" id="quiz2"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		               <header>
+						<h1>Quiz</h1>
+						<h3>Week 2</h3>
+						{% if quiz2submitted %}
+						<h4>Quiz Submitted, {{quiz2results}} / {{quiz2len}} correct</h4>
+						{% endif %}
+						</header>
+		            </div> 
+		            <div class="back quizback">
+		            	<form class="form-horizontal" method="post" action="./savequiz.html?quiz=2&amp;source=pj&amp;s={{sessionid}}">
+						<fieldset>
+		            	<header>
+		            		<h4>What is an Eclipse Project?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="q1" value="1">
+      							A single Java Source File
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q1" value="2">
+      							A collection of Java Source Files
+    						</label>
+    						</div>   
+    						<h3></h3> 						
+    						<h4>Where can Eclipse Source Code be saved?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="q2" value="1">
+      							In a Source Folder
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q2" value="2">
+      							Anywhere within the Eclipse project
+    						</label>
+    						</div>
+    						<h3></h3> 						
+    						<h4>What is a Java Package?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="q3" value="1">
+      							A way to organize projects
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q3" value="2">
+      							A way to organize source code
+    						</label>
+    						</div>
+    						<h4>Is "com. tinkeracademy" a valid package name?</h4>
+		            		<div>
+		            		<label>
+      							<input type="radio" name="q3" value="1">
+      							Yes, spaces are allowed
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q3" value="2">
+      							No, spaces are not allowed
+    						</label>
+    						</div>
+    						<div class="control-group">
+							  <div class="controls">
+							    <button name="quiz1submit" class="btn btn-primary">Submit</button>
+							  </div>
+							</div>
+						</header>
+						</fieldset>
+						</form>
+		            </div> 
+		        </div>
+
+			</div> <!-- posts -->
+									
+		</div><!-- content -->	
 		<div id="content">
 			<div class="posts">
 	
@@ -202,25 +338,25 @@
 		               <header>
 						<h1>Quiz</h1>
 						<h3>Week 1</h3>
-						{% if quizsubmitted %}
+						{% if quiz1submitted %}
 						<h3>Quiz Submitted</h3>
 						{% endif %}
 						</header>
 		            </div> 
 		            <div class="back quizback">
-		            	<form class="form-horizontal" method="post">
+		            	<form class="form-horizontal" method="post" action="./savequiz.html?quiz=1&amp;source=pj&amp;s={{sessionid}}">
 						<fieldset>
 		            	<header>
 		            		<h4>What is a Program?</h4>
 		            		<div>
 		            		<label>
-      							<input type="radio" name="quiz11" value="1">
+      							<input type="radio" name="q1" value="1">
       							A file containing source code
     						</label>
     						</div>
     						<div>
     						<label>
-      							<input type="radio" name="quiz11" value="2">
+      							<input type="radio" name="q1" value="2">
       							A file containing machine code
     						</label>
     						</div>   
@@ -228,13 +364,13 @@
     						<h4>What is a Programming Language?</h4>
 		            		<div>
 		            		<label>
-      							<input type="radio" name="quiz12" value="1">
+      							<input type="radio" name="q2" value="1">
       							A language used to write source code
     						</label>
     						</div>
     						<div>
     						<label>
-      							<input type="radio" name="quiz12" value="2">
+      							<input type="radio" name="q2" value="2">
       							A language used to write machine code
     						</label>
     						</div>
@@ -242,13 +378,13 @@
     						<h4>What is Compilation?</h4>
 		            		<div>
 		            		<label>
-      							<input type="radio" name="quiz13" value="1">
+      							<input type="radio" name="q3" value="1">
       							Process to convert machine code to source code
     						</label>
     						</div>
     						<div>
     						<label>
-      							<input type="radio" name="quiz13" value="2">
+      							<input type="radio" name="q3" value="2">
       							Process to convert source code to machine code
     						</label>
     						</div>
@@ -256,13 +392,13 @@
     						<h4>Why can't a C program compiled on Linux run on a Mac?</h4>
 		            		<div>
 		            		<label>
-      							<input type="radio" name="quiz14" value="1">
+      							<input type="radio" name="q4" value="1">
       							The C Program contains Linux but no Mac source code
     						</label>
     						</div>
     						<div>
     						<label>
-      							<input type="radio" name="quiz14" value="2">
+      							<input type="radio" name="q4" value="2">
       							The C Program contains Linux but no Mac system calls
     						</label>
     						</div>
@@ -270,19 +406,19 @@
     						<h4>Why can a Java program compiled on Linux run on a Mac?</h4>
 		            		<div>
 		            		<label>
-      							<input type="radio" name="quiz15" value="1">
+      							<input type="radio" name="q5" value="1">
       							The JVM translates the program byte code to Mac system calls
     						</label>
     						</div>
     						<div>
     						<label>
-      							<input type="radio" name="quiz15" value="2">
+      							<input type="radio" name="q5" value="2">
       							The JVM translates the program source code to Mac system calls
     						</label>
     						</div>
     						<div class="control-group">
 							  <div class="controls">
-							    <button id="quiz1submit" name="quiz1submit" class="btn btn-primary">Submit</button>
+							    <button name="submit" class="btn btn-primary">Submit</button>
 							  </div>
 							</div>
 						</header>
@@ -293,7 +429,7 @@
 				
 			</div> <!-- posts -->
 									
-		</div><!-- wrapper -->
+		</div><!-- content -->
 		</div>
 		</div>
 

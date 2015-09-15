@@ -616,16 +616,6 @@ class TinkerAcademyUserService(object):
 		p = None
 		for p in query.run(limit=1):
 			break
-		if not p:
-			query = TinkerAcademyUser.all()
-			query.filter("emailid2 = ", emailid)
-			for p in query.run(limit=1):
-				break
-		if not p:
-			query = TinkerAcademyUser.all()
-			query.filter("emailid3 = ", emailid)
-			for p in query.run(limit=1):
-				break
 		if not p or p.claz != claz:
 			p = TinkerAcademyUser()
 			p.emailid1 = emailid
