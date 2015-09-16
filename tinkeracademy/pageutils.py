@@ -122,8 +122,10 @@ def evaluatequiz(studentdict, answerdict):
 	return correct
 
 def extractkeyvaluesfromrequest(request):
-	kv = json.dumps(request.GET.items())
-	return kv
+	kvget = json.dumps(request.GET.items())
+	kvpost = json.dumps(request.POST.items())
+	kvpairs = "{" + "get:" + str(kvget) + ",post:" + str(kvpost) + "}"
+	return kvpairs
 
 def extractkeyfromrequest(request, key):
 	uid = None
