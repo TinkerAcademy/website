@@ -56,7 +56,7 @@ application = webapp2.WSGIApplication([
 										('/admin.html', AdminPage),
 										('/payment.html', PaymentPage),
 										('/scholarship.html', ScholarshipPage),
-										('/task/email', EmailTask),
+										# ('/task/email', EmailTask),
 										# ('/coursecontent', CourseContentsPage),
 										# ('/classroom', ClassroomPage),
 										# ('/forgot', ForgotPage),

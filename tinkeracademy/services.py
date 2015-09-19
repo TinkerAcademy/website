@@ -647,6 +647,7 @@ class TinkerAcademyUserService(object):
 			emailbody = emailbody.replace('$STUDENTNAME$', studentname)
 			emailbody = emailbody.replace('$STUDENTID$', str(p.studentid))
 			emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
+			emailservice.sendnext()
 		return self.login(p)
 	def createanonsessionid(self):
 		return hashlib.sha1('anon').hexdigest()
