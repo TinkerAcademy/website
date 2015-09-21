@@ -20,7 +20,8 @@ from pages import 	MainPage, \
 					ProgrammingUsingJavaPage, \
 					CoursePage, \
 					AchievementsPage, \
-					SaveQuizPage
+					SaveQuizPage, \
+					ProfilePage
 					# CourseContentsPage, \
 					# ClassroomPage, \
 					# ForgotPage, \
@@ -50,6 +51,7 @@ application = webapp2.WSGIApplication([
 										('/showcase.html', ShowcasePage),
 										('/achievements.html', AchievementsPage),
 										('/savequiz.html', SaveQuizPage),
+										('/profile.html', ProfilePage),
 										('/aboutus.html', AboutUsPage),
 										('/register.html', RegisterPage),
 										('/contact.html', ContactPage),

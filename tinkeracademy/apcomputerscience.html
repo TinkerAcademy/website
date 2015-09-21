@@ -115,6 +115,7 @@
  							<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="achievements.html?s={{sessionid}}">achievements</a></li>
 				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="register.html?s={{sessionid}}">register</a></li>
 				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li>
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="profile.html?s={{sessionid}}">profile</a></li>
 				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="aboutus.html?s={{sessionid}}">about</a></li>
 				    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html?s={{sessionid}}">contact</a></li>
 		    				{% else %}
@@ -123,7 +124,7 @@
 				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="showcase.html">showcase</a></li>
 				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="achievements.html">achievements</a></li>				    	
 				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="register.html">register</a></li>
-				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html">login</a></li>
+				    		<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html">login</a></li>				    		
 				    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="aboutus.html">about</a></li>
 	 			    		<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>		
 				    		{% endif %}
@@ -135,6 +136,7 @@
 				    		<option value="showcase.html">&nbsp;showcase</option>
 				    		<option value="register.html">&nbsp;register</option>
 				    		<option value="login.html">&nbsp;login</option>
+				    		<option value="profile.html">&nbsp;profile</option>
 				    		<option value="aboutus.html">&nbsp;about</option>
 				    		<option value="contact.html">&nbsp;contact</option>
 				    	</select>
@@ -146,6 +148,16 @@
 
 		<div id="wrapper" class="clearfix">
 		<div class="inside-wrap clearfix">		
+
+		<div id="content">
+			<div class="posts">	
+				<!-- titles -->								
+				<!-- grab the posts -->
+				<div class="box">
+					<h1 class="entry-title"><a href="showcase.html" title="Permalink to Showcase" rel="bookmark">{{user.claz}}</a></h1>
+				</div><!-- box -->				
+			</div> <!-- posts -->
+		</div><!-- content -->
 		
 		<div id="content">
 			<div class="posts">	

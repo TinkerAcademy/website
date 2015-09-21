@@ -156,3 +156,25 @@ def issessionrequest(request):
 	insession = isinsession(uid)
 	return insession
 
+def translateclaztosource(claz):
+	if "(AP)" in claz:
+		return "ap"
+	return "pj"
+
+def quizanswers(source):
+	answersdict = {
+			"ap": [
+					{},{},
+					{
+						"q1":1, "q2":2, "q3":1, "q4":2, "q5":2, "free" : 1
+					}
+				],
+			"pj": [
+					{}, {},
+					{
+						"q1":2, "q2":1, "q3":2, "q4":2 
+					}
+				]
+		}
+	return answersdict[source]
+

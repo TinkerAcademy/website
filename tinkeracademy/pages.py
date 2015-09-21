@@ -21,6 +21,8 @@ from pageutils import issessionrequest
 from pageutils import isadminuser
 from pageutils import createloginurl
 from pageutils import attemptlogin
+from pageutils import translateclaztosource
+from pageutils import quizanswers
 
 from environment import JINJA_ENVIRONMENT
 
@@ -450,6 +452,37 @@ class PaymentPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('payment.html')
 		self.response.write(template.render(template_values))
 
+class ProfilePage(webapp2.RequestHandler):
+	def get(self):
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		source = None
+		results = []
+		cacheservice = MemcacheService()
+		if sessionid:
+			user = cacheservice.getsessionuser(sessionid)
+			source = translateclaztosource(user.claz)
+			answerarr = quizanswers(source)
+			for quizint in range(1,9):
+				if len(answerarr) > quizint:
+					quiz = answerarr[quizint]
+					quizlen = len(quiz)
+					if "free" in quiz:
+						quizlen = quizlen - 1 + answerarr[quizint]["free"]
+					quizresult = getattr(user, 'quiz' + str(quizint) + 'results')
+					if quizresult is None:
+						quizresult = 0
+					results.append({'total' : quizlen, 'correct': quizresult})
+		template_values = {
+			'sessionid' : sessionid,
+			'user' : user,
+			'results' : results
+		}
+		template = JINJA_ENVIRONMENT.get_template('profile.html')
+		self.response.write(template.render(template_values))
+
 class ProgrammingUsingJavaPage(webapp2.RequestHandler):
 	def get(self):
 		sessionid = extractkeyfromrequest(self.request, 's')
@@ -666,20 +699,6 @@ class SubmitHomeworkPage(webapp2.RequestHandler):
 
 class SaveQuizPage(webapp2.RequestHandler):
 	def post(self):			
-		answersdict = {
-			"ap": [
-					{},{},
-					{
-						"q1":1, "q2":2, "q3":1, "q4":2, "q5":2, "free" : 1
-					}
-				],
-			"pj": [
-					{}, {},
-					{
-						"q1":2, "q2":1, "q3":2, "q4":2 
-					}
-				]
-		}
 		sessionid = extractkeyfromrequest(self.request, 's')
 		if sessionid:
 			sessionid = sessionid.strip()
@@ -693,8 +712,10 @@ class SaveQuizPage(webapp2.RequestHandler):
 					quiz = str(extractkeyfromrequest(self.request, 'quiz'))
 					quizint = int(quiz)
 					source = str(extractkeyfromrequest(self.request, 'source'))
-					if source in answersdict:
-						answerarr = answersdict[source]
+					if not source:
+						source = translateclaztosource(user.claz)
+					if source:
+						answerarr = quizanswers(source)
 						studentdict = self.request.params
 						quizresults = evaluatequiz(studentdict, answerarr[quizint])
 						quizlen = len(answerarr[quizint])
