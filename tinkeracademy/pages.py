@@ -727,6 +727,7 @@ class SaveQuizPage(webapp2.RequestHandler):
 						setattr(user, 'quiz' + quiz, quizstr)
 						setattr(user, 'quiz' + quiz + 'results', quizresults)
 						user.put()
+						cacheservice.setsessionuser(sessionid, user)
 						cacheservice.putinsession(sessionid, 'quiz' + str(quiz) + 'submitted', True)	
 						cacheservice.putinsession(sessionid, 'quiz' + str(quiz) + 'results', quizresults)	
 						cacheservice.putinsession(sessionid, 'quiz' + str(quiz) + 'len', quizlen)	
