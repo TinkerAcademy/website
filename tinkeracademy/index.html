@@ -50,10 +50,14 @@
 		<link rel="stylesheet" id="google_raleway-css" href="./tinkeracademy/css" type="text/css" media="all">
 		<link rel="stylesheet" id="jetpack_css-css" href="./tinkeracademy/jetpack.css" type="text/css" media="all">
 		<link rel="stylesheet" id="flip.css" href="./tinkeracademy/flip.css" type="text/css" media="all">
+		<link rel="stylesheet" id="hover.css" href="./tinkeracademy/hover.css" type="text/css" media="all">
+		<link rel="stylesheet" id="slick.css" href="./slick/slick.css" type="text/css" media="all">
+		<link rel="stylesheet" id="slick-theme.css" href="./slick/slick-theme.css" type="text/css" media="all">
 		<meta name="msapplication-TileColor" content="#da532c">
 		<meta name="theme-color" content="#ffffff">
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
+		<script type="text/javascript" src="./slick/slick.min.js"></script>
 		<script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.16/dist/jquery.flip.min.js"></script>
 		{% if sessionid %}
 		<link rel="prev" title="contact" href="contact.html?s={{sessionid}}">
@@ -79,7 +83,11 @@
 		<script type="text/javascript">
 			jQuery(document).ready(function( $ ) { 
 				$(".flipcard").flip({
-				  axis: 'x'
+				  	axis: 'x'
+				});
+				$(".carousel").slick({
+					autoplay: true,
+					autoplaySpeed: 10000
 				});
 			});			
 		</script>
@@ -88,7 +96,7 @@
 		<div class="header-wrap clearfix">
 			<header class="header">
 				<!-- grab the logo and site title -->
-						    	<h1 class="logo-image">
+					<h1 class="logo-image">
 						<a href="index.html">TINKER ACADEMY</a>
 					</h1>
 			    		    
@@ -136,6 +144,17 @@
 		<div class="inside-wrap clearfix">		
 		<div id="content">
 			<div class="posts">
+
+<!-- 				<div class="carousel">
+					<div>
+						<header>
+							<h1 class="entry-title">“The programmers of tomorrow are the wizards of the future”</h1>
+							<h2>Gabe Newell</h2>
+							<iframe class="imgur-embed" width="100%" height="325" frameborder="0" src="http://i.imgur.com/Y47v9BO.gifv#embed"></iframe>
+						</header>							
+					</div>
+				</div>
+ -->
 	
 				<!-- titles -->
 								
@@ -146,24 +165,28 @@
 							<h1 class="entry-title">Programming Using Java (&amp; Minecraft)</h1>
 						</div><!-- box -->
 						<div class="flipcard"> 
-				            <div class="front" style="background-color: #c85b2f"> 
+				            <div class="front hvr-curl-bottom-right" style="background-color: #c85b2f"> 
+				               <img src="./icons/redpin.png" width="40" align="center"/>
 				               <header>
 								<h1>Small classes are better.</h1>
 								</header>
 				            </div> 
-				            <div class="back">
+				            <div class="back hvr-curl-bottom-right">
+				            	<img src="./icons/bluepin.png" width="40" align="center"/>
 				            	<header>
 									<h3>Our classes have just 8 students. We truly believe small classes are better.</h3>
 								</header>
 				            </div> 
 				        </div>				        
 						<div class="flipcard"> 
-				            <div class="front" style="background-color: #72a7ee"> 
+				            <div class="front hvr-curl-bottom-right" style="background-color: #72a7ee"> 
+				            	<img src="./icons/bluepin.png" width="40" align="center"/>
 				               <header>
 								<h1>Coding is complex.</h1>
 								</header>
 				            </div> 
-				            <div class="back">
+				            <div class="back hvr-curl-bottom-right">
+				            	<img src="./icons/bluepin.png" width="40" align="center"/>
 								<!--<h2><iframe width="364" height="210" src="https://www.youtube.com/embed/tm1CREaQn1I" frameborder="0" allowfullscreen></iframe></h2>-->
 				            	<header>
 									<h3>Real coding is complex. It's solving problems. Our students <b>write complex code</b> and <b>solve problems</b> in Java.</h3>
@@ -171,50 +194,58 @@
 				            </div> 
 				        </div>				        									        
 						<div class="flipcard"> 
-				            <div class="front" style="background-color: #dedea9"> 
+				            <div class="front hvr-curl-bottom-right" style="background-color: #dedea9"> 
+				            	<img src="./icons/yellowpin.png" width="40" align="center"/>
 				               <header>
 								<h1>We make coding fun :)</h1>
 								</header>
 				            </div> 
-				            <div class="back">
+				            <div class="back hvr-curl-bottom-right">
+				            	<img src="./icons/bluepin.png" width="40" align="center"/>
 				            	<header>
 									<h3>Our students have <b>fun</b> coding. Just attend one of our trial classes. You will see the high energy :)</h3>
 								</header>
 				            </div> 
 				        </div>				        
 						<div class="flipcard"> 
-				            <div class="front" style="background-color: #a366a3"> 
+				            <div class="front hvr-curl-bottom-right" style="background-color: #a366a3"> 
+				            	<img src="./icons/purplepin.png" width="40" align="center"/>
 				               <header>
 								<h1>We focus on concepts.</h1>
 								</header>
 				            </div> 
-				            <div class="back">
+				            <div class="back hvr-curl-bottom-right">
+				            	<img src="./icons/bluepin.png" width="40" align="center"/>
 				            	<header>
 									<h3>Our students write code. Lots of code. This helps reinforce core coding concepts.</h3>
 								</header>
 				            </div> 
 				        </div>	
 				        <div class="flipcard"> 
-				            <div class="front" style="background-color: #d3cf5d"> 
+				            <div class="front hvr-curl-bottom-right" style="background-color: #d3cf5d"> 
+				               <img src="./icons/greenpin.png" width="40" align="center"/>
 				               <header>
 								<h1>Our students level up and achieve.</h1>
 								</header>
 				            </div> 
-				            <div class="back">
+				            <div class="back hvr-curl-bottom-right">
+				            	<img src="./icons/bluepin.png" width="40" align="center"/>
 				            	<header>
-									<h1><a href="./achievements.html" style="color: black;">Take a look at our student achievements.</a></h1><h3>As our students solve coding problems, they learn to level up and become high achievers.</h3>
+									<h3><a href="./achievements.html" style="color: black;">Take a look at our student achievements.</a></h3><h3>As our students solve coding problems, they level up to become high achievers.</h3>
 								</header>
 				            </div> 
 				        </div>			        
 						<div class="flipcard"> 
-				            <div class="front" style="background-color: #5397ab"> 
+				            <div class="front hvr-curl-bottom-right" style="background-color: #5397ab"> 
+				            	<img src="./icons/bluepin.png" width="40" align="center"/>
 				               <header>
 								<h1>Sounds Interesting?</h1>
 								</header>
 				            </div> 
-				            <div class="back">
+				            <div class="back hvr-curl-bottom-right">
+				            	<img src="./icons/bluepin.png" width="40" align="center"/>
 				            	<header>
-									<h1><a href="./register.html" style="color: black;">Register for our free trial classes.</a></h1><h3>We offer half year long classes.</h3>
+									<h3><a href="./register.html" style="color: black;">Register for our free trial classes.</a></h3><h3>We offer half year long classes.</h3>
 								</header>
 				            </div> 
 				        </div>				        

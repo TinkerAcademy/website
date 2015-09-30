@@ -110,7 +110,7 @@ def buildcoursecontenttemplatevalues(insession, courseid, coursecontentid, cours
 			template_values['coursevideos'].append(coursevideo)
 	return template_values
 
-def evaluatequiz(studentdict, answerdict):
+def evaluateanswer(studentdict, answerdict):
 	#{ "quiz":2, "answers":{"quiz":2 , "source":"ap" , "s":"ccb5eca7f5baff157d911dbe67ed3a38e75a170f" , "q1":2 , "submit":1} }
 	correct = 0
 	for i in range(1,10):
@@ -170,6 +170,9 @@ def quizanswers(source):
 					},
 					{
 						"q1":1, "q2":1, "q3":2, "q4":2, "q5":2, "q6": 1, "q7": 1
+					},
+					{
+						"q1":1, "q2":1, "q3":2, "q4":1, "q5":2, "q6": 1
 					}
 				],
 			"pj": [
@@ -180,4 +183,15 @@ def quizanswers(source):
 				]
 		}
 	return answersdict[source]
+
+def hwanswers(source):
+	answersdict = {
+			"ap": [
+					{},{},{},{},
+					{
+						"q1":-46672, "q2":7497032
+					}
+				]
+		}
+	return answersdict[source]	
 

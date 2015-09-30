@@ -180,13 +180,34 @@
 				<!-- grab the posts -->
 				<div class="box">
 					<header>
+						<h3>Quiz Results</h3>
 						{% set quizindex = 0 %}
-						{% for result in results %}
+						{% for result in quizresults %}
 						{% set quizindex = quizindex + 1 %}
 						{% if result['total'] > 0 %}
 						<h4>Quiz {{quizindex}} - {{result['correct']}} / {{result['total']}}</h4>
 						{% else %}
 						<h4>Quiz {{quizindex}} - Ungraded</h4>
+				        {% endif %}
+				        {% endfor %}
+					</header>
+				</div><!-- box -->
+			</div> <!-- posts -->
+		</div><!-- content -->
+		<div id="content">
+			<div class="posts">	
+				<!-- titles -->								
+				<!-- grab the posts -->
+				<div class="box">
+					<header>
+						<h3>Homwork Results</h3>
+						{% set hwindex = 0 %}
+						{% for result in hwresults %}
+						{% set hwindex = hwindex + 1 %}
+						{% if result['total'] > 0 %}
+						<h4>Homework {{hwindex}} - {{result['correct']}} / {{result['total']}}</h4>
+						{% else %}
+						<h4>Homwork {{hwindex}} - Ungraded</h4>
 				        {% endif %}
 				        {% endfor %}
 					</header>

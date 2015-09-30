@@ -24,6 +24,8 @@ handlers:
   static_dir: static/icons
 - url: /minecraft
   static_dir: static/minecraft
+- url: /homework
+  static_dir: static/homework
 # - url: /
 #   static_files: index.html
 #   upload: index.html
@@ -45,6 +47,9 @@ handlers:
 - url: /tinkeracademy/(.*)$
   static_files: tinkeracademy/\1
   upload: tinkeracademy/.*$
+- url: /slick/(.*)$
+  static_files: slick/\1
+  upload: slick/.*$
 - url: /admin
   script: tinkeracademy.application 
 - url: /.*

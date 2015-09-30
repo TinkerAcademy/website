@@ -49,10 +49,11 @@
 		<link rel="stylesheet" id="google_raleway-css" href="./tinkeracademy/css" type="text/css" media="all">
 		<link rel="stylesheet" id="jetpack_css-css" href="./tinkeracademy/jetpack.css" type="text/css" media="all">
 		<link rel="stylesheet" id="flip.css" href="./tinkeracademy/flip.css" type="text/css" media="all">
+		<link rel="stylesheet" id="hover.css" href="./tinkeracademy/hover.css" type="text/css" media="all">
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
-		<!--<script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.16/dist/jquery.flip.min.js"></script>-->
 		<script src="./tinkeracademy/flip.local.js"></script>
+		<!--<script src="./tinkeracademy/flip.local.js"></script>-->
 		{% if sessionid %}
 		<link rel="prev" title="register" href="register.html?s={{sessionid}}">
 		<link rel="next" title="about" href="index.html?s={{sessionid}}">
@@ -72,6 +73,23 @@
 	; 
 			}
 		</style>
+		<script type="text/javascript">
+
+			var lookup = {
+				"a1" : [ 180, 200 ]
+			}
+			jQuery(document).ready(function( $ ) { 
+				$(".flipcardxpand").each(function(index, elem) {
+						$(elem).flip({
+						  axis: 'x',
+						  frontHeight: lookup[elem.id][0],
+						  backHeight: lookup[elem.id][1]
+						})
+					}
+				);
+			});
+
+		</script>
     </head>
 	<body>
 		<div class="header-wrap clearfix">
@@ -123,131 +141,113 @@
 		<div id="wrapper" class="clearfix">
 		<div class="inside-wrap clearfix">		
 		<div id="content">
-			<div class="posts">
-	
-				<!-- titles -->
-								
-				<!-- grab the posts -->
-				<article class="post-109 page type-page status-publish hentry post">
-					<div class="box-wrap">
-						<div class="box">
-							<h1 class="entry-title"><a href="showcase.html" title="Permalink to Showcase" rel="bookmark">List Of Student Achievements</a></h1>
-							<h3>Programming Using Java (&amp; Minecraft)</h3>
-						</div><!-- box -->
+			<div class="posts">	
+				<div class="box">
+					<h1 class="entry-title">Student Achievement Badges</h1>
+					<h3>Programming Using Java (&amp; Minecraft)</h3>
+				</div><!-- box -->
+				<div class="flipcardxpand" id="a1"> 
+		            <div class="front hvr-curl-bottom-right" style="background-color: #e6e770;"> 
 		               <header>
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Download &amp; Install Software</h3>								
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Clone a Git Repository</h3>								
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Setup Eclipse</h3>								
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Setup Minecraft Forge</h3>								
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Run Eclipse</h3>								
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Run Eclipse Debugger</h3>								
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Add Debug Breakpoints</h3>	
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Locate a Java API</h3>
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Locate a Minecraft API</h3>							
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Create a Java Package</h3>							
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Create a Java Class</h3>
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Import a Java Class</h3>							
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Refactor a Java Class</h3>
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Add a Java Annotation</h3>
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Browse JavaDocs</h3>
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Open a compiled Java Class File</h3>
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Compile a Java Class Using Command Line</h3>							
-							<img src="./minecraft/lapis.png" height="60" width="60" align="left"/>
-							<h3>Run a Java Program Using Command Line</h3>							
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code an Event Handler</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a Console Output Statement</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a Method API Invocation</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a new Java Object expression</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a dot operator expression</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a String literal expression</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a Character literal expression</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code an Integer literal expression</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a Float literal expression</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code multiple input expressions</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a complex method invocation expression</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a local variable declaration</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a local variable assignment</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a local variable access</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a local variable re-assignment</h3>							
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a new block</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a static field declaration</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a static field initialization</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a static field access</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a static method definition</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a static method return statement</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Refactor code to reuse a method definition</h3>
-							<img src="./minecraft/gold.jpg" height="60" width="60" align="left"/>
-							<h3>Code a Java Property</h3>
-							<img src="./minecraft/emerald.png" height="60" width="60" align="left"/>
-							<h3>Create a resources file</h3>
-							<img src="./minecraft/emerald.png" height="60" width="60" align="left"/>
-							<h3>Create a Java Properties File</h3>
-							<img src="./minecraft/emerald.png" height="60" width="60" align="left"/>
-							<h3>Create a texture file</h3>
-							<img src="./minecraft/diamond.jpg" height="60" width="60" align="left"/>
-							<h3>Understand Java Compilation</h3>
-							<img src="./minecraft/diamond.jpg" height="60" width="60" align="left"/>
-							<h3>Understand Class Loaders</h3>
-							<img src="./minecraft/diamond.jpg" height="60" width="60" align="left"/>
-							<h3>Understand Java Virtual Machine Loading, Linking &amp; Initialization</h3>
-							<img src="./minecraft/diamond.jpg" height="60" width="60" align="left"/>
-							<h3>Understand Code Execution Flow</h3>
-							<img src="./minecraft/diamond.jpg" height="60" width="60" align="left"/>
-							<h3>Understand Method Invocation</h3>
-							<img src="./minecraft/diamond.jpg" height="60" width="60" align="left"/>
-							<h3>Understand Java Events &amp; Event Handlers</h3>
-							<img src="./minecraft/diamond.jpg" height="60" width="60" align="left"/>
-							<h3>Understand Object Instantiation</h3>
-							<img src="./minecraft/diamond.jpg" height="60" width="60" align="left"/>
-							<h3>Understand Textures</h3>
-							<img src="./minecraft/diamond.jpg" height="60" width="60" align="left"/>
-							<h3>Understand Localization</h3>														
+		               	<img src="./icons/badgebuilder.png" width="180" align="right"/>
+						<h1>Builder</h1>
 						</header>
-					</div><!-- box wrap -->
-				</article><!-- post-->
-				
-				</div>
-									
-		</div><!-- wrapper -->
+		            </div> 
+		            <div class="back hvr-curl-bottom-right">
+		            	<header>
+		            		<img src="./icons/badgebuilder.png" width="180" align="right"/>
+		            		<h3>The student built advanced Java tools</h3>
+						</header>
+		            </div> 
+		        </div>
+		        <div class="flipcardxpand" id="a1"> 
+		            <div class="front hvr-curl-bottom-right" style="background-color: #e6e770;"> 
+		               <header>
+		               	<img src="./icons/badgeorganizer.png" width="180" align="right"/>
+						<h1>Organizer</h1>
+						</header>
+		            </div> 
+		            <div class="back hvr-curl-bottom-right">
+		            	<header>
+		            		<img src="./icons/badgeorganizer.png" width="180" align="right"/>
+		            		<h3>The student organized code using an advanced source control system</h3>
+						</header>
+		            </div> 
+		        </div>
+		        <div class="flipcardxpand" id="a1"> 
+		            <div class="front hvr-curl-bottom-right" style="background-color: #e6e770;"> 
+		               <header>
+		               	<img src="./icons/badgedeveloper.png" width="180" align="right"/>
+						<h1>Developer</h1>
+						</header>
+		            </div> 
+		            <div class="back hvr-curl-bottom-right">
+		            	<header>
+		            		<img src="./icons/badgedeveloper.png" width="180" align="right"/>
+		            		<h3>The student developed code using core Java concepts</h3>
+						</header>
+		            </div> 
+		        </div>
+		        <div class="flipcardxpand" id="a1"> 
+		            <div class="front hvr-curl-bottom-right" style="background-color: #e6e770;"> 
+		               <header>
+		               	<img src="./icons/badgeinventor.png" width="180" align="right"/>
+						<h1>Inventor</h1>
+						</header>
+		            </div> 
+		            <div class="back hvr-curl-bottom-right">
+		            	<header>
+		            		<img src="./icons/badgeinventor.png" width="180" align="right"/>
+		            		<h3>The student invented Minecraft Recipes using Java</h3>
+						</header>
+		            </div> 
+		        </div>
+		        <div class="flipcardxpand" id="a1"> 
+		            <div class="front hvr-curl-bottom-right" style="background-color: #e6e770;"> 
+		               <header>
+		               	<img src="./icons/badgecreator.png" width="180" align="right"/>
+						<h1>Creator</h1>
+						</header>
+		            </div> 
+		            <div class="back hvr-curl-bottom-right">
+		            	<header>
+		            		<img src="./icons/badgecreator.png" width="180" align="right"/>
+		            		<h3>The student created Minecraft Items using Java</h3>
+						</header>
+		            </div> 
+		        </div>
+		        <div class="flipcardxpand" id="a1"> 
+		            <div class="front hvr-curl-bottom-right" style="background-color: #e6e770;"> 
+		               <header>
+		               	<img src="./icons/badgedesigner.png" width="180" align="right"/>
+						<h1>Designer</h1>
+						</header>
+		            </div> 
+		            <div class="back hvr-curl-bottom-right">
+		            	<header>
+		            		<img src="./icons/badgedesigner.png" width="180" align="right"/>
+		            		<h3>The student designed Minecraft Worlds using Java</h3>
+						</header>
+		            </div> 
+		        </div>
+		        <div class="flipcardxpand" id="a1"> 
+		            <div class="front hvr-curl-bottom-right" style="background-color: #e6e770;"> 
+		               <header>
+		               	<img src="./icons/badgeproducer.png" width="180" align="right"/>
+						<h1>Producer</h1>
+						</header>
+		            </div> 
+		            <div class="back hvr-curl-bottom-right">
+		            	<header>
+		            		<img src="./icons/badgeproducer.png" width="180" align="right"/>
+		            		<h3>The student produced entire Minecraft Mods using Java</h3>
+						</header>
+		            </div> 
+		        </div>
+			</div>									
+		</div>
+		</div>
+		</div>
 	
 		<footer id="footer">
 			<div id="footer-inside">

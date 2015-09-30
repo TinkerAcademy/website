@@ -21,6 +21,7 @@ from pages import 	MainPage, \
 					CoursePage, \
 					AchievementsPage, \
 					SaveQuizPage, \
+					SaveHomeworkPage, \
 					ProfilePage
 					# CourseContentsPage, \
 					# ClassroomPage, \
@@ -51,6 +52,7 @@ application = webapp2.WSGIApplication([
 										('/showcase.html', ShowcasePage),
 										('/achievements.html', AchievementsPage),
 										('/savequiz.html', SaveQuizPage),
+										('/savehomework.html', SaveHomeworkPage),
 										('/profile.html', ProfilePage),
 										('/aboutus.html', AboutUsPage),
 										('/register.html', RegisterPage),

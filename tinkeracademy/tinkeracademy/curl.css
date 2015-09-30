@@ -1,0 +1,8 @@
+/**
+ * Author: @joostkiens
+ * Licensed under the MIT license
+ */
+.curl {
+  box-shadow: 2px 2px 30px black;
+  transform: skew(-2deg) rotate(0deg);
+}

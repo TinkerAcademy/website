@@ -15,7 +15,7 @@ from pageutils import buildchannelpartnertemplatevalues
 from pageutils import buildstafftemplatevalues
 from pageutils import extractkeyfromrequest
 from pageutils import extractkeyvaluesfromrequest
-from pageutils import evaluatequiz
+from pageutils import evaluateanswer
 from pageutils import isinsession
 from pageutils import issessionrequest
 from pageutils import isadminuser
@@ -23,6 +23,7 @@ from pageutils import createloginurl
 from pageutils import attemptlogin
 from pageutils import translateclaztosource
 from pageutils import quizanswers
+from pageutils import hwanswers
 
 from environment import JINJA_ENVIRONMENT
 
@@ -138,19 +139,26 @@ class APComputerSciencePage(webapp2.RequestHandler):
 			template_values['quiz' + str(i) + 'submitted'] = cacheservice.getfromsession(sessionid, 'quiz' + str(i) + 'submitted');	
 			template_values['quiz' + str(i) + 'results'] = cacheservice.getfromsession(sessionid, 'quiz' + str(i) + 'results');	
 			template_values['quiz' + str(i) + 'len'] = cacheservice.getfromsession(sessionid, 'quiz' + str(i) + 'len');	
+		for i in range(1,10):
+			template_values['hw' + str(i) + 'submitted'] = cacheservice.getfromsession(sessionid, 'hw' + str(i) + 'submitted');	
+			template_values['hw' + str(i) + 'results'] = cacheservice.getfromsession(sessionid, 'hw' + str(i) + 'results');	
+			template_values['hw' + str(i) + 'len'] = cacheservice.getfromsession(sessionid, 'hw' + str(i) + 'len');	
 		logging.info("APComputerSciencePage template_values="+str(template_values))
 		if sessionid:
 			for i in range(1,10):				
 				cacheservice.clearfromsession(sessionid, 'quiz' + str(i) + 'submitted')
 				cacheservice.clearfromsession(sessionid, 'quiz' + str(i) + 'results')
 				cacheservice.clearfromsession(sessionid, 'quiz' + str(i) + 'len')
+			for i in range(1,10):				
+				cacheservice.clearfromsession(sessionid, 'hw' + str(i) + 'submitted')
+				cacheservice.clearfromsession(sessionid, 'hw' + str(i) + 'results')
+				cacheservice.clearfromsession(sessionid, 'hw' + str(i) + 'len')
 		template = JINJA_ENVIRONMENT.get_template('apcomputerscience.html')
 		self.response.write(template.render(template_values))		
 	def post(self):			
 		userservice = TinkerAcademyUserService()
 		sessionid = userservice.anonlogin()
 		cacheservice = MemcacheService()
-		cacheservice.putinsession(sessionid, "quizsubmitted", True)	
 		self.redirect('/apcomputerscience.html?s='+str(sessionid))
 
 class AllCoursesPage(webapp2.RequestHandler):
@@ -459,26 +467,39 @@ class ProfilePage(webapp2.RequestHandler):
 			sessionid = sessionid.strip()
 		user = None
 		source = None
-		results = []
 		cacheservice = MemcacheService()
+		quizresults = []
+		hwresults = []
 		if sessionid:
 			user = cacheservice.getsessionuser(sessionid)
 			source = translateclaztosource(user.claz)
-			answerarr = quizanswers(source)
+			quizanswerarr = quizanswers(source)
 			for quizint in range(1,9):
-				if len(answerarr) > quizint:
-					quiz = answerarr[quizint]
+				if len(quizanswerarr) > quizint:
+					quiz = quizanswerarr[quizint]
 					quizlen = len(quiz)
 					if "free" in quiz:
-						quizlen = quizlen - 1 + answerarr[quizint]["free"]
+						quizlen = quizlen - 1 + quizanswerarr[quizint]["free"]
 					quizresult = getattr(user, 'quiz' + str(quizint) + 'results')
 					if quizresult is None:
 						quizresult = 0
-					results.append({'total' : quizlen, 'correct': quizresult})
+					quizresults.append({'total' : quizlen, 'correct': quizresult})
+			hwanswerarr = hwanswers(source)
+			for hwint in range(1,9):
+				if len(hwanswerarr) > hwint:
+					hw = hwanswerarr[hwint]
+					hwlen = len(hw)
+					if "free" in hw:
+						hwlen = hwlen - 1 + hwanswerarr[hwint]["free"]
+					hwresult = getattr(user, 'hw' + str(hwint) + 'results')
+					if hwresult is None:
+						hwresult = 0
+					hwresults.append({'total' : hwlen, 'correct': hwresult})
 		template_values = {
 			'sessionid' : sessionid,
 			'user' : user,
-			'results' : results
+			'quizresults' : quizresults,
+			'hwresults' : hwresults
 		}
 		template = JINJA_ENVIRONMENT.get_template('profile.html')
 		self.response.write(template.render(template_values))
@@ -511,7 +532,6 @@ class ProgrammingUsingJavaPage(webapp2.RequestHandler):
 		userservice = TinkerAcademyUserService()
 		sessionid = userservice.anonlogin()
 		cacheservice = MemcacheService()
-		cacheservice.putinsession(sessionid, "quizsubmitted", True)	
 		self.redirect('/programmingusingjava.html?s='+str(sessionid))
 
 class RegisterPage(webapp2.RequestHandler):
@@ -717,7 +737,7 @@ class SaveQuizPage(webapp2.RequestHandler):
 					if source:
 						answerarr = quizanswers(source)
 						studentdict = self.request.params
-						quizresults = evaluatequiz(studentdict, answerarr[quizint])
+						quizresults = evaluateanswer(studentdict, answerarr[quizint])
 						quizlen = len(answerarr[quizint])
 						if "free" in answerarr[quizint]:
 							quizlen = quizlen - 1 + answerarr[quizint]["free"]
@@ -741,6 +761,50 @@ class SaveQuizPage(webapp2.RequestHandler):
 		self.redirect(redirecthtml)
 
 
+class SaveHomeworkPage(webapp2.RequestHandler):
+	def post(self):			
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		source = None
+		if sessionid:
+			cacheservice = MemcacheService()
+			user = cacheservice.getsessionuser(sessionid)
+			if user:
+				if self.request.params:
+					hw = str(extractkeyfromrequest(self.request, 'hw'))
+					hwint = int(hw)
+					source = str(extractkeyfromrequest(self.request, 'source'))
+					if not source:
+						source = translateclaztosource(user.claz)
+					if source:
+						answerarr = hwanswers(source)
+						studentdict = self.request.params
+						hwresults = evaluateanswer(studentdict, answerarr[hwint])
+						hwlen = len(answerarr[hwint])
+						if "free" in answerarr[hwint]:
+							hwlen = hwlen - 1 + answerarr[hwint]["free"]
+							hwresults = hwresults + answerarr[hwint]["free"]
+						kvpairs = extractkeyvaluesfromrequest(self.request)
+						hwstr = kvpairs
+						setattr(user, 'hw' + hw, hwstr)
+						setattr(user, 'hw' + hw + 'results', hwresults)
+						user.put()
+						cacheservice.setsessionuser(sessionid, user)
+						cacheservice.putinsession(sessionid, 'hw' + str(hw) + 'submitted', True)	
+						cacheservice.putinsession(sessionid, 'hw' + str(hw) + 'results', hwresults)	
+						cacheservice.putinsession(sessionid, 'hw' + str(hw) + 'len', hwlen)	
+		redirecthtml = "./index.html"
+		if source == "ap":
+			redirecthtml = "./apcomputerscience.html"
+		elif source == "pj":
+			redirecthtml = "./programmingusingjava.html"			
+		if sessionid:
+			redirecthtml = redirecthtml + "?s=" + str(sessionid)
+		self.redirect(redirecthtml)
+
+# Old
 class SubmitQuizPage(webapp2.RequestHandler):
 	def post(self):
 		uid, insession = attemptlogin(self.request)
