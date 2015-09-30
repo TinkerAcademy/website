@@ -81,6 +81,9 @@
 			
 		</style>
 		<script type="text/javascript">
+			function istouchdevice() {
+				return typeof window.ontouchstart !== 'undefined';
+			}
 			jQuery(document).ready(function( $ ) { 
 				$(".flipcard").flip({
 				  	axis: 'x'
@@ -89,6 +92,9 @@
 					autoplay: true,
 					autoplaySpeed: 10000
 				});
+				if (istouchdevice()) {
+					$(".hvr-curl-bottom-right").addClass('hover');
+				}
 			});			
 		</script>
     </head>
