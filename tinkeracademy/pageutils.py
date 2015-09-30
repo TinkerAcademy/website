@@ -117,8 +117,11 @@ def evaluateanswer(studentdict, answerdict):
 		key = "q" + str(i)
 		if key in answerdict:
 			if key in studentdict:
-				if int(answerdict[key]) == int(studentdict[key]):
-					correct = correct + 1
+				try:
+					if int(answerdict[key]) == int(studentdict[key]):
+						correct = correct + 1
+				except ValueError:
+					pass
 	return correct
 
 def extractkeyvaluesfromrequest(request):
