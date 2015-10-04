@@ -22,7 +22,8 @@ from pages import 	MainPage, \
 					AchievementsPage, \
 					SaveQuizPage, \
 					SaveHomeworkPage, \
-					ProfilePage
+					ProfilePage, \
+					InstallationPage
 					# CourseContentsPage, \
 					# ClassroomPage, \
 					# ForgotPage, \
@@ -57,6 +58,7 @@ application = webapp2.WSGIApplication([
 										('/aboutus.html', AboutUsPage),
 										('/register.html', RegisterPage),
 										('/contact.html', ContactPage),
+										('/installation.html', InstallationPage),
 										('/admin.html', AdminPage),
 										('/payment.html', PaymentPage),
 										('/scholarship.html', ScholarshipPage),
@@ -73,7 +75,7 @@ application = webapp2.WSGIApplication([
 										# ('/signupstatus', SignUpStatusPage),
 										# ('/submithomework', SubmitHomeworkPage),
 										# ('/submitquiz', SubmitQuizPage),
-										# ('/task/databaseupdate', DatabaseUpdateTask),
+										('/task/databaseupdate', DatabaseUpdateTask),
 										# ('/task/tokenupdate', TokenUpdateTask),
 									], debug=True)
 

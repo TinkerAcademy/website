@@ -9,6 +9,7 @@ import httplib2
 
 from services import EmailService
 from services import DatabaseService
+from services import TinkerAcademyUserService
 from pageutils import isadminuser
 from environment import updatetokens
 
@@ -19,17 +20,20 @@ class EmailTask(webapp2.RequestHandler):
 
 class DatabaseUpdateTask(webapp2.RequestHandler):
 	def get(self):
-		ipaddress = self.request.remote_addr
-		if isadminuser:
+		userservice = TinkerAcademyUserService()
+		studentid = "2015035"
+		studentname = "Timothy Liu"
+		user = userservice.finduserbystudentid(studentid)
+		if user:
 			try:
-				databaseservice = DatabaseService()
-				databaseservice.updategeoip(ipaddress)
+				user.studentname = studentname
+				user.put()
 			except:
-				logging.error("database update from admin user from ipaddress=" + str(ipaddress))
+				logging.error("error updating user=" + str(studentid))
 				sys_err = sys.exc_info()
 				logging.error(sys_err[1])
 		else:
-			logging.error("database update from non-admin user from ipaddress=" + str(ipaddress))
+			logging.error("user not found=" + str(studentid))
 
 class TokenUpdateTask(webapp2.RequestHandler):
 	def get(self):
