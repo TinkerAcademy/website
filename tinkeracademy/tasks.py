@@ -21,7 +21,7 @@ class EmailTask(webapp2.RequestHandler):
 class DatabaseUpdateTask(webapp2.RequestHandler):
 	def get(self):
 		userservice = TinkerAcademyUserService()
-		studentid = "2015035"
+		studentid = 2015035
 		studentname = "Timothy Liu"
 		user = userservice.finduserbystudentid(studentid)
 		if user:
