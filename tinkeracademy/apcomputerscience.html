@@ -79,11 +79,14 @@
 				'lesson2' : [ 200, 1600 ],
 				'lesson3' : [ 200, 4800 ],
 				'lesson4' : [ 200, 520 ],
+				'lesson5' : [ 200, 520 ],
 				'quiz1' : [ 200, 800 ],
 				'quiz2' : [ 200, 1000 ],
 				'quiz3' : [ 200, 2030 ],
 				'quiz4' : [ 200, 1600 ],
-				'homework4' : [ 200, 2100 ]
+				'quiz5' : [ 200, 2920 ],
+				'homework4' : [ 200, 2100 ],
+				'homework5' : [ 200, 1800 ]
 			}
 			jQuery(document).ready(function( $ ) { 
 				$(".flipcardxpand").each(function(index, elem) {
@@ -164,6 +167,273 @@
 				<div class="box">
 					<h1 class="entry-title"><a href="showcase.html" title="Permalink to Showcase" rel="bookmark">{{user.claz}}</a></h1>
 				</div><!-- box -->				
+			</div> <!-- posts -->
+		</div><!-- content -->
+
+		<div id="content">
+			<div class="posts">	
+				<!-- titles -->								
+				<!-- grab the posts -->
+				<div class="box">
+					<h1 class="entry-title"><a href="showcase.html" title="Permalink to Showcase" rel="bookmark">Week 4</a></h1>
+				</div><!-- box -->		
+				<div class="flipcardxpand" id="lesson5"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		            	<img alt="Videos" src="./icons/Youtube.png" width="128" align="right"/>
+		                <header>
+						<h1>Videos</h1>
+						<h3>Week 5</h3>
+						</header>
+		            </div> 
+		            <div class="back">
+		            	<header>
+		            		<h2>Week 5 Classroom Material (Calculator2, WHILE Loop, IF Statements)</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/0Knlf86LeJY" frameborder="0" allowfullscreen></iframe></h2>	
+						</header>
+		            </div> 
+		        </div> <!--lesson1-->		
+				<div class="flipcardxpand" id="quiz5"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		               <header>
+						<h1>Quiz</h1>
+						<h3>Week 5</h3>
+						{% if quiz4submitted %}
+						<h4>Quiz Submitted, {{quiz4results}} / {{quiz4len}} correct</h4>
+						{% endif %}
+						</header>
+		            </div> 
+		            <div class="back quizback">
+		            	<form class="form-horizontal" method="post" action="./savequiz.html?quiz=5&amp;source=ap&amp;s={{sessionid}}">
+						<fieldset>	
+						<header>
+		            		<h4>Question 1</h4>
+		            		<code>|01| <code><code>public class A {</code><br/>		            		
+		            		<code>|02| <code><code>  public static void main(String[] args) {</code><br/>
+		            		<code>|03| <code><code>     int x = 0;</code><br/> 		            		
+		            		<code>|04| <code><code>     while ((x*x - x - 12) !=  0) {</code><br/> 
+		            		<code>|05| <code><code>     	x = x + 1;</code><br/>            		
+		            		<code>|06| <code><code>     }</code><br/>		
+		            		<code>|07| <code><code>     System.out.println(x);</code><br/>		
+		            		<code>|08| <code><code>  }</code><br/>
+		            		<code>|09| <code><code>}</code><br/>
+		            		<h5>What is the value of x above when the main method completes execution?</h5>
+							<div>
+		            		<label>
+      							<input type="radio" name="q1" value="1">
+      							0
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q1" value="2">
+      							3
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q1" value="3">
+      							4
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q1" value="4">
+      							12
+    						</label>
+    						</div>   
+    						<h3></h3>
+    						<h4>Question 2</h4>
+		            		<code>|01| <code><code>public class B {</code><br/>		            		
+		            		<code>|02| <code><code>  public static void main(String[] args) {</code><br/>
+		            		<code>|03| <code><code>     int x = 0;</code><br/> 		            		
+		            		<code>|04| <code><code>     while ((x*x + 7*x + 12) !=  0) {</code><br/> 
+		            		<code>|05| <code><code>     	x = x + 1;</code><br/>            		
+		            		<code>|06| <code><code>     }</code><br/>		
+		            		<code>|07| <code><code>     System.out.println(x);</code><br/>		
+		            		<code>|08| <code><code>  }</code><br/>
+		            		<code>|09| <code><code>}</code><br/>
+		            		<h5>What is the value of x above when the main method completes execution?</h5>
+							<div>
+		            		<label>
+      							<input type="radio" name="q2" value="1">
+      							3
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q2" value="2">
+      							4
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q2" value="3">
+      							Neither, the main method will never complete execution
+    						</label>
+    						</div>   
+    						<h3></h3>
+    						<h4>Question 3</h4>
+		            		<code>|01| <code><code>public class C {</code><br/>		            		
+		            		<code>|02| <code><code>  public static void main(String[] args) {</code><br/>
+		            		<code>|03| <code><code>     int x = 0;</code><br/> 		            		
+		            		<code>|04| <code><code>     if (x &gt; 0) {</code><br/> 
+		            		<code>|05| <code><code>     	x = x + 1;</code><br/>            		
+		            		<code>|06| <code><code>     } else if (x &lt; 0) {</code><br/>		
+		            		<code>|07| <code><code>     	x = x - 1;</code><br/>            		
+		            		<code>|08| <code><code>     } else {</code><br/>		
+		            		<code>|09| <code><code>     	x = 1;</code><br/>            		
+		            		<code>|10| <code><code>     }</code><br/> 		            		
+		            		<code>|11| <code><code>     System.out.println(x);</code><br/>		
+		            		<code>|12| <code><code>  }</code><br/>
+		            		<code>|13| <code><code>}</code><br/>
+		            		<h5>What is the value of x above when the main method completes execution?</h5>
+							<div>
+		            		<label>
+      							<input type="radio" name="q3" value="1">
+      							0
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q3" value="2">
+      							1
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q3" value="3">
+      							2
+    						</label>
+    						</div>   
+    						<h3></h3>
+    						<h4>Question 4</h4>
+		            		<code>|01| <code><code>public class D {</code><br/>		            		
+		            		<code>|02| <code><code>  public static void main(String[] args) {</code><br/>
+		            		<code>|03| <code><code>     int x = 0;</code><br/> 		            		
+		            		<code>|04| <code><code>     while (!(x &lt; 0)) {</code><br/> 		            		
+		            		<code>|05| <code><code>       if (x &gt; 0) {</code><br/> 
+		            		<code>|06| <code><code>     	 x = x - 3;</code><br/>            		
+		            		<code>|07| <code><code>       } else if (x &lt; 0) {</code><br/>		
+		            		<code>|08| <code><code>     	 x = x + 1;</code><br/>            		
+		            		<code>|09| <code><code>       } else {</code><br/>		
+		            		<code>|10| <code><code>     	x = x + 2;</code><br/>            		
+		            		<code>|11| <code><code>       }</code><br/> 		            		
+		            		<code>|12| <code><code>     }</code><br/>		
+		            		<code>|13| <code><code>     System.out.println(x);</code><br/>		
+		            		<code>|14| <code><code>  }</code><br/>
+		            		<code>|15| <code><code>}</code><br/>
+		            		<h5>What is the value of x above when the main method completes execution?</h5>
+							<div>
+		            		<label>
+      							<input type="radio" name="q4" value="1">
+      							0
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q4" value="2">
+      							1
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q4" value="3">
+      							-1
+    						</label>
+    						</div>   
+    						<h3></h3>
+    						<h4>Question 5</h4>
+		            		<code>|01| <code><code>public class E {</code><br/>		            		
+		            		<code>|02| <code><code>  public static void main(String[] args) {</code><br/>
+		            		<code>|03| <code><code>     int x = -9;</code><br/> 		            		
+		            		<code>|04| <code><code>     while (!(x == 0)) {</code><br/> 		            		
+		            		<code>|05| <code><code>       if (x &gt; 0) {</code><br/> 
+		            		<code>|06| <code><code>     	 x = x - 1;</code><br/>            		
+		            		<code>|07| <code><code>       } else if (x &lt; 0) {</code><br/>		
+		            		<code>|08| <code><code>     	 x = x + 2;</code><br/>            		
+		            		<code>|09| <code><code>       } else {</code><br/>		
+		            		<code>|10| <code><code>     	x = x - 2;</code><br/>            		
+		            		<code>|11| <code><code>       }</code><br/> 		            		
+		            		<code>|12| <code><code>     }</code><br/>		
+		            		<code>|13| <code><code>  }</code><br/>
+		            		<code>|14| <code><code>}</code><br/>
+		            		<h5>How many times will the loop execute in the code above</h5>
+							<div>
+		            		<label>
+      							<input type="radio" name="q5" value="1">
+      							4
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q5" value="2">
+      							5
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q5" value="3">
+      							6
+    						</label>
+    						</div>   
+    						<h3></h3>
+    						<div class="control-group">
+							  <div class="controls">
+							    <button id="submit" name="submit" value="1" class="btn btn-primary">Submit</button>
+							  </div>
+							</div>
+						</header>	            	
+						</fieldset>
+						</form>
+		            </div> 
+		        </div> <!--quiz-->
+				<div class="flipcardxpand" id="homework5"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		                <header>
+						<h1>Homework</h1>
+						<h3>Week 5</h3>
+						{% if hw5submitted %}
+						<h4>Homework Submitted, {{hw5results}} / {{hw5len}} correct</h4>
+						{% endif %}
+						</header>
+		            </div> 
+		            <div class="back hwback">	
+		            	<form class="form-horizontal" method="post" action="./savehomework.html?hw=5&amp;source=ap&amp;s={{sessionid}}">
+						<fieldset>
+		            	<header>
+							<h4>Part 1</h4>
+							<h5>Week 5 Homework Part 1 Getting Started</h5>
+							<h5><iframe width="360" height="300" src="https://www.youtube.com/embed/CsABCXqQjSw" frameborder="0" allowfullscreen></iframe></h5>
+		            		<h5>You are busy writing your cool Java decoder program when <span style="color:red">CLIFFORD, THE BIG RED DOG</span> decides to come by for a visit. Clifford decides to get his paws into some serious Java programming and very soon your well formatted Java code looks <a href="./homework/Main.java" style="color:blue" target="_blank">this</a></h5>
+		            		<h5>You will now need to pack Clifford off to Emily Elizabeth's. Then watch the Week 5 Homework Part 1 Getting Started video. Clean up the code in Main.java, fix all typos, missing/extra curly braces and syntax errors. Then run the program and type in the output below</h5>
+							<div>
+		            		<label>
+      							<input name="q1">
+    						</label>
+    						</div>
+    						<h3></h3>
+    						<h4>Part 2</h4>
+							<h5>Week 5 Homework Part 2 Getting Started</h5>
+							<h5><iframe width="360" height="300" src="https://www.youtube.com/embed/ALyMxxf56rc" frameborder="0" allowfullscreen></iframe></h5>
+    						<h5>You are watching the Bay Area News Hour when the news coverage shifts to a looming crisis on the Golden Gate Bridge. Truck #2112 scheduled for the Capitol has overtuned with pennies, nickels, dimes and quarters strewn across the bridge. These coins are due at the Capitol within the hour to help avert a budget crisis. Brave Californians are scrambling to count the coins. With great (programming) power, comes great responsibilty. You step in. You use the image AI/pattern matching app developed during Year 2 Advanced Programming at Tinker Academy to generate a file that looks like <a href="./homework/input2.txt" target="_blank" style="color: blue;">input2.txt</a>. There are 14,400 rows. Each row in the file ends with a "=". Your code should loop through each row and for each row, calculate the total using the calculator program developed in class. Run the program and type in the output below</h5>
+    						<h5>Hints: Watch the Week 5 Homework Part 2 Getting Started video. Use a for loop to loop through 14,400 rows. Your code inside the for loop should contain code similar to the Calculator2 code we completed in class. Remember to replace "double" with "int" in your program and all references to "s.nextDouble()" with "s.nextInt()". </h5> 
+		            		<h5>Run the program and type in the output below</h5>
+							<div>
+		            		<label>
+      							<input name="q2">
+    						</label>
+    						</div>
+    						<h3></h3>    						
+    						<div class="control-group">
+							  <div class="controls">
+							    <button id="submit" name="submit" value="1" class="btn btn-primary">Submit</button>
+							  </div>
+							</div>
+						</header>
+						</fieldset>
+						</form>	            		
+		            </div> 
+		        </div> <!--homework-->		
 			</div> <!-- posts -->
 		</div><!-- content -->
 
