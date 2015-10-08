@@ -9,6 +9,7 @@ class TinkerAcademyUser(db.Model):
 	emailid1 = db.StringProperty()
 	emailid2 = db.StringProperty()
 	emailid3 = db.StringProperty()
+	isadmin = db.BooleanProperty()
 	claz = db.StringProperty()
 	favmod = db.StringProperty()
 	zipcode = db.StringProperty()

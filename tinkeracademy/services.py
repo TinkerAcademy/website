@@ -590,6 +590,13 @@ class SignUpService(object):
 		return 0
 
 class TinkerAcademyUserService(object):
+	def findusersinclaz(self, user):
+		query = TinkerAcademyUser.all()
+		query.filter("claz = ", user.claz)
+		users = []
+		for p in query.run():
+			users.append(p)
+		return users
 	def finduserbystudentid(self, studentid):
 		query = TinkerAcademyUser.all()
 		query.filter("studentid = ", studentid)

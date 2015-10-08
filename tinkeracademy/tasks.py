@@ -21,12 +21,11 @@ class EmailTask(webapp2.RequestHandler):
 class DatabaseUpdateTask(webapp2.RequestHandler):
 	def get(self):
 		userservice = TinkerAcademyUserService()
-		studentid = 2015035
-		studentname = "Timothy Liu"
+		studentid = 2015046 # ron.vergis@gmail.com AP
 		user = userservice.finduserbystudentid(studentid)
 		if user:
 			try:
-				user.studentname = studentname
+				user.isadmin = True
 				user.put()
 			except:
 				logging.error("error updating user=" + str(studentid))

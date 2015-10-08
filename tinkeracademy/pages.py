@@ -411,7 +411,7 @@ class LoginPage(webapp2.RequestHandler):
 			studentid = int(studentid)
 			userservice = TinkerAcademyUserService()
 			user = userservice.finduserbystudentid(studentid)
-			if user:
+			if user and user.emailid1 == emailid:
 				sessionid = userservice.login(user)
 				if sessionid:
 					self.redirect('/course.html?s='+str(sessionid))
@@ -483,9 +483,16 @@ class ProfilePage(webapp2.RequestHandler):
 		cacheservice = MemcacheService()
 		quizresults = []
 		hwresults = []
+		users = []
+		isadmin = False
+		profilestudent = None
 		if sessionid:
+			profilestudent = cacheservice.getfromsession(sessionid, 'profilestudent')
+			cacheservice.clearfromsession(sessionid, 'profilestudent')
 			user = cacheservice.getsessionuser(sessionid)
-			source = translateclaztosource(user.claz)
+			if not profilestudent:
+				profilestudent = user
+			source = translateclaztosource(profilestudent.claz)
 			quizanswerarr = quizanswers(source)
 			for quizint in range(1,9):
 				if len(quizanswerarr) > quizint:
@@ -493,7 +500,7 @@ class ProfilePage(webapp2.RequestHandler):
 					quizlen = len(quiz)
 					if "free" in quiz:
 						quizlen = quizlen - 1 + quizanswerarr[quizint]["free"]
-					quizresult = getattr(user, 'quiz' + str(quizint) + 'results')
+					quizresult = getattr(profilestudent, 'quiz' + str(quizint) + 'results')
 					if quizresult is None:
 						quizresult = 0
 					quizresults.append({'total' : quizlen, 'correct': quizresult})
@@ -504,18 +511,37 @@ class ProfilePage(webapp2.RequestHandler):
 					hwlen = len(hw)
 					if "free" in hw:
 						hwlen = hwlen - 1 + hwanswerarr[hwint]["free"]
-					hwresult = getattr(user, 'hw' + str(hwint) + 'results')
+					hwresult = getattr(profilestudent, 'hw' + str(hwint) + 'results')
 					if hwresult is None:
 						hwresult = 0
 					hwresults.append({'total' : hwlen, 'correct': hwresult})
+			if user.isadmin:
+				isadmin = True
+				userservice = TinkerAcademyUserService()
+				users = userservice.findusersinclaz(user)
 		template_values = {
 			'sessionid' : sessionid,
-			'user' : user,
+			'user' : profilestudent,
 			'quizresults' : quizresults,
-			'hwresults' : hwresults
+			'hwresults' : hwresults,
+			'users': users,
+			'isadmin': isadmin
 		}
 		template = JINJA_ENVIRONMENT.get_template('profile.html')
 		self.response.write(template.render(template_values))
+	def post(self):
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+			profilestudentid = extractkeyfromrequest(self.request, 'p')
+			profilestudentid = int(profilestudentid)
+			userservice = TinkerAcademyUserService()
+			profilestudent = userservice.finduserbystudentid(profilestudentid)
+			cacheservice = MemcacheService()
+			cacheservice.putinsession(sessionid, 'profilestudent', profilestudent)
+		redirecthtml = "./profile.html" + "?s=" + str(sessionid)
+		self.redirect(redirecthtml)
+
 
 class ProgrammingUsingJavaPage(webapp2.RequestHandler):
 	def get(self):

@@ -145,7 +145,24 @@
 				</nav>	
 			</header>
 		</div>
-
+		{% if isadmin %}
+		<form class="form-horizontal" method="post" action="./profile.html?s={{sessionid}}">
+			<fieldset>	
+			<header>
+				<select name="p">
+				{% for profileuser in users %}
+				  <option value="{{profileuser.studentid}}">{{profileuser.studentname}}</option>
+				{% endfor %}		
+				</select>
+				<div class="control-group">
+				  <div class="controls">
+				    <button id="submit" name="submit" value="1" class="btn btn-primary">View Profile</button>
+				  </div>
+				</div>
+			</header>	            	
+			</fieldset>
+		</form>
+		{% endif %}
 		<div id="wrapper" class="clearfix">
 		<div class="inside-wrap clearfix">	
 
@@ -170,6 +187,7 @@
 				<div class="box">
 					<header>
 						<h3>Name: {{user.studentname}}</h3>
+						<h3>ID: {{user.studentid}}</h3>
 					</header>
 				</div><!-- box -->
 			</div> <!-- posts -->
