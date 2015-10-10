@@ -16,6 +16,8 @@ handlers:
   static_dir: static/forgedoc
 - url: /forge
   static_dir: static/forge
+- url: /code
+  static_dir: static/code
 - url: /identicons
   static_dir: static/identicons
 - url: /staff
