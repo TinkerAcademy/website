@@ -86,7 +86,8 @@
 				'quiz4' : [ 200, 1600 ],
 				'quiz5' : [ 200, 3200 ],
 				'homework4' : [ 200, 2100 ],
-				'homework5' : [ 200, 1800 ]
+				'homework5' : [ 200, 1800 ],
+				'homework6' : [ 200, 2320 ]
 			}
 			jQuery(document).ready(function( $ ) { 
 				$(".flipcardxpand").each(function(index, elem) {
@@ -167,6 +168,92 @@
 				<div class="box">
 					<h1 class="entry-title"><a href="showcase.html" title="Permalink to Showcase" rel="bookmark">{{user.claz}}</a></h1>
 				</div><!-- box -->				
+			</div> <!-- posts -->
+		</div><!-- content -->
+
+		<div id="content">
+			<div class="posts">	
+				<!-- titles -->								
+				<!-- grab the posts -->
+				<div class="box">
+					<h1 class="entry-title"><a href="showcase.html" title="Permalink to Showcase" rel="bookmark">Week 6</a></h1>
+				</div><!-- box -->		
+				<div class="flipcardxpand" id="lesson5"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		            	<img alt="Videos" src="./icons/Youtube.png" width="128" align="right"/>
+		                <header>
+						<h1>Videos</h1>
+						<h3>Week 6</h3>
+						</header>
+		            </div> 
+		            <div class="back">
+		            	<header>
+		            		<h2>Week 6 Concept Review, Quiz 5 &amp; Homework 5</h2>
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/0Knlf86LeJY" frameborder="0" allowfullscreen></iframe></h2>	
+						</header>
+		            </div> 
+		        </div> <!--lesson1-->		
+				<div class="flipcardxpand" id="homework6"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		                <header>
+						<h1>Homework</h1>
+						<h3>Week 6</h3>
+						{% if hw6submitted %}
+						<h4>Homework Submitted, {{hw6results}} / {{hw6len}} correct</h4>
+						{% endif %}
+						</header>
+		            </div> 
+		            <div class="back hwback">	
+		            	<form class="form-horizontal" method="post" action="./savehomework.html?hw=5&amp;source=ap&amp;s={{sessionid}}">
+						<fieldset>
+		            	<header>
+							<h4>Part 1</h4>
+							<h5>Week 6 Homework Part 1 Getting Started</h5>
+							<h5><iframe width="360" height="300" src="https://www.youtube.com/embed/CsABCXqQjSw" frameborder="0" allowfullscreen></iframe></h5>
+		            		<h5>Your friends and you have been spending your time on Fruit Ninja &trade; and have been counting the number of fruits destroyed in every game session. The list of fruits destroyed in 10,000 game sessions is stored in a file. Click <a href="./homework/input2.txt" target="_blank" style="color: blue;">here</a> to access the file. The file has 10,000 rows. All integers in the file are positive (&gt; 0) integers. Write a program in Java to <span style="color:black;">output the maximum number of fruits destroyed in a game session.</span> Then type in the output below</h5>
+		            		<h5>Steps</h5>
+		            		<h5>Step 1: Create an Eclipse Project Homework6Part1</h5>
+		            		<h5>Step 2: Create package com.tinkeracademy.ap</h5>
+		            		<h5>Step 3: Create source file Main.java in package com.tinkeracademy.ap</h5>
+		            		<h5>Step 4: <a href="./homework/Homework6Part1Main.java" target="_blank" style="color: blue;">Click Here</a> and copy the contents into Main.java created in Step 3</h5>
+		            		<h5>Step 5: Create a file input.txt in Homework6Part1</h5>
+		            		<h5>Step 6: <a href="./homework/input2.txt" target="_blank" style="color: blue;">Click Here</a> and copy the contents into input.txt created in Step 5</h5>
+		            		<h5>Step 7: Complete the TODO in Main.java</h5>
+		            		<h5>Step 8: Run the program and type in the output below</h5>
+							<div>
+		            		<label>
+      							<input name="q1">
+    						</label>
+    						</div>
+    						<h3></h3>
+    						<h4>Part 2</h4>
+							<h5>Week 5 Homework Part 2 Getting Started</h5>
+							<h5><iframe width="360" height="300" src="https://www.youtube.com/embed/ALyMxxf56rc" frameborder="0" allowfullscreen></iframe></h5>
+    						<h5>The mayor of Ōkunoshima (大久野島?) needs your help. Rabbits are multiplying fast on this island and they need a mathematical model to estimate the rabbit population in a few years. You know that a Fibonnaci sequence is the best approximation to estimate a rabbit population growth. For example, the first 10 numbers of the sequence are <code>0, 1, 1, 2, 3, 5, 8, 13, 21, 34,...</code> The 11<sup class="sup">th</sup> number in the sequence would be 55 (21 + 34). The 12<sup class="sup">th</sup> number is 89 (34 + 55). In general, the n<sup class="sup">th</sup> number can be found from the (n-2)<sup class="sup">th</sup> and (n-1)<sup class="sup">th</sup> Fibonacci numbers</h5><code>F(n) = F(n-1) + F(n-2) with F(0) = 0 and F(1) = 1</code>
+    						<h5>Write a program that can output the 25<sup class="sup">th</sup> Fibonacci number.</h5>
+		            		<h5>Steps</h5>
+		            		<h5>Step 1: Create an Eclipse Project Homework6Part2</h5>
+		            		<h5>Step 2: Create package com.tinkeracademy.ap</h5>
+		            		<h5>Step 3: Create source file Main.java in package com.tinkeracademy.ap</h5>
+		            		<h5>Step 4: <a href="./homework/Homework6Part2Main.java" target="_blank" style="color: blue;">Click Here</a> and copy the contents into Main.java created in Step 3</h5>
+		            		<h5>Step 5: Complete the TODO in Main.java</h5>    						
+		            		<h5>Step 6: Run the program and type in the output below</h5>
+							<div>
+		            		<label>
+      							<input name="q2">
+    						</label>
+    						</div>
+    						<h3></h3>    						
+    						<div class="control-group">
+							  <div class="controls">
+							    <button id="submit" name="submit" value="1" class="btn btn-primary">Submit</button>
+							  </div>
+							</div>
+						</header>
+						</fieldset>
+						</form>	            		
+		            </div> 
+		        </div> <!--homework-->		
 			</div> <!-- posts -->
 		</div><!-- content -->
 

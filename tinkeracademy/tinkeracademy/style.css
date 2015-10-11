@@ -1877,4 +1877,9 @@ img.alignright {
 		);
 	/*box-shadow : 0 0 10px rgba(0, 0, 0, .5);*/
 	transition: all .5s ease;
-}								
+}		
+
+.sup {
+	vertical-align: super;
+	font-size:smaller
+}						
