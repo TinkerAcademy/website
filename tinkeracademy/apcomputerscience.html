@@ -80,14 +80,16 @@
 				'lesson3' : [ 200, 4800 ],
 				'lesson4' : [ 200, 520 ],
 				'lesson5' : [ 200, 520 ],
+				'lesson6' : [ 200, 450 ],
 				'quiz1' : [ 200, 800 ],
 				'quiz2' : [ 200, 1000 ],
 				'quiz3' : [ 200, 2030 ],
 				'quiz4' : [ 200, 1600 ],
 				'quiz5' : [ 200, 3200 ],
+				'quiz6' : [ 200, 3300 ],
 				'homework4' : [ 200, 2100 ],
 				'homework5' : [ 200, 1800 ],
-				'homework6' : [ 200, 2320 ]
+				'homework6' : [ 200, 1600 ]
 			}
 			jQuery(document).ready(function( $ ) { 
 				$(".flipcardxpand").each(function(index, elem) {
@@ -178,7 +180,7 @@
 				<div class="box">
 					<h1 class="entry-title"><a href="showcase.html" title="Permalink to Showcase" rel="bookmark">Week 6</a></h1>
 				</div><!-- box -->		
-				<div class="flipcardxpand" id="lesson5"> 
+				<div class="flipcardxpand" id="lesson6"> 
 		            <div class="front" style="background-color: #e6e770;"> 
 		            	<img alt="Videos" src="./icons/Youtube.png" width="128" align="right"/>
 		                <header>
@@ -189,11 +191,230 @@
 		            <div class="back">
 		            	<header>
 		            		<h2>Week 6 Concept Review, Quiz 5 &amp; Homework 5</h2>
-							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/0Knlf86LeJY" frameborder="0" allowfullscreen></iframe></h2>	
+							<h2><iframe width="360" height="300" src="https://www.youtube.com/embed/bc1CMtpWLBw" frameborder="0" allowfullscreen></iframe></h2>	
 						</header>
 		            </div> 
 		        </div> <!--lesson1-->		
-				<div class="flipcardxpand" id="homework6"> 
+				<div class="flipcardxpand" id="quiz6"> 
+		            <div class="front" style="background-color: #e6e770;"> 
+		               <header>
+						<h1>Quiz</h1>
+						<h3>Week 6</h3>
+						{% if quiz6submitted %}
+						<h4>Quiz Submitted, {{quiz6results}} / {{quiz6len}} correct</h4>
+						{% endif %}
+						</header>
+		            </div> 
+		            <div class="back quizback">
+		            	<form class="form-horizontal" method="post" action="./savequiz.html?quiz=6&amp;source=ap&amp;s={{sessionid}}">
+						<fieldset>	
+						<header>
+		            		<h4>Question 1</h4>
+		            		<code>|01| <code><code>public class Q1 {</code><br/>
+		            		<code>|02| <code><code>   public static void main(String[] args) {</code><br/>
+		            		<code>|03| <code><code>      System.out.println(Q1.m(4));</code><br/>
+		            		<code>|04| <code><code>   }</code><br/>
+		            		<code>|05| <code><code>   public static int m(int n) {</code><br/>
+		            		<code>|06| <code><code>    int result = 1;</code><br/>
+		            		<code>|07| <code><code>    int counter = 1;</code><br/>
+		            		<code>|08| <code><code>    for (int i = 0; i &lt; n; i++) {</code><br/>
+		            		<code>|09| <code><code>       result = result * counter;</code><br/>
+		            		<code>|10| <code><code>       counter = counter + 1;</code><br/>
+		            		<code>|11| <code><code>     }</code><br/>
+		            		<code>|12| <code><code>     return result;</code><br/>
+		            		<code>|13| <code><code>   }</code><br/>
+		            		<code>|14| <code><code>}</code><br/>
+		            		<h5>What is the output when the main method completes execution?</h5>
+							<div>
+		            		<label>
+      							<input type="radio" name="q1" value="1">
+      							0
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q1" value="2">
+      							6
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q1" value="3">
+      							12
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q1" value="4">
+      							24
+    						</label>
+    						</div>   
+    						<h3></h3>
+    						<h4>Question 2</h4>
+		            		<code>|01| <code><code>public class Q2 {</code><br/>
+		            		<code>|02| <code><code>   public static void main(String[] args) {</code><br/>
+		            		<code>|03| <code><code>      System.out.println(Q2.m(4));</code><br/>
+		            		<code>|04| <code><code>   }</code><br/>
+		            		<code>|05| <code><code>   public static int m(int n) {</code><br/>
+		            		<code>|06| <code><code>    int result = 1;</code><br/>
+		            		<code>|07| <code><code>    int counter = 1;</code><br/>
+		            		<code>|08| <code><code>    for (int i = 0; i &lt; n; i++) {</code><br/>
+		            		<code>|09| <code><code>       result = result * counter;</code><br/>
+		            		<code>|10| <code><code>       counter = counter - 1;</code><br/>
+		            		<code>|11| <code><code>     }</code><br/>
+		            		<code>|12| <code><code>     return result;</code><br/>
+		            		<code>|13| <code><code>   }</code><br/>
+		            		<code>|14| <code><code>}</code><br/>
+		            		<h5>What is the output when the main method completes execution?</h5>
+							<div>
+		            		<label>
+      							<input type="radio" name="q2" value="1">
+      							0
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q2" value="2">
+      							6
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q2" value="3">
+      							12
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q2" value="4">
+      							24
+    						</label>
+    						</div>   
+    						<h3></h3>
+    						<h4>Question 3</h4>
+		            		<code>|01| <code><code>public class Q3 {</code><br/>
+		            		<code>|02| <code><code>   public static void main(String[] args) {</code><br/>
+		            		<code>|03| <code><code>      System.out.println(Q3.m(4));</code><br/>
+		            		<code>|04| <code><code>   }</code><br/>
+		            		<code>|05| <code><code>   public static int m(int n) {</code><br/>
+		            		<code>|06| <code><code>    int result = 1;</code><br/>
+		            		<code>|07| <code><code>    int counter = 1;</code><br/>
+		            		<code>|08| <code><code>    for (int i = 0; i &lt; n; i++) {</code><br/>
+		            		<code>|09| <code><code>    for (int j = 0; i &lt; i; j++) {</code><br/>
+		            		<code>|10| <code><code>       result = result * counter;</code><br/>
+		            		<code>|11| <code><code>       counter = counter + 1;</code><br/>
+		            		<code>|12| <code><code>     }</code><br/>
+		            		<code>|13| <code><code>     }</code><br/>
+		            		<code>|14| <code><code>     return result;</code><br/>
+		            		<code>|15| <code><code>   }</code><br/>
+		            		<code>|16| <code><code>}</code><br/>
+		            		<h5>What is the output when the main method completes execution?</h5>
+							<div>
+		            		<label>
+      							<input type="radio" name="q3" value="1">
+      							0
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q3" value="2">
+      							6
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q3" value="3">
+      							24
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q3" value="4">
+      							720
+    						</label>
+    						</div>   
+    						<h3></h3>
+    						<h4>Question 4</h4>
+		            		<code>|01| <code><code>public class Q4 {</code><br/>
+		            		<code>|02| <code><code>   public static void main(String[] args) {</code><br/>
+		            		<code>|03| <code><code>      System.out.println(Q4.m(4, 5));</code><br/>
+		            		<code>|04| <code><code>   }</code><br/>
+		            		<code>|05| <code><code>   public static int m(int n, int m) {</code><br/>
+		            		<code>|06| <code><code>      int result = 0;</code><br/>
+		            		<code>|07| <code><code>      if (n &gt; m) {</code><br/>
+		            		<code>|08| <code><code>       result = 1;</code><br/>
+		            		<code>|09| <code><code>      } else if (n &lt; m) {</code><br/>
+		            		<code>|10| <code><code>       result = -1;</code><br/>
+		            		<code>|11| <code><code>      }</code><br/>
+		            		<code>|12| <code><code>      return result;</code><br/>		            		
+		            		<code>|13| <code><code>   }</code><br/>
+		            		<code>|14| <code><code>}</code><br/>
+		            		<h5>What is the output when the main method completes execution?</h5>
+							<div>
+		            		<label>
+      							<input type="radio" name="q4" value="1">
+      							0
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q4" value="2">
+      							1
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q4" value="3">
+      							-1
+    						</label>
+    						</div>   
+    						<h3></h3>
+    						<h4>Question 5</h4>
+		            		<code>|01| <code><code>public class Q5 {</code><br/>
+		            		<code>|02| <code><code>   public static void main(String[] args) {</code><br/>
+		            		<code>|03| <code><code>      System.out.println(Q5.m(4, 5));</code><br/>
+		            		<code>|04| <code><code>   }</code><br/>
+		            		<code>|05| <code><code>   public static int m(int n, int m) {</code><br/>
+		            		<code>|06| <code><code>      int result = 0;</code><br/>
+		            		<code>|07| <code><code>      if (n &gt; m) {</code><br/>
+		            		<code>|08| <code><code>       result = n;</code><br/>
+		            		<code>|09| <code><code>      } else if (n &lt; m) {</code><br/>
+		            		<code>|10| <code><code>       result = m;</code><br/>
+		            		<code>|11| <code><code>      }</code><br/>
+		            		<code>|12| <code><code>      return result;</code><br/>		            		
+		            		<code>|13| <code><code>   }</code><br/>
+		            		<code>|14| <code><code>}</code><br/>
+		            		<h5>What is the output when the main method completes execution?</h5>
+							<div>
+		            		<label>
+      							<input type="radio" name="q5" value="1">
+      							0
+    						</label>
+    						</div>
+    						<div>
+    						<label>
+      							<input type="radio" name="q5" value="2">
+      							4
+    						</label>
+    						</div>   
+    						<div>
+    						<label>
+      							<input type="radio" name="q5" value="3">
+      							5
+    						</label>
+    						</div>   
+    						<h3></h3>
+    						<div class="control-group">
+							  <div class="controls">
+							    <button id="submit" name="submit" value="1" class="btn btn-primary">Submit</button>
+							  </div>
+							</div>
+						</header>	            	
+						</fieldset>
+						</form>
+		            </div> 
+		        </div> <!--quiz-->
+		        <div class="flipcardxpand" id="homework6"> 
 		            <div class="front" style="background-color: #e6e770;"> 
 		                <header>
 						<h1>Homework</h1>
@@ -204,20 +425,18 @@
 						</header>
 		            </div> 
 		            <div class="back hwback">	
-		            	<form class="form-horizontal" method="post" action="./savehomework.html?hw=5&amp;source=ap&amp;s={{sessionid}}">
+		            	<form class="form-horizontal" method="post" action="./savehomework.html?hw=6&amp;source=ap&amp;s={{sessionid}}">
 						<fieldset>
 		            	<header>
 							<h4>Part 1</h4>
-							<h5>Week 6 Homework Part 1 Getting Started</h5>
-							<h5><iframe width="360" height="300" src="https://www.youtube.com/embed/CsABCXqQjSw" frameborder="0" allowfullscreen></iframe></h5>
-		            		<h5>Your friends and you have been spending your time on Fruit Ninja &trade; and have been counting the number of fruits destroyed in every game session. The list of fruits destroyed in 10,000 game sessions is stored in a file. Click <a href="./homework/input2.txt" target="_blank" style="color: blue;">here</a> to access the file. The file has 10,000 rows. All integers in the file are positive (&gt; 0) integers. Write a program in Java to <span style="color:black;">output the maximum number of fruits destroyed in a game session.</span> Then type in the output below</h5>
+		            		<h5>Your friends and you have been spending your time on Fruit Ninja &trade; and have been counting the number of fruits destroyed in every game session. The list of fruits destroyed in 10,000 game sessions is stored in a file. Click <a href="./homework/input1.txt" target="_blank" style="color: blue;">here</a> to access the file. The file has 10,000 rows. All integers in the file are positive (&gt; 0) integers. Write a program in Java to <span style="color:black;">output the maximum number of fruits destroyed in a game session.</span> Then type in the output below</h5>
 		            		<h5>Steps</h5>
 		            		<h5>Step 1: Create an Eclipse Project Homework6Part1</h5>
 		            		<h5>Step 2: Create package com.tinkeracademy.ap</h5>
 		            		<h5>Step 3: Create source file Main.java in package com.tinkeracademy.ap</h5>
 		            		<h5>Step 4: <a href="./homework/Homework6Part1Main.java" target="_blank" style="color: blue;">Click Here</a> and copy the contents into Main.java created in Step 3</h5>
 		            		<h5>Step 5: Create a file input.txt in Homework6Part1</h5>
-		            		<h5>Step 6: <a href="./homework/input2.txt" target="_blank" style="color: blue;">Click Here</a> and copy the contents into input.txt created in Step 5</h5>
+		            		<h5>Step 6: <a href="./homework/input1.txt" target="_blank" style="color: blue;">Click Here</a> and copy the contents into input.txt created in Step 5</h5>
 		            		<h5>Step 7: Complete the TODO in Main.java</h5>
 		            		<h5>Step 8: Run the program and type in the output below</h5>
 							<div>
@@ -227,8 +446,6 @@
     						</div>
     						<h3></h3>
     						<h4>Part 2</h4>
-							<h5>Week 5 Homework Part 2 Getting Started</h5>
-							<h5><iframe width="360" height="300" src="https://www.youtube.com/embed/ALyMxxf56rc" frameborder="0" allowfullscreen></iframe></h5>
     						<h5>The mayor of Ōkunoshima (大久野島?) needs your help. Rabbits are multiplying fast on this island and they need a mathematical model to estimate the rabbit population in a few years. You know that a Fibonnaci sequence is the best approximation to estimate a rabbit population growth. For example, the first 10 numbers of the sequence are <code>0, 1, 1, 2, 3, 5, 8, 13, 21, 34,...</code> The 11<sup class="sup">th</sup> number in the sequence would be 55 (21 + 34). The 12<sup class="sup">th</sup> number is 89 (34 + 55). In general, the n<sup class="sup">th</sup> number can be found from the (n-2)<sup class="sup">th</sup> and (n-1)<sup class="sup">th</sup> Fibonacci numbers</h5><code>F(n) = F(n-1) + F(n-2) with F(0) = 0 and F(1) = 1</code>
     						<h5>Write a program that can output the 25<sup class="sup">th</sup> Fibonacci number.</h5>
 		            		<h5>Steps</h5>
