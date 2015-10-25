@@ -645,16 +645,16 @@ class TinkerAcademyUserService(object):
 		if zipcode:
 			p.zipcode = zipcode
 		p.put()
-		isfutureclaz = claz == 'Future Sessions'
-		isrecservicesclaz = claz == 'Sep 2015 - Nov 2015' or claz == 'Sep 2015 - Nov 2015 (AP)'
-		if not isfutureclaz and not isrecservicesclaz:
-			emailservice = EmailService()
-			emailbody = readtextfilecontents(constants.EMAIL_TA_REGISTER_FILENAME)
-			emailbody = emailbody.replace('$EMAILID$', emailid)
-			emailbody = emailbody.replace('$STUDENTNAME$', studentname)
-			emailbody = emailbody.replace('$STUDENTID$', str(p.studentid))
-			emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
-			emailservice.sendnext()
+		# isfutureclaz = claz == 'Future Sessions'
+		# isrecservicesclaz = claz == 'Sep 2015 - Nov 2015' or claz == 'Sep 2015 - Nov 2015 (AP)'
+		# if not isfutureclaz and not isrecservicesclaz:
+		# 	emailservice = EmailService()
+		# 	emailbody = readtextfilecontents(constants.EMAIL_TA_REGISTER_FILENAME)
+		# 	emailbody = emailbody.replace('$EMAILID$', emailid)
+		# 	emailbody = emailbody.replace('$STUDENTNAME$', studentname)
+		# 	emailbody = emailbody.replace('$STUDENTID$', str(p.studentid))
+		# 	emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
+		# 	emailservice.sendnext()
 		return self.login(p)
 	def createanonsessionid(self):
 		return hashlib.sha1('anon').hexdigest()

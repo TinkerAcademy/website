@@ -26,6 +26,8 @@ handlers:
   static_dir: static/icons
 - url: /minecraft
   static_dir: static/minecraft
+- url: /textures
+  static_dir: static/textures
 - url: /homework
   static_dir: static/homework
 # - url: /

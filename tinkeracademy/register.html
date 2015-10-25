@@ -43,6 +43,8 @@
 		
 		<!-- load scripts -->
 		<link rel="stylesheet" id="contact-form-7-css" href="./tinkeracademy/styles.css" type="text/css" media="all">
+		<link rel="stylesheet" id="flip.css" href="./tinkeracademy/flip.css" type="text/css" media="all">
+		<link rel="stylesheet" id="hover.css" href="./tinkeracademy/hover.css" type="text/css" media="all">
 		<link rel="stylesheet" id="style-css" href="./tinkeracademy/style.css" type="text/css" media="all">
 		<link rel="stylesheet" id="font_awesome_css-css" href="./tinkeracademy/font-awesome.css" type="text/css" media="screen">
 		<link rel="stylesheet" id="media_queries_css-css" href="./tinkeracademy/media-queries.css" type="text/css" media="screen">
@@ -51,6 +53,7 @@
 		<link rel="stylesheet" id="form-css" href="./tinkeracademy/form.css" type="text/css" media="all">
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
+		<script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.16/dist/jquery.flip.min.js"></script>
 		{% if sessionid %}
 		<link rel="prev" title="about" href="index.html?s={{sessionid}}">
 		<link rel="next" title="contact" href="contact.html?s={{sessionid}}">
@@ -70,6 +73,26 @@
 	; 
 			}
 		</style>
+		<script type="text/javascript">
+			jQuery(document).ready(function( $ ) { 
+				$(".flipcard").flip({
+				  	axis: 'x'
+				});
+				$("#class > option").each(function() {
+					$('#' + this.value).hide();
+					if (this.selected) {
+						$('#' + this.value).show();
+					}
+				});
+				$("#class").change(function() {
+  					var sel = $("#class").val();
+					$("#class > option").each(function() {
+    					$('#' + this.value).hide();
+					});
+					$('#' + sel).show();  					
+				});
+			});		
+		</script>
     </head>
 	<body class="page page-id-109 page-template-default">
 	<div class="header-wrap clearfix">
@@ -137,7 +160,7 @@
 							<h3>Thank You for registering :)</h3>
 							{% else %}
 							<h3>Thank You for registering :)</h3>
-							<h4>We just sent you an welcome email with the class details. Class starts October 03, 2015.</h4>
+							<h4>You will receive an email from us with more details 2 weeks before class starts.</h4>
 							{% endif %}
 							{% endif %}
 						</div><!-- box -->
@@ -146,7 +169,7 @@
 					<div class="box-wrap">
 						<div class="box">
 							<header>
-								<h1 class="entry-title"><a href="register.html" title="Permalink to registration" rel="bookmark">Register</a></h1>
+								<h1 class="entry-title">Register</h1>
 							</header>
 							
 							<form class="form-horizontal" method="post">
@@ -172,15 +195,6 @@
 
 							<!-- Text input-->
 							<div class="control-group">
-							  <label class="control-label" for="email">Favorite Minecraft Mod?</label>
-							  <div class="controls">
-							    <input id="favmod" name="favmod" type="text" placeholder="Your Favorite Minecraft Mod" class="input-xlarge" >
-							    
-							  </div>
-							</div>
-
-							<!-- Text input-->
-							<div class="control-group">
 							  <label class="control-label" for="email">Zip Code</label>
 							  <div class="controls">
 							    <input id="zipcode" name="zipcode" type="text" placeholder="Your Zip Code" class="input-xlarge" >
@@ -193,10 +207,7 @@
 							  <label class="control-label" for="selectbasic">Class</label>
 							  <div class="controls">
 							    <select id="class" name="class" class="input-large">
-							      <option>Sep 2015 - Nov 2015 (AP)</option>
-							      <!--<option disabled>Sep 2015 - Nov 2015</option>-->
-							      <!--<option disabled>Oct 2015 - Mar 2016</option>-->
-							      <option>Future Sessions</option>
+							      <option value="aj">Jan 16 - Jun 18, 2016 (AP Part 2)</option>
 							    </select>
 							  </div>
 							</div>
@@ -212,14 +223,22 @@
 							</form>
 
 
+						</div><!-- box -->						
+						<div id="aj" class="box">
+							<header>
+								<h1 class="entry-title">AP Computer Science Part 2 (Advanced Java)</h1>
+							</header>
+							<div class="post-content">
+								<p>This is an advanced class. Prior Java experience <span style="font-weight:bold">is required.</span></p>
+								<p>The first class is on January 16, 2016 and the last class is on June 18, 2016</p>
+								<p>The first 3 classes are <span style="font-weight:bold">free</span> Trial Classes (January 16, 23 &amp; 30)</p>
+								<p><span style="background-color:#E7B91B">Get ready to develop an Android app for the Google Play Store!</span></p>
+							</div>							
 						</div><!-- box -->
 					</div><!-- box wrap -->
 					{% endif %}
 				</article><!-- post-->
-				
-				</div>
-			
-						
+
 			<!-- post navigation -->
 						
 			<!-- comments -->
