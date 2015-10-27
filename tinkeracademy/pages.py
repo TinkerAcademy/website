@@ -630,6 +630,48 @@ class RegisterPage(webapp2.RequestHandler):
 		else:
 			self.redirect('/register.html')
 
+class SubscribePage(webapp2.RequestHandler):
+	def get(self):
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		isnewuser = False
+		isfuture = False
+		isrecservicesclaz = False
+		if sessionid:
+			cacheservice = MemcacheService()
+			user = cacheservice.getsessionuser(sessionid)
+			isnewuser = cacheservice.getfromsession(sessionid, "newuser")	
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		template_values = {
+			'sessionid' : sessionid,
+			'user' : user,
+			'isnewuser' : isnewuser,
+			'isfuture' : isfuture,
+			'isrecservicesclaz' : isrecservicesclaz
+		}
+		if sessionid:
+			cacheservice.clearfromsession(sessionid, "newuser")
+		template = JINJA_ENVIRONMENT.get_template('subscribe.html')
+		self.response.write(template.render(template_values))
+	def post(self):
+		emailid = extractkeyfromrequest(self.request, 'email')
+		if emailid:
+			emailid = emailid.strip()
+		validationservice = ValidationService()
+		isvalidemail = validationservice.isvalidemail(emailid)
+		if isvalidemail and emailid:
+			userservice = TinkerAcademyUserService()
+			sessionid = userservice.subscribe(emailid)		
+			cacheservice = MemcacheService()
+			cacheservice.putinsession(sessionid, "newuser", True)	
+			self.redirect('/subscribe.html?s='+str(sessionid))
+		else:
+			self.redirect('/subscribe.html')
+
 class ScholarshipPage(webapp2.RequestHandler):
 	def get(self):
 		# uid, insession = attemptlogin(self.request)

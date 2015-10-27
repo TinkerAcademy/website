@@ -656,6 +656,31 @@ class TinkerAcademyUserService(object):
 		# 	emailservice.register(constants.EMAIL_TA_REGISTER_TYPE, constants.EMAIL_TA_REGISTER_ID, emailid, constants.EMAIL_TA_REGISTER_SIGNUP_SUBJECT, emailbody)
 		# 	emailservice.sendnext()
 		return self.login(p)
+	def subscribe(self, emailid):
+		query = TinkerAcademyUser.all()
+		query.filter("emailid1 = ", emailid)
+		p = None
+		for p in query.run(limit=1):
+			break
+		if not p:
+			p = TinkerAcademyUser()
+			p.emailid1 = emailid
+			studentid = 2015000
+			query = TinkerAcademyUser.all()
+			for e in query.run():
+				if studentid < e.studentid:
+					studentid = e.studentid
+			studentid = studentid + 1;
+			p.studentid = studentid
+			p.studentname = None
+			p.emailid2 = None
+			p.emailid3 = None
+			p.scholarship = False
+			p.userstatus = 1
+			p.stripe_customer_id = None
+			p.claz = None
+		p.put()
+		return self.login(p)
 	def createanonsessionid(self):
 		return hashlib.sha1('anon').hexdigest()
 	def createsessionid(self, studentid):

@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<title>register | TINKER ACADEMY</title>
+		<title>subscribe | TINKER ACADEMY</title>
 		<link rel="icon" href="http://www.tinkeracademy.com/tinkeracademy/favicon.png" type="image/png"/>
 		
 		<!-- media queries -->
@@ -87,12 +87,12 @@
 					});
 					var sel = $("#class").val();
 					$('#' + sel).show();  
-					$('#register').hide();					
+					$('#subscribe').hide();					
 				});
 				$("#close").click(function() {
 					var sel = $("#class").val();
 					$('#' + sel).hide();  
-					$('#register').show();					
+					$('#subscribe').show();					
 				})
 			});		
 		</script>
@@ -113,7 +113,7 @@
 		    			<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li> -->
 						<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="showcase.html?s={{sessionid}}">showcase</a></li>
 						<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="achievements.html?s={{sessionid}}">achievements</a></li>
- 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html?s={{sessionid}}">register</a></li>
+ 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="subscribe.html?s={{sessionid}}">subscribe</a></li>
  		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html?s={{sessionid}}">login</a></li>
  		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="aboutus.html?s={{sessionid}}">about</a></li>
 						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html?s={{sessionid}}">contact</a></li>
@@ -122,7 +122,7 @@
 		    			<!-- <li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="login.html">login</a></li> -->
 						<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="showcase.html?s={{sessionid}}">showcase</a></li>
 						<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="achievements.html">achievements</a></li>
-		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="register.html">register</a></li>
+		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="subscribe.html">subscribe</a></li>
 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-111"><a href="login.html">login</a></li>
 		    			<li id="menu-item-111" class="menu-item menu-item-type-post_type menu-item-object-page page_item page-item-109 current_page_item current-menu-item menu-item-111"><a href="aboutus.html">about</a></li>
  						<li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="contact.html">contact</a></li>
@@ -156,25 +156,26 @@
 					<div class="box-wrap">
 						<div class="box">
 							{% if isfuture %}
-							<h3>Thank You for registering :)</h3>
+							<h3>Thank You for subscribing :)</h3>
 							<h4>We will update you on future sessions.</h4>
 							{% else %}
 							{% if isrecservicesclaz %}
-							<h3>Thank You for registering :)</h3>
+							<h3>Thank You for subscribing :)</h3>
 							{% else %}
-							<h3>Thank You for registering :)</h3>
-							<h4>You will receive an email from us with more details 2 weeks before class starts.</h4>
+							<h3>Thank You for subscribing :)</h3>
+							<h4>You will receive monthly newsletter from us.</h4>
+							<h4>You can unsubscribe at any time from this page.</h4>
 							{% endif %}
 							{% endif %}
 						</div><!-- box -->
 					</div><!-- box wrap -->
 					{% else %}
-					<div id="register" class="box-wrap">
+					<div id="subscribe" class="box-wrap">
 						<div class="box">
 							<header>
-								<h1 class="entry-title">Register</h1>
+								<h1 class="entry-title">Subscribe To Newsletter</h1>
 							</header>
-							
+							<!--http://bootsnipp.com/forms-->
 							<form class="form-horizontal" method="post">
 							<fieldset>
 
@@ -187,37 +188,22 @@
 							  </div>
 							</div>
 
-							<!-- Text input-->
-							<div class="control-group">
-							  <label class="control-label" for="email">Name</label>
-							  <div class="controls">
-							    <input id="name" name="name" type="text" placeholder="Your First &amp; Last Name" class="input-xlarge" >							    
-							  </div>
-							</div>
-
-							<!-- Text input-->
-							<div class="control-group">
-							  <label class="control-label" for="email">Zip Code</label>
-							  <div class="controls">
-							    <input id="zipcode" name="zipcode" type="text" placeholder="Your Zip Code" class="input-xlarge" >							    
-							  </div>
-							</div>
-
 							<!-- Select Basic -->
 							<div class="control-group">
-							  <label class="control-label" for="selectbasic">Class</label>
-							  <div class="controls">							  	
-							    <select id="class" name="class" class="input-large">
-							      <option value="aj">Jan 16 - Jun 18, 2016 (AP Part2/Adv Java)</option>
-							    </select>
-							    <span id="details" class="btn btn-primary">Details</span>
+							  <div class="controls">
+							  	<label for="sub-0">							  	
+							    	<input type="radio" id="sub-0" name="sub-0" value="1" checked="checked">Yes
+								</label>
+								<label for="sub-1">							  	
+							    	<input type="radio" id="sub-1" name="sub-1" value="2">No
+								</label>
 							  </div>
 							</div>
 
 							<!-- Button -->
 							<div class="control-group">
 							  <div class="controls">
-							    <button id="join" name="join" class="btn btn-primary">Register</button>
+							    <button id="join" name="join" class="btn btn-primary">Update</button>
 							  </div>
 							</div>
 
@@ -226,33 +212,7 @@
 
 
 						</div><!-- box -->	
-					</div>					
-					<div id="aj" class="box-wrap">
-						<div class="box">
-							<button id="close" class="btn btn-primary">Back To Registration Page</button>
-							<header>
-								<h1 class="entry-title">AP Computer Science Part 2 (Advanced Java)</h1>
-							</header>
-							<div class="post-content">
-								<p>This is an advanced class. Prior Java experience <span style="font-weight:bold">is required.</span></p>
-								<p>The first class is on January 16, 2016 and the last class is on June 18, 2016</p>
-								<p>The first 3 classes are <span style="font-weight:bold">free</span> Trial Classes (January 16, 23 &amp; 30)</p>
-								<p><span style="background-color:#E7B91B">Get ready to develop an Android app for the Google Play Store!</span></p>
-								<h2>What will you learn during this class?</h2>
-								<p>By now you know the basics of Java.</p>
-								<p>In this course, you will put together the basics to write an advanced Android App, a <span style="background-color:#E7B91B">music rating</span> app. The app will listen to and analyze music for different qualities such as harmony.</p> 
-								<p>In the class, you will learn to put together concepts such as <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller" target="_blank">MVC</a> programming, <a href="https://en.wikipedia.org/wiki/Client%E2%80%93server_model" target="_blank">client server</a>, <a href="https://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">REST</a> apis, <a href="https://en.wikipedia.org/wiki/Serialization">serialization</a>, <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="_blank">HTTP</a> connections, Android concepts such as Application, Intent, Activities, Fragments, Views, Resources, Services. You will learn the basics of spectral analysis of sounds. <span style="background-color:#E7B91B">Most important, you will learn how to carefully write and analyze code</span>. Which is what good programming is all about.<p>
-								<h2>How much will it cost?</h2>
-								<p>The classes in Jan 2016 are free (trial classes). The fees starting from Feb 2016 will be $72 per month, payable monthly.</p>		
-								<h2>What is the class schedule?</h2>						
-								<p>There will be 4 classes every month starting from February. Classes will be held on a Saturday from 01:00 - 02:00 pm PST.</p>
-								<h2>What if a student wants to drop out of the class mid way?</h2>
-								<p>This is going to be a fun and exciting course. We would like to see all our students complete the course and become high achievers. We do have a flexible cancellation notice and you will be billed for the number of classes completed in the course. </p>
-								<h2>What if a student lags behind the class and needs to catch up?</h2>
-								<p>We will have 2 labs per month to help students catch up. The homework labs will be evenings during the week. The exact date and time will be decided once class starts.</p>
-							</div>		
-						</div><!-- box -->
-					</div><!-- box wrap -->
+					</div>										
 					{% endif %}
 				</article><!-- post-->
 
