@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<title>pay | TINKER ACADEMY</title>
+		<title>payment | TINKER ACADEMY</title>
 		<link rel="icon" href="http://www.tinkeracademy.com/tinkeracademy/favicon.png" type="image/png"/>
 		
 		<!-- media queries -->
@@ -107,38 +107,57 @@
 			<div class="posts">
 	
 				<!-- titles -->
-								
 				<!-- grab the posts -->
-					
+				{% if not paid %}
 				<article class="post-109 page type-page status-publish hentry post">
 					<div class="box-wrap">
 						<div class="box">
 							<header>
-								<h1 class="entry-title"><a href="contact.html" title="Permalink to contact" rel="bookmark">pay</a></h1>
+								<img src="/tinkeracademy/TinkerAcademy.png" style="float:left;padding-right:10px">								
+								<h1 class="entry-title">Programming Using Java (&amp; Minecraft)</h1>
+								<h2>Payment due for Nov 2015 is $72</h2>
 							</header>
 							<div class="post-content">
-								<p><strong>The total payment for the classes is 212 dollars.</strong>&nbsp; </p>
-								<h1>
 								<form action="" method="POST">
 								  <script
 								    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-								    data-key="pk_test_8CsqsHCTUozELcAsZbPhjb3N"
-								    data-amount="2000"
-								    data-name="Demo Site"
-								    data-description="2 widgets ($20.00)"
-								    data-image="/tinkeracademy/TinkerAcademy.png">
+								    data-key="pk_live_aaQgxoxrTwTDCp63OyvBujFV"
+								    data-amount="7200"
+								    data-name="Tinker Academy"
+								    data-description="Programming Using Java (&amp; Minecraft) November 2015 ($72.00)"
+								    data-image="/tinkeracademy/TinkerAcademy.png"
+								    data-locale="auto"
+								    data-zip-code="true"
+								    data-label="Pay Using Credit Card"
+								    data-allow-remember-me="false">
 								  </script>
 								</form>	
-								</h1>						
-								<p>We offer scholarships if family income is less than 100,000 dollars per year.</p>
-							    <!-- <div class="controls"> -->
-							    <button id="join" name="join" class="btn btn-primary" onclick="gotoscholarship()">Apply For Scholarship</button>
-							    <!-- </div> -->
+							</div>
+							<div class="box">
+								<a href="http://www.stripe.com/gallery" target="_blank"><img src="/tinkeracademy/stripe.png" alt="Powered by Stripe, a Y Combinator Company"></a>
 							</div>
 						</div><!-- box -->
 					</div><!-- box wrap -->
 				</article><!-- post-->
-				
+				{% else %}
+				<article class="post-109 page type-page status-publish hentry post">
+					<div class="box-wrap">
+						<div class="box">
+							<header>
+								<img src="/tinkeracademy/TinkerAcademy.png" style="float:left;padding-right:10px">								
+								<h1 class="entry-title">Programming Using Java (&amp; Minecraft)</h1>
+								<h2>Payment complete for Nov 2015 ($72)</h2>
+							</header>
+							<div class="post-content">
+								<h2>Thank you for your <strong>payment.</strong></h2>
+							</div>
+							<div class="box">
+								<a href="http://www.stripe.com/gallery" target="_blank"><img src="/tinkeracademy/stripe.png" alt="Powered by Stripe, a Y Combinator Company"></a>
+							</div>
+						</div><!-- box -->
+					</div><!-- box wrap -->
+				</article><!-- post-->
+				{% endif %}
 				</div>
 			
 						
