@@ -460,6 +460,33 @@ class MainPage(webapp2.RequestHandler):
 		template = JINJA_ENVIRONMENT.get_template('index.html')
 		self.response.write(template.render(template_values))
 
+class AcePage(webapp2.RequestHandler):
+	def get(self):
+		sessionid = extractkeyfromrequest(self.request, 's')
+		if sessionid:
+			sessionid = sessionid.strip()
+		user = None
+		if sessionid:
+			cacheservice = MemcacheService()
+			user = cacheservice.getsessionuser(sessionid)
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		template_values = {
+			'sessionid' : sessionid,
+			'user' : user,
+			'newuser' : False,
+		}
+		# uid, insession = attemptlogin(self.request)
+		# coursesservice = CoursesService()
+		# courses = coursesservice.listupcomingcourses()
+		# header_template_values = buildheadertemplatevalues(insession, uid)
+		# template_values.update(header_template_values)
+		# course_template_values = buildallcoursestemplatevalues(insession, courses)
+		# template_values.update(course_template_values)
+		template = JINJA_ENVIRONMENT.get_template('index-ace.html')
+		self.response.write(template.render(template_values))		
+
 class PaymentPage(webapp2.RequestHandler):
 	def get(self):
 		# uid, insession = attemptlogin(self.request)
