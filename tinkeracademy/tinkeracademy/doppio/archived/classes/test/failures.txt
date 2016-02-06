@@ -1,0 +1,6 @@
+
+Failed classes/test/NioFilesPaths: Output does not match native JVM.
+Doppio | Java
+6: Does abspath.real == normalized path?: false   Does abspath.real == normalized path?: false
+7: Does '' exist?: true                           Does '' exist?: true
+8: What is the length of ''?: 1224              | What is the length of ''?: 952
