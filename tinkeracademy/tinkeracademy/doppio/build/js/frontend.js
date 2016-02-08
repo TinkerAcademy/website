@@ -610,7 +610,7 @@ var EditCommand = (function (_super) {
         var _this = this;
         this.initialize(terminal);
         var startEditor = function (data) {
-            _this._consoleElement.fadeOut('fast', function () {
+            /*_this._consoleElement.fadeOut('fast', */(function () {
                 _this._filenameElement.val(args[0]);
                 _this._editorContainer.fadeIn('fast');
                 if (args[0] == null || args[0].split('.')[1] === 'java') {
@@ -622,7 +622,7 @@ var EditCommand = (function (_super) {
                     _this._editor.getSession().setMode(new TextMode);
                 }
                 _this._editor.getSession().setValue(data);
-            });
+            })();/*);*/
         };
         if (args[0] == null) {
             startEditor(this.defaultFile('Test.java'));
