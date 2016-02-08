@@ -44,6 +44,9 @@ var Terminal = (function () {
             welcomeMessage: welcomeMessage
         });
     }
+    Terminal.prototype.showPrompt = function(text) {
+        this._console.reprompt();
+    }
     Terminal.prototype.stdout = function (text) {
         this._console.message(text, 'success', true);
     };
@@ -287,7 +290,9 @@ $(document).ready(function () {
     onResize();
     // Set up file system.
     var xhrfs = new BrowserFS.FileSystem.XmlHttpRequest('listings.json', 'tinkeracademy/doppio/build/demo_files/'), mfs = new BrowserFS.FileSystem.MountableFileSystem(), fs = BrowserFS.BFSRequire('fs');
+    var tutorialsfs = new BrowserFS.FileSystem.XmlHttpRequest('tutorials.json', 'tinkeracademy/doppio/build/demo_files/tutorials/');
     mfs.mount('/sys', xhrfs);
+    mfs.mount('/tutorials', tutorialsfs);
     BrowserFS.initialize(mfs);
     fs.mkdirSync('/mnt');
     mfs.mount('/mnt/localStorage', new BrowserFS.FileSystem.LocalStorage());
@@ -295,47 +300,51 @@ $(document).ready(function () {
     process.chdir('/home');
     recursiveCopy('/sys/classes', '/home', function (err) {
         recursiveCopy('/sys/jars', '/home', function (err) {
-            // Set up the master terminal object.
-            fs.readFile("/sys/motd", function (e, data) {
-                var welcomeText = "";
-                if (!e) {
-                    welcomeText = data.toString();
-                }
-                var terminal = new Terminal($('#console'), [
-                    new JARCommand('ecj', demoJars + "ecj.jar", ['-Djdt.compiler.useSingleThread=true'], ['java']),
-                    new JARCommand('rhino', demoJars + "rhino.jar", [], ['js']),
-                    new JavaClassCommand('javac', demoClasses, "classes.util.Javac", [], ['java']),
-                    new JavaClassCommand('javap', demoClasses, "classes.util.Javap", [], ['class']),
-                    new JavaCommand(),
-                    new LSCommand(),
-                    new EditCommand('source', $('#save_btn'), $('#close_btn'), $('#ide'), $('#console'), $('#filename')),
-                    new CatCommand(),
-                    new MvCommand(),
-                    new CpCommand(),
-                    new MkdirCommand(),
-                    new CDCommand(),
-                    new RMCommand(),
-                    new RmdirCommand(),
-                    new MountDropboxCommand(),
-                    new TimeCommand(),
-                    new ProfileCommand(),
-                    new HelpCommand()
-                ], welcomeText);
-                // set up the local file loaders
-                $('#file').change(function (ev) {
-                    uploadFiles(terminal, ev);
-                });
-                // Set up stdout/stderr/stdin.
-                process.stdout.on('data', function (data) { return terminal.stdout(data.toString()); });
-                process.stderr.on('data', function (data) { return terminal.stderr(data.toString()); });
-                process.stdin.on('_read', function () {
-                    terminal.stdin(function (text) {
-                        // BrowserFS's stdin lets you write to it for emulation purposes.
-                        process.stdin.write(new Buffer(text));
+            recursiveCopy('/tutorials', '/home', function (err) {
+                // Set up the master terminal object.
+                fs.readFile("/sys/motd", function (e, data) {
+                    var welcomeText = "";
+                    if (!e) {
+                        welcomeText = data.toString();
+                    }
+                    var terminal = new Terminal($('#console'), [
+                        new JARCommand('ecj', demoJars + "ecj.jar", ['-Djdt.compiler.useSingleThread=true'], ['java']),
+                        new JARCommand('rhino', demoJars + "rhino.jar", [], ['js']),
+                        new JavaClassCommand('javac', demoClasses, "classes.util.Javac", [], ['java']),
+                        new JavaClassCommand('javap', demoClasses, "classes.util.Javap", [], ['class']),
+                        new JavaCommand(),
+                        new LSCommand(),
+                        new EditCommand('source', $('#save_btn'), $('#close_btn'), $('#ide'), $('#console'), $('#filename')),
+                        new CatCommand(),
+                        new MvCommand(),
+                        new CpCommand(),
+                        new MkdirCommand(),
+                        new CDCommand(),
+                        new RMCommand(),
+                        new RmdirCommand(),
+                        new MountDropboxCommand(),
+                        new TimeCommand(),
+                        new ProfileCommand(),
+                        new HelpCommand()
+                    ], welcomeText);
+                    // set up the local file loaders
+                    $('#file').change(function (ev) {
+                        uploadFiles(terminal, ev);
                     });
+                    // Set up stdout/stderr/stdin.
+                    process.stdout.on('data', function (data) { return terminal.stdout(data.toString()); });
+                    process.stderr.on('data', function (data) { return terminal.stderr(data.toString()); });
+                    process.stdin.on('_read', function () {
+                        terminal.stdin(function (text) {
+                            // BrowserFS's stdin lets you write to it for emulation purposes.
+                            process.stdin.write(new Buffer(text));
+                        });
+                    });
+                    // Focus the terminal.
+                    $('#console').click();
+                    var tutorial = new Tutorial(fs, terminal);
+                    tutorial.process("tutorial0");
                 });
-                // Focus the terminal.
-                $('#console').click();
             });
         });
     });

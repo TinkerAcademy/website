@@ -152,7 +152,7 @@
             typer.css({position:'absolute',top:0,left:'-9999px'});
             if (config.welcomeMessage)
                 message(config.welcomeMessage,'jquery-console-welcome');
-            newPromptBox();
+            // newPromptBox();
             if (config.autofocus) {
                 inner.addClass('jquery-console-focus');
                 typer.focus();
@@ -516,7 +516,9 @@
         // Reset the prompt in invalid command
         function commandResult(msg,className,noreprompt) {
             column = -1;
-            updatePromptDisplay();
+            if (!noreprompt) {
+              updatePromptDisplay();
+            }
             if (typeof msg == 'string') {
                 message(msg,className,noreprompt);
             } else if ($.isArray(msg)) {
@@ -660,6 +662,7 @@
         ////////////////////////////////////////////////////////////////////////
         // Update the prompt display
         function updatePromptDisplay(){
+            if (!prompt) return;
             var line = promptText;
             var html = '';
             if (column > 0 && line == ''){

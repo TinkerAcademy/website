@@ -1,125 +1,123 @@
 {
 	"name": "Getting Started With Java",
-	"sections" : {
-		"title": "Getting Started With Java",
-		"chapter": "Writing Your First Java Program", 
-		"text": {
-			"$L001": "Creating Your First Application",
-			"$L002": "In this application will display the greeting \"Hello World!\"",
-			"$L003": "To create this program, you will:",
-			"$L004": "Step 1. First create a Java source file",
-			"$L005": "Step 2. Compile the source file into a class file",
-			"$L006": "Step 3. Run the program",
-			"$L007": "Once you successfully complete this tutorial, you will see \"Hello World!\" displayed as output on the screen.",
-			"$L008": "Step 1",
-			"$L009": "Type in the following line of code at the prompt below and press the <Enter> key.",
-			"$L010": "edit HelloWorld.java",
-			"$L011": "Replace line #3 in HelloWorld.java with the line of code below",
-			"$L012": "System.out.println(\"Hello World!\");",
-			"$L013": "Press the Continue button to continue",
-			"$L014": "Step 2",
-			"$L015": "Type in the following line of code at the prompt below and press the <Enter> key.",
-			"$L016": "javac HelloWorld.java",
-			"$L017": "The source code is now compiled into the a class file HelloWorld.class",
-			"$L018": "Type in the following line of code at the prompt below and press the <Enter> key.",
-			"$L019": "ls",
-			"$L020": "HelloWorld.class is your Java Program. Now that you have a .class program, you can now run it",
-			"$L021": "Step 3",
-			"$L022": "Type in the following line of code at the prompt below and press the <Enter> key.",
-			"$L023": "java HelloWorld",
-			"$L024": "Congratulations, your program works!",
-			"$L025": "Press Next to go to the next tutorial",
-			"$L026": "You have errors. Read the instructions again to fix them or click Redo to redo this tutorial."
+	"title": "Getting Started With Java\n\n",
+	"description": "Your First Java Program\n", 
+	"text": {
+		"$L001": "Creating Your First Application",
+		"$L002": "In this application will display the greeting \"Hello World!\"",
+		"$L003": "To create this program, you will:",
+		"$L004": "Step 1. First create a Java source file",
+		"$L005": "Step 2. Compile the source file into a class file",
+		"$L006": "Step 3. Run the program",
+		"$L007": "Once you successfully complete this tutorial, you will see \"Hello World!\" displayed as output on the screen.",
+		"$L008": "Step 1",
+		"$L009": "Type in the following line of code at the prompt below and press the <Enter> key.",
+		"$L010": "edit HelloWorld.java",
+		"$L011": "Replace line #3 in HelloWorld.java with the line of code below",
+		"$L012": "System.out.println(\"Hello World!\");",
+		"$L013": "Press the Continue button to continue",
+		"$L014": "Step 2",
+		"$L015": "Type in the following line of code at the prompt below and press the <Enter> key.",
+		"$L016": "javac HelloWorld.java",
+		"$L017": "The source code is now compiled into the a class file HelloWorld.class",
+		"$L018": "Type in the following line of code at the prompt below and press the <Enter> key.",
+		"$L019": "ls",
+		"$L020": "HelloWorld.class is your Java Program. Now that you have a .class program, you can now run it",
+		"$L021": "Step 3",
+		"$L022": "Type in the following line of code at the prompt below and press the <Enter> key.",
+		"$L023": "java HelloWorld",
+		"$L024": "Congratulations, your program works!",
+		"$L025": "Press Next to go to the next tutorial",
+		"$L026": "You have errors. Read the instructions again to fix them or click Redo to redo this tutorial."
+	},
+	"events": {
+		"$E001": { 
+					"event": "$load",
+					"lines" : [
+						"$L001", 
+						"$L002", 
+						"$L003", 
+						"$L004", 
+						"$L005", 
+						"$L006", 
+						"$L007", 
+						"$L008", 
+						"$L009",
+						"$L010", 
+						"$L011", 
+						"$L012", 
+						"$L013", 
+						"$C001" 
+					]
+				},
+		"$E002": {
+					"event": "$click",
+					"lines": [
+						"$L014",
+						"$L015",
+						"$L016",
+						"$O001",
+						"$O002"
+					]
 		},
-		"events": {
-			"$E001": { 
-						"event": "$load",
-						"lines" : [
-							"$L001", 
-							"$L002", 
-							"$L003", 
-							"$L004", 
-							"$L005", 
-							"$L006", 
-							"$L007", 
-							"$L008", 
-							"$L009",
-							"$L010", 
-							"$L011", 
-							"$L012", 
-							"$L013", 
-							"$C001" 
-						]
-					},
-			"$E002": {
-						"event": "$click",
-						"lines": [
-							"$L014",
-							"$L015",
-							"$L016",
-							"$O001",
-							"$O002"
-						]
-			},
-			"$E003": {
-						"event": "$click",
-						"action": "$clear"
-			},
-			"$E004": {
-						"event": "$click",
-						"action": "$next"
-			}
-		}, 
-		"controls": {
-			"$C001": {
-				"title" : "Continue",
-				"event" : "$E002"
-			},
-			"$C002": {
-				"title" : "Redo",
-				"event" : "$E003"
-			},
-			"$C003": {
-				"title" : "Next",
-				"event" : "$E004"
-			}
+		"$E003": {
+					"event": "$click",
+					"action": "$clear"
 		},
-		"output": {
-			"$O001": {
-				"output" : "$blank",
-				"lines": [
-					"$L017",
-					"$L018",
-					"$L019",
-					"$O003"
-				]
-			},
-			"$O002": {
-				"output" : "$noblank",
-				"lines": [
-					"$L025",
-					"$C002"
-				]
-			},
-			"$O003": {
-				"output" : "$noblank",
-				"lines": [
-					"$L020",
-					"$L021",
-					"$L022",
-					"$L023",
-					"$O004",
-					"$O005"
-				]
-			},
-			"$O004": {
-				"output" : "Hello World!",
-				"lines": [
-					"$L024",
-					"$L025",
-					"$C003"
-				]
-			}
+		"$E004": {
+					"event": "$click",
+					"action": "$next"
+		}
+	}, 
+	"controls": {
+		"$C001": {
+			"title" : "Continue",
+			"event" : "$E002"
+		},
+		"$C002": {
+			"title" : "Redo",
+			"event" : "$E003"
+		},
+		"$C003": {
+			"title" : "Next",
+			"event" : "$E004"
+		}
+	},
+	"output": {
+		"$O001": {
+			"output" : "$blank",
+			"lines": [
+				"$L017",
+				"$L018",
+				"$L019",
+				"$O003"
+			]
+		},
+		"$O002": {
+			"output" : "$noblank",
+			"lines": [
+				"$L025",
+				"$C002"
+			]
+		},
+		"$O003": {
+			"output" : "$noblank",
+			"lines": [
+				"$L020",
+				"$L021",
+				"$L022",
+				"$L023",
+				"$O004",
+				"$O005"
+			]
+		},
+		"$O004": {
+			"output" : "Hello World!",
+			"lines": [
+				"$L024",
+				"$L025",
+				"$C003"
+			]
 		}
 	}
 }
