@@ -8,49 +8,24 @@
 		<title>TINKER ACADEMY</title>
 		<link rel='stylesheet' href="./tinkeracademy/doppio/build/css/style.css">
 		<link rel="icon" href="http://www.tinkeracademy.com/tinkeracademy/favicon.png" type="image/png"/>
-		
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  
 		<!-- media queries -->
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
 	
 		<style type="text/css" media="screen">
-			#editor { 
+			#control {
 				position: absolute;
-				left:50%;
-		        width:50%;
-		        height:800px;
+				right:0px;
 			}
-			#tutor { 
-				position: absolute;
-				left:0%;
-		        width:50%;
-		        height:400px;
-			}
-			#console { 
-				position: absolute;
-				left:0%;
-				top:50%;
-		        width:50%;
-		        height:400px;
-			}
-			#complete-button {
-				position: absolute;
-				left:40px;
-		        top:70px;
-		        font-size:20px;
-		        font-weight: bold;
-		        margin: 10px;
-		        padding: 3px;
-				background-color: yellow;
-			}
-			#complete-button a {
-		        text-decoration: none;
-			}
+			.ui-menu { width: 150px; }
 		</style>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js" type="text/javascript" charset="utf-8"></script>
   		<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/mode-java.js" type="text/javascript" charset="utf-8"></script>
   		<script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
   		<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.10.2/dropbox.min.js" type="text/javascript"></script>
   		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  		<script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
   		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/async/0.9.0/async.js"></script>
   		<script src="./tinkeracademy/doppio/build/js/jquery.console.js" type="text/javascript" ></script>
@@ -63,9 +38,21 @@
 		<script src="./tinkeracademy/doppio/build/js/browserfs.min.js" type="text/javascript" ></script>
 		<script src="./tinkeracademy/doppio/build/js/doppio.js" type="text/javascript" ></script>
 		<script src="./tinkeracademy/doppio/build/js/frontend.js" type="text/javascript" ></script>
+		<script>
+		  $(function() {
+		    $( "#menu" ).menu();
+		  });
+		</script>
     </head>    
 	<body>
-		<div id='console'></div>
+		<div id='console'>
+			<div id='control'>
+				<ul id="menu">
+				  <li>Save</li>
+				  <li>Redo</li>
+				</ul>
+			</div>
+		</div>
 		<div id='source'></div>
 	</body>
 </html>

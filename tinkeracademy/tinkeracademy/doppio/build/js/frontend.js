@@ -342,8 +342,13 @@ $(document).ready(function () {
                     });
                     // Focus the terminal.
                     $('#console').click();
-                    var tutorial = new Tutorial(fs, terminal);
+                    var tutorial = new Tutorial(fs, terminal, $('#control'));
                     tutorial.process("tutorial0");
+
+                    $('ul#menu li').click(function(e) {
+                        var menu = $(this).text();
+                        tutorial.click(menu);
+                    });
                 });
             });
         });

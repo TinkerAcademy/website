@@ -1,24 +1,23 @@
 {
-	"name": "Getting Started With Java",
-	"title": "Getting Started With Java\n\n",
-	"description": "Your First Java Program\n", 
-	"text": {
-		"$L001": "Creating Your First Application",
-		"$L002": "In this application will display the greeting \"Hello World!\"",
-		"$L003": "To create this program, you will:",
-		"$L004": "Step 1. First create a Java source file",
-		"$L005": "Step 2. Compile the source file into a class file",
-		"$L006": "Step 3. Run the program",
-		"$L007": "Once you successfully complete this tutorial, you will see \"Hello World!\" displayed as output on the screen.",
-		"$L008": "Step 1",
-		"$L009": "Type in the following line of code at the prompt below and press the <Enter> key.",
-		"$L010": "edit HelloWorld.java",
-		"$L011": "Replace line #3 in HelloWorld.java with the line of code below",
-		"$L012": "System.out.println(\"Hello World!\");",
-		"$L013": "Press the Continue button to continue",
-		"$L014": "Step 2",
-		"$L015": "Type in the following line of code at the prompt below and press the <Enter> key.",
-		"$L016": "javac HelloWorld.java",
+	"name": "tutorial0",
+	"title": "Tutorial: Getting Started With Java\n\n",
+	"lines": {
+		"$L001": "Write A Hello World Program\n",
+		"$L002": "In this tutorial you will write a program to display the greeting \"Hello World!\"\n",
+		"$L003": "To create this program, you will:\n",
+		"$L004": "Step 1. First create a Java source file\n",
+		"$L005": "Step 2. Compile the source file into a class file\n",
+		"$L006": "Step 3. Run the program\n",
+		"$L007": "Once you successfully complete this tutorial, you will see \"Hello World!\" displayed as output.\n\n",
+		"$L008": "Step 1\n",
+		"$L009": "Type in the following at the prompt below and press the <Enter> key.\n\n",
+		"$L010": "\tedit HelloWorld.java\n\n",
+		"$L011": "Replace line #3 in HelloWorld.java with the line of code below\n\n",
+		"$L012": "\tSystem.out.println(\"Hello World!\");\n\n",
+		"$L013": "Select Save from the menu to save all your changes, or Redo to redo the tutorial.\n\n",
+		"$L014": "\nStep 2\n",
+		"$L015": "Type in the following at the prompt below and press the <Enter> key.\n\n",
+		"$L016": "\tjavac HelloWorld.java\n\n",
 		"$L017": "The source code is now compiled into the a class file HelloWorld.class",
 		"$L018": "Type in the following line of code at the prompt below and press the <Enter> key.",
 		"$L019": "ls",
@@ -28,13 +27,12 @@
 		"$L023": "java HelloWorld",
 		"$L024": "Congratulations, your program works!",
 		"$L025": "Press Next to go to the next tutorial",
-		"$L026": "You have errors. Read the instructions again to fix them or click Redo to redo this tutorial."
+		"$L026": "You have errors. Fix them or select Redo to redo this tutorial."
 	},
 	"events": {
 		"$E001": { 
-					"event": "$load",
+					"name": "$load",
 					"lines" : [
-						"$L001", 
 						"$L002", 
 						"$L003", 
 						"$L004", 
@@ -46,40 +44,47 @@
 						"$L010", 
 						"$L011", 
 						"$L012", 
-						"$L013", 
-						"$C001" 
-					]
+						"$L013"
+					],
+					"controls" : [
+						"$C001",
+						"$C002"
+					],
+					"showPrompt" : true
 				},
 		"$E002": {
-					"event": "$click",
+					"name": "$click",
 					"lines": [
 						"$L014",
 						"$L015",
-						"$L016",
+						"$L016"
+					],
+					"output": [
 						"$O001",
 						"$O002"
-					]
+					],
+					"showPrompt" : true
 		},
 		"$E003": {
-					"event": "$click",
+					"name": "$click",
 					"action": "$clear"
 		},
 		"$E004": {
-					"event": "$click",
+					"name": "$click",
 					"action": "$next"
 		}
 	}, 
 	"controls": {
 		"$C001": {
-			"title" : "Continue",
+			"name" : "Save",
 			"event" : "$E002"
 		},
 		"$C002": {
-			"title" : "Redo",
+			"name" : "Redo",
 			"event" : "$E003"
 		},
 		"$C003": {
-			"title" : "Next",
+			"name" : "Next",
 			"event" : "$E004"
 		}
 	},
@@ -96,7 +101,7 @@
 		"$O002": {
 			"output" : "$noblank",
 			"lines": [
-				"$L025",
+				"$L026",
 				"$C002"
 			]
 		},
