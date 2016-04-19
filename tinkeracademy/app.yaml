@@ -14,12 +14,13 @@ threadsafe: true
 handlers:
 - url: /index.html
   static_files: static/docs/index.html
-  upload: index.html
+  upload: static/docs/index.html
 - url: /
   static_files: static/docs/index.html
-  upload: index.html
+  upload: static/docs/index.html
 - url: /java1
   static_files: static/docs/java1/index.html
+  upload: static/docs/java1/index.html
 - url: /forgedoc
   static_dir: static/forgedoc
 - url: /forge
