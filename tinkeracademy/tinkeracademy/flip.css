@@ -1,7 +1,20 @@
 .flipcard {
 	width: 400px ; 
-	height: 246px;
-	margin: 36px;
+	height: 540px;
+	margin-top: 0px;
+	margin-bottom: 72px;
+	margin-right: 72px;
+	margin-left: 0px;
+	font: 12px/28px 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
+	float:left;
+}
+.noflipcard {
+	width: 400px ; 
+	height: 540px;
+	margin-top: 0px;
+	margin-bottom: 72px;
+	margin-right: 72px;
+	margin-left: 0px;
 	font: 12px/28px 'Open Sans', 'Helvetica Neue', Helvetica, sans-serif;
 	float:left;
 }

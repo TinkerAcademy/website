@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
-		<title>TINKER ACADEMY PUBLISHING</title>
+		<title>TINKER ACADEMY</title>
 		<link rel="icon" href="http://www.tinkeracademy.com/tinkeracademy/favicon.png" type="image/png"/>
 		
 		<!-- media queries -->
@@ -21,23 +21,6 @@
 			<link rel="stylesheet" type="text/css" href="http://utko.com/wp-content/themes/verb/includes/styles/ie.css" media="screen"/>
 		<![endif]-->
 	
-		<!-- add js class -->
-		<div class="fit-vids-style">­
-			<style>               
-				.fluid-width-video-wrapper {                 
-					width: 100%;                              
-					position: relative;                       
-					padding: 0;                            
-				}                                                                                   
-				.fluid-width-video-wrapper iframe, .fluid-width-video-wrapper object,     .fluid-width-video-wrapper embed {           
-					position: absolute;                       
-					top: 0;                                   
-					left: 0;                                  
-					width: 100%;                              
-					height: 100%;                          
-				}
-				</style>
-		</div>
 		<script type="text/javascript">
 			document.documentElement.className = 'js';
 		</script>
@@ -49,6 +32,7 @@
 		<link rel="stylesheet" id="media_queries_css-css" href="./tinkeracademy/media-queries.css" type="text/css" media="screen">
 		<link rel="stylesheet" id="google_raleway-css" href="./tinkeracademy/css" type="text/css" media="all">
 		<link rel="stylesheet" id="jetpack_css-css" href="./tinkeracademy/jetpack.css" type="text/css" media="all">
+		<link rel="stylesheet" id="flip.css" href="./tinkeracademy/flip.css" type="text/css" media="all">
 		<link rel="stylesheet" id="hover.css" href="./tinkeracademy/hover.css" type="text/css" media="all">
 		<link rel="stylesheet" id="slick.css" href="./slick/slick.css" type="text/css" media="all">
 		<link rel="stylesheet" id="slick-theme.css" href="./slick/slick-theme.css" type="text/css" media="all">
@@ -57,6 +41,7 @@
 		<script type="text/javascript" src="./tinkeracademy/jquery.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/jquery-migrate.min.js"></script>
 		<script type="text/javascript" src="./slick/slick.min.js"></script>
+		<script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.16/dist/jquery.flip.min.js"></script>
 		<script type="text/javascript" src="./tinkeracademy/tinkeracademy.js"></script>
 		<meta name="generator" content="WordPress 3.9.3">
 		<style type="text/css">
@@ -72,6 +57,18 @@
 			
 			
 		</style>
+		<script type="text/javascript">
+			jQuery(document).ready(function( $ ) { 
+				$(".noflip").click(false);
+				$(".flipcard").flip({
+				  	axis: 'x'
+				});
+				$(".carousel").slick({
+					autoplay: true,
+					autoplaySpeed: 10000
+				});
+			});		
+		</script>
     </head>
 	<body class="home page page-id-112 page-template page-template-blocks-php">
 		<div class="header-wrap clearfix">
@@ -80,20 +77,237 @@
 					<h1 class="logo-image">
 						<a href="index.html">TINKER ACADEMY PUBLISHING</a>
 					</h1>
+			    		    
+			    <nav role="navigation" class="header-nav">	
+			    	<!-- nav menu -->
+			    	<div class="menu-home-container">
+			    		<ul id="menu-home" class="nav">
+				    		<!-- <li id="menu-item-164" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-164"><a href="aboutus.html">about</a></li> -->
+				    	</ul>
+				    	<select class="select-menu">
+				    		<option value="#">Navigate to...</option>
+				    		<!-- <option value="aboutus.html">&nbsp;about</option> -->
+				    	</select>
+				    	<div class="mobile-icon"></div>
+				    </div>		    
+				</nav>	
 			</header>
 		</div>
 
 		<div id="wrapper" class="clearfix">
-		<div class="inside-wrap clearfix">		
-		<div id="content">
-			<div class="posts">
-				<article class="post-109 page type-page status-publish hentry post">
-					<a href="./java1"><img src="./icons/javaworkbook1.png" align="center"/></a>
-				</article><!-- post-->
-				
-				</div>
-									
-		</div><!-- wrapper -->
+			<div class="inside-wrap clearfix">		
+				<div id="content">
+					<div class="posts">
+						<article class="post-109 page type-page status-publish hentry post">
+							<div class="box-wrap">
+								<div class="flipcard"> 
+						            <div class="front hvr-curl-bottom-right" style="background-color: #c85b2f"> 
+						               	<h3>Java Fundamentals 1</h3>
+										<h5>Strings, Basic Data Types &amp; Control Flow</h5>
+										<img src="./icons/javaworkbook1.png" align="center" width="260"/>
+										<h5>Click <a href="./java1">here</a> if you bought the book</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<header>
+											<h3>Java Fundamentals 1</h3>
+											<ul>
+												<h5>Introduction To Java Programming</h5>
+												<h5>Strings, Escape Sequences, Unicode</h5>
+												<h5>char, int, boolean Data Types</h5>
+												<h5>Boolean &aamp; Integer expressions</h5>
+												<h5>Increment &amp; Decrement Operators</h5>
+												<h5>Conditional blocks (If, If Else)</h5>
+												<h5>For Loops (Basic, Nested)</h5>
+												<h5>Hands On Project: Upsidedown Text</h5>
+											</ul>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>				        
+								<div class="flipcard"> 
+						            <div class="front nohvr-curl-bottom-right noflip" style="background-color: #72a7ee"> 
+						               	<h3>Java Fundamentals 2</h3>
+										<h5>Arrays &amp; Lists</h5>
+										<img src="./icons/javaworkbook2.png" align="center" width="260"/>
+										<h5>Avaialable in stores June 2016</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<img src="./icons/bluepin.png" width="40" align="center"/>
+										<!--<h2><iframe width="364" height="210" src="https://www.youtube.com/embed/tm1CREaQn1I" frameborder="0" allowfullscreen></iframe></h2>-->
+						            	<header>
+											<h3>Would you learn tennis from tennis videos and a quiz? Neither would we. You will start coding in our class from Day 1. Thats how you'll learn to code.</h3>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>				        									        
+								<div class="flipcard"> 
+						            <div class="front nohvr-curl-bottom-right noflip" style="background-color: #dedea9"> 
+						               	<h3>Java Fundamentals 3</h3>
+										<h5>Basic Classes, Objects &amp; Methods</h5>
+										<img src="./icons/javaworkbook3.png" align="center" width="260"/>
+										<h5>Avaialable in stores July 2016</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<img src="./icons/bluepin.png" width="40" align="center"/>
+						            	<header>
+											<h3>Writing code is cool. Heard of Steve Jobs? He used to write lots of code growing up. Elon Musk? Ditto. Our students showoff their coding skills with cool apps.</h3>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>				        
+								<div class="flipcard"> 
+						            <div class="front nohvr-curl-bottom-right noflip" style="background-color: #a366a3"> 
+						               	<h3>Java Fundamentals 4</h3>
+										<h5>Advanced Classes, Objects &amp; Methods</h5>
+										<img src="./icons/javaworkbook4.png" align="center" width="260"/>
+										<h5>Avaialable in stores August 2016</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<img src="./icons/bluepin.png" width="40" align="center"/>
+						            	<header>
+											<h3>We teach core computer science concepts. Operating systems? Algorithms? Compilers? Machine Architecture? Source Control? Yes, Yes, Yes, Yes &amp; Yes!</h3>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>	
+						        <!-- <div class="flipcard"> 
+						            <div class="front hvr-curl-bottom-right noflip" style="background-color: #d3cf5d"> 
+						               	<h3>Java Fundamentals 5</h3>
+										<h5>Inheritance</h5>
+										<img src="./icons/javaworkbook1.png" align="center" width="260"/>
+										<h5>Click <a href="./java1">here</a> if you bought the book</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<img src="./icons/bluepin.png" width="40" align="center"/>
+						            	<header>
+											<h3>We teach core computer science concepts. Operating systems? Algorithms? Compilers? Machine Architecture? Source Control? Yes, Yes, Yes, Yes &amp; Yes!</h3>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>
+						        <div class="flipcard"> 
+						            <div class="front hvr-curl-bottom-right noflip" style="background-color: #5397ab"> 
+						               	<h3>Java Fundamentals 6</h3>
+										<h5>Packages &amp; Interfaces</h5>
+										<img src="./icons/javaworkbook1.png" align="center" width="260"/>
+										<h5>Click <a href="./java1">here</a> if you bought the book</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<img src="./icons/bluepin.png" width="40" align="center"/>
+						            	<header>
+											<h3>We teach core computer science concepts. Operating systems? Algorithms? Compilers? Machine Architecture? Source Control? Yes, Yes, Yes, Yes &amp; Yes!</h3>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>	
+						        <div class="flipcard"> 
+						            <div class="front hvr-curl-bottom-right noflip" style="background-color: #c85b2f"> 
+						               	<h3>Java Fundamentals 7</h3>
+										<h5>Java Exception Handling</h5>
+										<img src="./icons/javaworkbook1.png" align="center" width="260"/>
+										<h5>Click <a href="./java1">here</a> if you bought the book</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<img src="./icons/bluepin.png" width="40" align="center"/>
+						            	<header>
+											<h3>We teach core computer science concepts. Operating systems? Algorithms? Compilers? Machine Architecture? Source Control? Yes, Yes, Yes, Yes &amp; Yes!</h3>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>	
+						        <div class="flipcard"> 
+						            <div class="front hvr-curl-bottom-right noflip" style="background-color: #72a7ee"> 
+						               	<h3>Java Fundamentals 8</h3>
+										<h5>I/O Programming</h5>
+										<img src="./icons/javaworkbook1.png" align="center" width="260"/>
+										<h5>Click <a href="./java1">here</a> if you bought the book</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<img src="./icons/bluepin.png" width="40" align="center"/>
+						            	<header>
+											<h3>We teach core computer science concepts. Operating systems? Algorithms? Compilers? Machine Architecture? Source Control? Yes, Yes, Yes, Yes &amp; Yes!</h3>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>	
+						        <div class="flipcard"> 
+						            <div class="front hvr-curl-bottom-right noflip" style="background-color: #dedea9"> 
+						               	<h3>Java Fundamentals 9</h3>
+										<h5>Multithreaded Programming, Threads &amp; Runnables</h5>
+										<img src="./icons/javaworkbook1.png" align="center" width="260"/>
+										<h5>Click <a href="./java1">here</a> if you bought the book</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<img src="./icons/bluepin.png" width="40" align="center"/>
+						            	<header>
+											<h3>We teach core computer science concepts. Operating systems? Algorithms? Compilers? Machine Architecture? Source Control? Yes, Yes, Yes, Yes &amp; Yes!</h3>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>	
+						        <div class="flipcard"> 
+						            <div class="front hvr-curl-bottom-right noflip" style="background-color: #a366a3"> 
+						               	<h3>Java Fundamentals 10</h3>
+										<h5>Enumeration, Autoboxing &amp; Generics</h5>
+										<img src="./icons/javaworkbook1.png" align="center" width="260"/>
+										<h5>Click <a href="./java1">here</a> if you bought the book</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<img src="./icons/bluepin.png" width="40" align="center"/>
+						            	<header>
+											<h3>We teach core computer science concepts. Operating systems? Algorithms? Compilers? Machine Architecture? Source Control? Yes, Yes, Yes, Yes &amp; Yes!</h3>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>	
+						        <div class="flipcard"> 
+						            <div class="front hvr-curl-bottom-right noflip" style="background-color: #d3cf5d"> 
+						               	<h3>Java Fundamentals 11</h3>
+										<h5>GUI Programming, Events &amp; Swing</h5>
+										<img src="./icons/javaworkbook1.png" align="center" width="260"/>
+										<h5>Click <a href="./java1">here</a> if you bought the book</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<img src="./icons/bluepin.png" width="40" align="center"/>
+						            	<header>
+											<h3>We teach core computer science concepts. Operating systems? Algorithms? Compilers? Machine Architecture? Source Control? Yes, Yes, Yes, Yes &amp; Yes!</h3>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>	
+						        <div class="flipcard"> 
+						            <div class="front hvr-curl-bottom-right noflip" style="background-color: #5397ab"> 
+						               	<h3>Java Fundamentals 12</h3>
+										<h5>Basic Data Structures &amp; Algorithms</h5>
+										<img src="./icons/javaworkbook1.png" align="center" width="260"/>
+										<h5>Click <a href="./java1">here</a> if you bought the book</h5>
+										<h5>© 2016 TINKER ACADEMY</h5>
+						            </div> 
+						            <div class="back hvr-curl-bottom-right">
+						            	<img src="./icons/bluepin.png" width="40" align="center"/>
+						            	<header>
+											<h3>We teach core computer science concepts. Operating systems? Algorithms? Compilers? Machine Architecture? Source Control? Yes, Yes, Yes, Yes &amp; Yes!</h3>
+										</header>
+										<div class="mobile"></div>
+						            </div> 
+						        </div>	 -->
+							</div><!-- box wrap -->
+						</article><!-- post-->
+					</div>
+				</div><!-- content -->
+			</div>
+		</div>
 
 		<footer id="footer">
 			<div id="footer-inside">
